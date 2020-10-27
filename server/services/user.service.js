@@ -1,15 +1,16 @@
-const { models } = require('../models');
+const { User } = require('../models').models;
 
-const UserService = () => {
-  async function readAll() {
-    const users = await models.User.findAll({
-      attributes: ['id', 'email'],
-      order: ['email'],
-    });
-    return users;
-  }
-
-  return { readAll };
+module.exports = {
+  readAll: async (req, res, next) => {
+    try {
+      const users = await User.findAll({
+        where: { deletedAt: null },
+        attributes: ['id', 'email'],
+        order: ['email'],
+      });
+      res.json(users);
+    } catch (err) {
+      next(err);
+    }
+  },
 };
-
-module.exports = UserService();
