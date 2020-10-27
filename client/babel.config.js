@@ -3,9 +3,9 @@ module.exports = {
     [
       '@babel/preset-env',
       {
-        "targets" : "> 0.25%, not dead",
-        "useBuiltIns": "usage",
-        "corejs": "3",
+        targets: '> 0.25%, not dead',
+        useBuiltIns: 'usage',
+        corejs: '3',
       },
     ],
     '@babel/preset-react',
