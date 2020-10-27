@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
+import DropdownItem from './DropdownItem';
 
 const ModalWrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
-function DropdownItem({ id, value }) {
-  return (
-    <li key={id}>{value}</li>
-  );
-}
 export default function Dropdown({ title, items }) {
   const wrapperRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -49,11 +45,6 @@ export default function Dropdown({ title, items }) {
     </ModalWrapper>
   );
 }
-
-DropdownItem.propTypes = {
-  id: PropTypes.number.isRequired,
-  value: PropTypes.string.isRequired,
-};
 
 Dropdown.propTypes = {
   title: PropTypes.string.isRequired,
