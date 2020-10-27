@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 
+function DropdownItem({ id, value }) {
+  return (
+    <li key={id}>{value}</li>
+  );
+}
 export default function Dropdown({ title, items }) {
   const [isActive, setIsActive] = useState(false);
-  const itemList = items.map((v) => <li key={v.id}>{v.value}</li>);
+  const itemList = items.map((v) => <DropdownItem id={v.id} value={v.value} />);
   const onClick = () => setIsActive(!isActive);
 
   return (
@@ -23,6 +28,11 @@ export default function Dropdown({ title, items }) {
     </div>
   );
 }
+
+DropdownItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
+};
 
 Dropdown.propTypes = {
   title: PropTypes.string.isRequired,
