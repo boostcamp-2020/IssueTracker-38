@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize(
   process.env.DB_DATABASE,
@@ -13,6 +13,7 @@ const sequelize = new Sequelize(
       dialectOptions: {
         collate: 'utf8_general_ci',
       },
+      timestamps: false,
     },
     sync: { force: true },
     pool: {
@@ -20,5 +21,15 @@ const sequelize = new Sequelize(
     },
   },
 );
+
+require('./issue')(sequelize, DataTypes);
+require('./comment')(sequelize, DataTypes);
+require('./label')(sequelize, DataTypes);
+require('./milestone')(sequelize, DataTypes);
+require('./user')(sequelize, DataTypes);
+
+Object.keys(sequelize.models).forEach((model) => {
+  if (sequelize.models[model].associate) sequelize.models[model].associate(sequelize.models);
+});
 
 module.exports = sequelize;

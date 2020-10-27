@@ -1,0 +1,48 @@
+module.exports = (sequelize, DataTypes) => {
+  const Issue = sequelize.define(
+    'Issue',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
+      isClosed: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+    },
+    {
+      timestamps: true,
+      paranoid: true,
+    },
+  );
+  Issue.associate = (models) => {
+    Issue.belongsTo(models.User, {
+      foreignKey: {
+        name: 'userId',
+      },
+    });
+    Issue.belongsTo(models.Milestone, {
+      foreignKey: {
+        name: 'milestoneId',
+      },
+    });
+    Issue.hasMany(models.Comment, {
+      foreignKey: {
+        name: 'commentId',
+      },
+      onDelete: 'CASCADE',
+    });
+    Issue.belongsToMany(models.Label, {
+      through: 'Issue-Label',
+    });
+    Issue.belongsToMany(models.User, {
+      through: 'Issue-Assignee',
+    });
+  };
+
+  return Issue;
+};
