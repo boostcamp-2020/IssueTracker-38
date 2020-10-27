@@ -1,8 +1,10 @@
 const express = require('express');
+const sequelize = require('./models');
 
 const app = express();
 
 const port = process.env.PORT || 3000;
+sequelize.sync();
 
 app.use(express.json());
 
