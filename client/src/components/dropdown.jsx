@@ -1,14 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PropTypes } from 'prop-types';
-import styled from 'styled-components';
 import DropdownItem from './DropdownItem';
 
-const ModalWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 export default function Dropdown({ title, items }) {
-  const wrapperRef = useRef(null);
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
   const itemList = items.map((v) => <DropdownItem id={v.id} value={v.value} />);
@@ -21,20 +15,20 @@ export default function Dropdown({ title, items }) {
       }
     };
     if (isActive) {
-      wrapperRef.current.addEventListener('click', pageClickEvent);
+      window.addEventListener('click', pageClickEvent);
     }
     return () => {
-      wrapperRef.current.removeEventListener('click', pageClickEvent);
+      window.removeEventListener('click', pageClickEvent);
     };
   }, [isActive]);
 
   return (
-    <ModalWrapper ref={wrapperRef}>
+    <div ref={dropdownRef}>
       <button type="button" onClick={onClick}>
         {title}
         ▼
       </button>
-      <div ref={dropdownRef} style={{ display: isActive ? 'block' : 'none' }}>
+      <div style={{ display: isActive ? 'block' : 'none' }}>
         <p>
           Filter by
           {' '}
@@ -42,7 +36,7 @@ export default function Dropdown({ title, items }) {
         </p>
         <ul>{itemList}</ul>
       </div>
-    </ModalWrapper>
+    </div>
   );
 }
 
