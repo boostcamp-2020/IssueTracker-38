@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-// TODO: 이슈 컴포넌트 연결
-// import Issue from './Issue';
+import Issue from './Issue';
 
 export default function Issues({ issues }) {
   const [selections, setSelections] = useState([]);
@@ -25,7 +24,7 @@ export default function Issues({ issues }) {
       return;
     }
 
-    const allIssueIds = issues.map((issue) => issue.id);
+    const allIssueIds = issues.map((issue) => issue.issueId);
     setSelections(allIssueIds);
   };
 
@@ -42,16 +41,23 @@ export default function Issues({ issues }) {
           selected
         </span>
       </div>
-      {issues.map((issue) => (
-        <div>
+      {issues.map(({
+        title, milestone, label, issueId, createdAt, asignee,
+      }) => (
+        <div key={issueId}>
           <input
-            onClick={() => handleCheckboxClick(issue.id)}
-            checked={selections.includes(issue.id)}
+            onClick={() => handleCheckboxClick(issueId)}
+            checked={selections.includes(issueId)}
             type="checkbox"
           />
-          {/* <Issue
-            issue={issue}
-          /> */}
+          <Issue
+            title={title}
+            milestone={milestone}
+            label={label}
+            issueId={issueId}
+            createdAt={createdAt}
+            asignee={asignee}
+          />
         </div>
       ))}
     </>
