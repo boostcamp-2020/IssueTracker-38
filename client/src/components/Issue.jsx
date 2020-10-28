@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Issue({
   title,
@@ -6,11 +7,11 @@ export default function Issue({
   label,
   issueId,
   createdAt,
-  asignee
+  asignee,
 }) {
   return (
     <div>
-      <input type="checkbox"></input>
+      <input type="checkbox" />
       <div className="content">
         <div>
           <a href="/">{title}</a>
@@ -26,3 +27,12 @@ export default function Issue({
     </div>
   );
 }
+
+Issue.propTypes = {
+  title: PropTypes.string.isRequired,
+  milestone: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  issueId: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  asignee: PropTypes.string.isRequired,
+};

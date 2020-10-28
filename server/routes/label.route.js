@@ -1,6 +1,6 @@
-const router = require("express").Router();
-const service = require("../service/label");
+const router = require('express').Router();
+const labelService = require('../services/label.service');
 
-router.get("/", service.getLabels);
+router.get('/', labelService.getLabels);
 
 module.exports = router;
