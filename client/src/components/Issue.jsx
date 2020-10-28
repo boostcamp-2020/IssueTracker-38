@@ -11,7 +11,6 @@ export default function Issue({
 }) {
   return (
     <div>
-      <input type="checkbox" />
       <div className="content">
         <div>
           <a href="/">{title}</a>
@@ -32,7 +31,7 @@ Issue.propTypes = {
   title: PropTypes.string.isRequired,
   milestone: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  issueId: PropTypes.string.isRequired,
+  issueId: PropTypes.number.isRequired,
   createdAt: PropTypes.string.isRequired,
   asignee: PropTypes.string.isRequired,
 };
