@@ -2,8 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-// TODO: 라우터 등록
-// router.use('/example', require('./example.route.js'));
-router.use("/label", require("./label.route"));
+router.use("/user", require("./user.route.js"));
+router.use("/label", require("./label"));
 
 module.exports = router;
