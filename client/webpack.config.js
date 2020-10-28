@@ -2,6 +2,8 @@ const path = require('path');
 
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
+const Dotenv = require('dotenv-webpack');
+
 module.exports = {
   entry: './src/index.jsx',
   output: {
@@ -30,6 +32,7 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html',
     }),
+    new Dotenv({}),
   ],
   devServer: {
     inline: true,
