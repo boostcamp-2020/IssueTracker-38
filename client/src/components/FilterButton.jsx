@@ -17,7 +17,7 @@ export default function filterButton() {
   };
 
   return (
-    <button type="button" onClick={() => alert('hello!')}>
+    <button type="button">
       Filter
       <div css={styles.dropdown} />
     </button>

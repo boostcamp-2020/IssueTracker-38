@@ -1,4 +1,4 @@
-const Label = require("../models/label");
+const Label = require('../models/label');
 
 exports.getLabels = async (req, res) => {
   try {
@@ -6,6 +6,6 @@ exports.getLabels = async (req, res) => {
     return res.status(200).json({ labels });
   } catch (err) {
     console.error(err);
-    return res.status(400).json({ message: "라벨 불러오기 성공" });
+    return res.status(400).json({ message: '라벨 불러오기 성공' });
   }
 };
