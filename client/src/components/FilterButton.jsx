@@ -12,12 +12,20 @@ export default function filterButton() {
       borderTopWidth: '4px',
       borderRight: '4px solid transparent',
       borderBottom: '0 solid transparent',
-      borderLeft: '4px solid transparent',
+      borderLeft: '4px solid transparent'
     },
+    button: {
+      fontSize: '16px',
+      background: 'white',
+      border: '1px solid lightgray',
+      backgroundColor: '#efefef',
+      borderRadius: '6px 0 0 6px',
+      width: '100px'
+    }
   };
 
   return (
-    <button type="button">
+    <button type="button" css={styles.button}>
       Filter
       <div css={styles.dropdown} />
     </button>

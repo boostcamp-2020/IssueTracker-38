@@ -6,11 +6,11 @@ module.exports = {
       const users = await User.findAll({
         where: { deletedAt: null },
         attributes: ['id', 'email'],
-        order: ['email'],
+        order: ['email']
       });
       res.json(users);
     } catch (err) {
       next(err);
     }
-  },
+  }
 };
