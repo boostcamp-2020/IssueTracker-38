@@ -4,25 +4,25 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
     },
     name: {
       type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: false,
     },
     color: {
       type: DataTypes.STRING(10),
-      allowNull: false
+      allowNull: false,
     },
     description: {
       type: DataTypes.STRING(100),
-      allowNull: true
-    }
+      allowNull: true,
+    },
   });
 
-  Label.associate = models => {
+  Label.associate = (models) => {
     Label.belongsToMany(models.Issue, {
-      through: 'Issue-Label'
+      through: 'IssueLabel',
     });
   };
 

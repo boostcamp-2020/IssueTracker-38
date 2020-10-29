@@ -6,28 +6,28 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       email: {
         type: DataTypes.STRING(100),
-        allowNull: false
-      }
+        allowNull: false,
+      },
     },
     {
       timestamps: true,
-      paranoid: true
-    }
+      paranoid: true,
+    },
   );
 
-  User.associate = models => {
+  User.associate = (models) => {
     User.hasMany(models.Issue, {
-      foreignKey: 'userId'
+      foreignKey: 'userId',
     });
     User.hasMany(models.Comment, {
-      foreignKey: 'userId'
+      foreignKey: 'userId',
     });
     User.belongsToMany(models.Issue, {
-      through: 'Issue-Assignee'
+      through: 'IssueAssignee',
     });
   };
 

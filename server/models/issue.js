@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: false
+        allowNull: false,
       },
       title: {
         type: DataTypes.STRING(50),
@@ -19,36 +19,36 @@ module.exports = (sequelize, DataTypes) => {
       isClosed: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: false
-      }
+        defaultValue: false,
+      },
     },
     {
       timestamps: true,
-      paranoid: true
-    }
+      paranoid: true,
+    },
   );
-  Issue.associate = models => {
+  Issue.associate = (models) => {
     Issue.belongsTo(models.User, {
       foreignKey: {
-        name: 'userId'
-      }
+        name: 'userId',
+      },
     });
     Issue.belongsTo(models.Milestone, {
       foreignKey: {
-        name: 'milestoneId'
-      }
+        name: 'milestoneId',
+      },
     });
     Issue.hasMany(models.Comment, {
       foreignKey: {
-        name: 'commentId'
+        name: 'commentId',
       },
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
     });
     Issue.belongsToMany(models.Label, {
-      through: 'Issue-Label'
+      through: 'IssueLabel',
     });
     Issue.belongsToMany(models.User, {
-      through: 'Issue-Assignee'
+      through: 'IssueAssignee',
     });
   };
 
