@@ -47,7 +47,7 @@ export default function Issue({
   return (
     <div css={styles.body}>
       <div css={styles.layout}>
-        <a css={styles.title} href="/">
+        <a css={styles.title} href={`/detail/${issueId}`}>
           {title}
         </a>
         <div css={styles.label}>{label}</div>
