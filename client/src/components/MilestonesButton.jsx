@@ -1,6 +1,7 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
-export default function milestonesButton({ countOfMilestone }) {
+export default function MilestonesButton({ countOfMilestone }) {
   return (
     <div>
       <svg viewBox="0 0 16 16" width="16" height="16">
@@ -11,3 +12,7 @@ export default function milestonesButton({ countOfMilestone }) {
     </div>
   );
 }
+
+MilestonesButton.propTypes = {
+  countOfMilestone: PropTypes.number.isRequired,
+};
