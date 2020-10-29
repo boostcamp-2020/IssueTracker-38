@@ -1,19 +1,20 @@
-import React from 'react';
+import React from "react";
 
 export default function header() {
   const styles = {
     header: {
-      height: '100px',
-      backgroundColor: 'black',
-      textAlign: 'center',
+      height: "100px",
+      backgroundColor: "black",
+      textAlign: "center",
+      margin: "0"
     },
     title: {
-      padding: '0',
-      lineHeight: '100px',
-      color: 'white',
-      fontSize: '25px',
-      fontWeight: 'bold',
-    },
+      padding: "0",
+      lineHeight: "100px",
+      color: "white",
+      fontSize: "25px",
+      fontWeight: "bold"
+    }
   };
 
   return (

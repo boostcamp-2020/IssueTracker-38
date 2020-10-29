@@ -12,10 +12,11 @@ export default function TotalCheckBox({
         checked={selectionSwitch}
         type="checkbox"
       />
-      <span>
-        {selections.length}
-        selected
-      </span>
+      {selections.length === 0 ? (
+        <></>
+      ) : (
+        <span> {selections.length} selected</span>
+      )}
     </div>
   );
 }

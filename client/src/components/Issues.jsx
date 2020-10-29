@@ -5,7 +5,19 @@ import Issue from "./Issue";
 
 const style = {
   layout: {
-    display: "flex"
+    display: "flex",
+    width: "100%",
+    border: "1px solid lightgrey",
+    padding: "10px 15px",
+    boxSizing: "border-box",
+    "&:hover": {
+      backgroundColor: "#efefef"
+    }
+  },
+  statusIcon: {
+    marginTop: "3px",
+    marginLeft: "10px",
+    fill: "green"
   }
 };
 export default function Issues({ issues, handleCheckboxClick, selections }) {
@@ -20,6 +32,7 @@ export default function Issues({ issues, handleCheckboxClick, selections }) {
               type="checkbox"
             />
             <svg
+              css={style.statusIcon}
               class="octicon octicon-issue-opened open"
               viewBox="0 0 16 16"
               version="1.1"
