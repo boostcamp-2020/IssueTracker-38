@@ -1,5 +1,11 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
+import React from "react";
+import { PropTypes } from "prop-types";
+
+const styles = {
+  layout: {
+    display: "flex"
+  }
+};
 
 export default function Issue({
   title,
@@ -7,20 +13,20 @@ export default function Issue({
   label,
   issueId,
   createdAt,
-  asignee,
+  asignee
 }) {
   return (
     <div>
       <div className="content">
-        <div>
+        <div css={styles.layout}>
           <a href="/">{title}</a>
-        </div>
-        <div className="details">
-          <div>{milestone}</div>
           <div>{label}</div>
+        </div>
+        <div css={styles.layout} className="details">
           <div>{issueId}</div>
           <div>{createdAt}</div>
           <div>{asignee}</div>
+          <div>{milestone}</div>
         </div>
       </div>
     </div>
@@ -33,5 +39,5 @@ Issue.propTypes = {
   label: PropTypes.string.isRequired,
   issueId: PropTypes.number.isRequired,
   createdAt: PropTypes.string.isRequired,
-  asignee: PropTypes.string.isRequired,
+  asignee: PropTypes.string.isRequired
 };
