@@ -1,44 +1,44 @@
-import React, { useState, useEffect, useRef } from "react";
-import { PropTypes } from "prop-types";
-import DropdownItem from "./DropdownItem";
+import React, { useState, useEffect, useRef } from 'react';
+import { PropTypes } from 'prop-types';
+import DropdownItem from './DropdownItem';
 
 const style = {
   dropDown: {
-    position: "absolute",
-    border: "1px solid lightgray",
-    padding: "5px",
-    background: "white"
+    position: 'absolute',
+    border: '1px solid lightgray',
+    padding: '5px',
+    background: 'white'
   },
   button: {
-    border: "none",
-    background: "none",
-    outline: "none",
-    cursor: "pointer",
-    fontSize: "16px",
-    color: "#636363",
-    marginLeft: "20px"
+    border: 'none',
+    background: 'none',
+    outline: 'none',
+    cursor: 'pointer',
+    fontSize: '16px',
+    color: '#636363',
+    marginLeft: '20px'
   },
   downArrow: {
-    marginLeft: "2px",
-    display: "inline-block",
-    width: "0",
-    height: "0",
-    verticalAlign: "middle",
+    marginLeft: '2px',
+    display: 'inline-block',
+    width: '0',
+    height: '0',
+    verticalAlign: 'middle',
     content: '""',
-    borderTopStyle: "solid",
-    borderTopWidth: "4px",
-    borderRight: "4px solid transparent",
-    borderBottom: "0 solid transparent",
-    borderLeft: "4px solid transparent"
+    borderTopStyle: 'solid',
+    borderTopWidth: '4px',
+    borderRight: '4px solid transparent',
+    borderBottom: '0 solid transparent',
+    borderLeft: '4px solid transparent'
   },
   title: {
-    borderBottom: "1px solid lightgray",
-    margin: "0px"
+    borderBottom: '1px solid lightgray',
+    margin: '0px'
   },
   content: {
-    listStyle: "none",
-    margin: "5px 0 0 0",
-    padding: "5px"
+    listStyle: 'none',
+    margin: '5px 0 0 0',
+    padding: '5px'
   }
 };
 export default function Dropdown({ title, items }) {
@@ -57,10 +57,10 @@ export default function Dropdown({ title, items }) {
       }
     };
     if (isActive) {
-      window.addEventListener("click", pageClickEvent);
+      window.addEventListener('click', pageClickEvent);
     }
     return () => {
-      window.removeEventListener("click", pageClickEvent);
+      window.removeEventListener('click', pageClickEvent);
     };
   }, [isActive]);
 
@@ -70,7 +70,7 @@ export default function Dropdown({ title, items }) {
         {title}
         <div css={style.downArrow}></div>
       </button>
-      <div css={{ ...style.dropDown, display: isActive ? "block" : "none" }}>
+      <div css={{ ...style.dropDown, display: isActive ? 'block' : 'none' }}>
         <p css={style.title}>Filter by {title}</p>
         <ul css={style.content}>{itemList}</ul>
       </div>

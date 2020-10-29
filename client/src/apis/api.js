@@ -14,7 +14,7 @@ export const issueAPI = {
     const url = `${baseURL}/issue`;
     const request = {
       method: 'get',
-      header: { Authorization: 'Bearer ~' },
+      header: { Authorization: 'Bearer ~' }
     };
     const issues = await customFetch(url, request);
     return issues;
@@ -24,11 +24,11 @@ export const issueAPI = {
     const request = {
       method: 'patch',
       header: { Authorization: 'Bearer ~' },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     };
     const result = await customFetch(url, request);
     return result;
-  },
+  }
 };
 
 export const milestoneAPI = {
@@ -36,11 +36,11 @@ export const milestoneAPI = {
     const url = `${baseURL}/milestone`;
     const request = {
       method: 'get',
-      header: { Authorization: 'Bearer ~' },
+      header: { Authorization: 'Bearer ~' }
     };
     const milestones = await customFetch(url, request);
     return milestones;
-  },
+  }
 };
 
 export const labelAPI = {
@@ -48,11 +48,11 @@ export const labelAPI = {
     const url = `${baseURL}/label`;
     const request = {
       method: 'get',
-      header: { Authorization: 'Bearer ~' },
+      header: { Authorization: 'Bearer ~' }
     };
     const labels = await customFetch(url, request);
     return labels;
-  },
+  }
 };
 
 export const userAPI = {
@@ -60,9 +60,9 @@ export const userAPI = {
     const url = `${baseURL}/user`;
     const request = {
       method: 'get',
-      header: { Authorization: 'Bearer ~' },
+      header: { Authorization: 'Bearer ~' }
     };
     const users = await customFetch(url, request);
     return users;
-  },
+  }
 };

@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { PropTypes } from "prop-types";
+import React, { useState } from 'react';
+import { PropTypes } from 'prop-types';
 
-import Issue from "./Issue";
+import Issue from './Issue';
 
 const style = {
   layout: {
-    display: "flex",
-    width: "100%",
-    border: "1px solid lightgrey",
-    padding: "10px 15px",
-    boxSizing: "border-box",
-    "&:hover": {
-      backgroundColor: "#efefef"
+    display: 'flex',
+    width: '100%',
+    border: '1px solid lightgrey',
+    padding: '10px 15px',
+    boxSizing: 'border-box',
+    '&:hover': {
+      backgroundColor: '#efefef'
     }
   },
   statusIcon: {
-    marginTop: "3px",
-    marginLeft: "10px",
-    fill: "green"
+    marginTop: '3px',
+    marginLeft: '10px',
+    fill: 'green'
   }
 };
 export default function Issues({ issues, handleCheckboxClick, selections }) {

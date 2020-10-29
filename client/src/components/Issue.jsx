@@ -1,38 +1,38 @@
-import React from "react";
-import { PropTypes } from "prop-types";
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
 const styles = {
   body: {
-    padding: "0 10px"
+    padding: '0 10px'
   },
   layout: {
-    display: "flex",
-    marginTop: "3px"
+    display: 'flex',
+    marginTop: '3px'
   },
   title: {
-    fontSize: "20px",
-    fontWeight: "bold",
-    textDecoration: "none",
-    color: "black",
-    marginRight: "10px"
+    fontSize: '20px',
+    fontWeight: 'bold',
+    textDecoration: 'none',
+    color: 'black',
+    marginRight: '10px'
   },
   label: {
-    padding: "5px 10px",
-    backgroundColor: "violet",
-    borderRadius: "12px",
-    fontSize: "12px"
+    padding: '5px 10px',
+    backgroundColor: 'violet',
+    borderRadius: '12px',
+    fontSize: '12px'
   },
   details: {
-    display: "flex",
-    fontSize: "12px",
-    color: "grey",
-    marginTop: "5px"
+    display: 'flex',
+    fontSize: '12px',
+    color: 'grey',
+    marginTop: '5px'
   },
   detail: {
-    marginRight: "5px"
+    marginRight: '5px'
   },
   milestoneIcon: {
-    fill: "grey"
+    fill: 'grey'
   }
 };
 

@@ -1,12 +1,12 @@
-import React from "react";
-import { PropTypes } from "prop-types";
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
 const style = {
   count: {
-    backgroundColor: "lightgrey",
-    padding: "3px 10px",
-    fontSize: "13px",
-    borderRadius: "15px"
+    backgroundColor: 'lightgrey',
+    padding: '3px 10px',
+    fontSize: '13px',
+    borderRadius: '15px'
   }
 };
 export default function GroupButton({

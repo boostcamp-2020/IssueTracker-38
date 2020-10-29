@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import Header from "./components/Header";
-import IssueMain from "./components/IssueMain";
-import IssueSearchBar from "./components/IssueSearchBar";
+import Header from './components/Header';
+import IssueMain from './components/IssueMain';
+import IssueSearchBar from './components/IssueSearchBar';
 
-import { dummyIssues, dummyDropdownItems } from "./dummyData";
+import { dummyIssues, dummyDropdownItems } from './dummyData';
 
 export default function App() {
   return (

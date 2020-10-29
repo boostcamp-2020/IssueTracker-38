@@ -8,34 +8,34 @@ module.exports = {
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, '../server/public/'),
-    filename: 'main.js',
+    filename: 'main.js'
   },
   module: {
     rules: [
       {
         test: /\.js|.jsx$/,
         exclude: /node_modules/,
-        use: 'babel-loader',
+        use: 'babel-loader'
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
+        use: ['style-loader', 'css-loader']
+      }
+    ]
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx']
   },
   devtool: 'inline-source-map',
   plugins: [
     new HtmlWebPackPlugin({
       template: './src/index.html',
-      filename: 'index.html',
+      filename: 'index.html'
     }),
-    new Dotenv({}),
+    new Dotenv({})
   ],
   devServer: {
     inline: true,
-    historyApiFallback: true,
-  },
+    historyApiFallback: true
+  }
 };

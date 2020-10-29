@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 
 const styles = {
   inputWrapper: {
-    padding: "5px",
-    border: "1px solid lightgrey",
-    borderRadius: "0 6px 6px 0",
-    width: "90%",
-    backgroundColor: "#efefef"
+    padding: '5px',
+    border: '1px solid lightgrey',
+    borderRadius: '0 6px 6px 0',
+    width: '90%',
+    backgroundColor: '#efefef'
   },
   input: {
-    backgroundColor: "#efefef",
-    border: "0"
+    backgroundColor: '#efefef',
+    border: '0'
   }
 };
 

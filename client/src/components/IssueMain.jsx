@@ -1,27 +1,27 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import TotalCheckBox from "./TotalCheckBox";
-import Issues from "./Issues";
-import Dropdown from "./Dropdown";
+import TotalCheckBox from './TotalCheckBox';
+import Issues from './Issues';
+import Dropdown from './Dropdown';
 
 const styles = {
   body: {
-    width: "1100px",
-    margin: "0 auto",
-    border: "1px solid lightgrey",
-    borderRadius: "6px"
+    width: '1100px',
+    margin: '0 auto',
+    border: '1px solid lightgrey',
+    borderRadius: '6px'
   },
   layout: {
-    display: "flex",
-    flexDirection: "row",
-    border: "1px solid lightgrey",
-    borderRadius: "6px 6px 0 0",
-    justifyContent: "space-between",
-    padding: "15px",
-    backgroundColor: "#efefef"
+    display: 'flex',
+    flexDirection: 'row',
+    border: '1px solid lightgrey',
+    borderRadius: '6px 6px 0 0',
+    justifyContent: 'space-between',
+    padding: '15px',
+    backgroundColor: '#efefef'
   },
   dropdowns: {
-    display: "flex"
+    display: 'flex'
   }
 };
 
