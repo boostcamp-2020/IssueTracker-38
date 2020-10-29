@@ -31,7 +31,6 @@ module.exports = {
     }
   },
   update: async (req, res, next) => {
-    console.log(req.body);
     const willBeUpdated = req.body;
     const IssueId = willBeUpdated.id;
     delete willBeUpdated.id;
@@ -71,5 +70,5 @@ module.exports = {
     } catch (err) {
       next(err);
     }
-  }
+  },
 };
