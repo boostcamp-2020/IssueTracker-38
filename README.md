@@ -5,6 +5,8 @@
 ### [팀 그라운드 룰](https://github.com/boostcamp-2020/IssueTracker-38/wiki/Ground-Rule)
 ### [배포 링크](http://106.10.49.222:3000/)
 ### 브랜치 전략
+[master] - [dev] - feature  
+기능단위로 feature 브랜치를 분리하여 task를 관리한다.
 ### [기능 요구사항 목록](https://github.com/boostcamp-2020/IssueTracker-38/issues)
 ### [기능 분석 및 개발계획](https://github.com/boostcamp-2020/IssueTracker-38/wiki/%EA%B8%B0%ED%9A%8D%EC%84%9C-%EB%B6%84%EC%84%9D-%EB%B0%8F-%EB%AA%A9%ED%91%9C-%EA%B5%AC%ED%98%84-%EC%9D%BC%EC%A0%95)
 ### DB ERD
