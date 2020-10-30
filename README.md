@@ -18,4 +18,9 @@
   <img src=https://user-images.githubusercontent.com/48055710/97649729-657ee480-1a9b-11eb-8e87-87bd94970309.png>
 </details>
 
-### [Component Context](https://docs.google.com/presentation/d/1gsGjG9Ru9RgLvrTmEOdkUW7FJ3Nc1OY0WDRnQ4FXKMc/edit#slide=id.p1)
+### Component Context
+<details>
+  <summary>보기</summary>
+  <br>
+  <img src=https://user-images.githubusercontent.com/48055710/97653730-d1b21600-1aa4-11eb-950c-342cf906b079.png>
+</details>
