@@ -4,6 +4,8 @@ const express = require('express');
 
 const app = express();
 
+const path = require('path');
+
 const cors = require('cors');
 
 const port = process.env.PORT || 3000;
@@ -14,8 +16,13 @@ sequelize.sync();
 
 app.use(express.json());
 app.use(cors({ origin: '*' }));
+app.use(express.static('public'));
 
 app.use('/', require('./routes'));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
