@@ -2,7 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-// TODO: 라우터 등록
-// router.use('/example', require('./example.route.js'));
+router.use('/user', require('./user.route'));
+router.use('/label', require('./label.route'));
+router.use('/issue', require('./issue.route'));
+router.use('/milestone', require('./milestone.route'));
 
 module.exports = router;

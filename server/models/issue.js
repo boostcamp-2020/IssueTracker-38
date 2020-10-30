@@ -8,6 +8,14 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         allowNull: false,
       },
+      title: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+      },
+      content: {
+        type: DataTypes.STRING(500),
+        allowNull: false,
+      },
       isClosed: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
@@ -37,10 +45,10 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE',
     });
     Issue.belongsToMany(models.Label, {
-      through: 'Issue-Label',
+      through: 'IssueLabel',
     });
     Issue.belongsToMany(models.User, {
-      through: 'Issue-Assignee',
+      through: 'IssueAssignee',
     });
   };
 
