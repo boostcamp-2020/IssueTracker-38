@@ -16,4 +16,4 @@
 ### DB ERD
 ![스크린샷 2020-10-30 오전 10 31 24](https://user-images.githubusercontent.com/48055710/97649729-657ee480-1a9b-11eb-8e87-87bd94970309.png)
 ### Component Context
-
+https://docs.google.com/presentation/d/1gsGjG9Ru9RgLvrTmEOdkUW7FJ3Nc1OY0WDRnQ4FXKMc/edit#slide=id.p1
