@@ -28,7 +28,7 @@ export default function TotalCheckBox({
 }
 
 TotalCheckBox.propTypes = {
-  selections: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selections: PropTypes.arrayOf(PropTypes.number).isRequired,
   selectionSwitch: PropTypes.bool.isRequired,
   handleCheckboxSwitch: PropTypes.func.isRequired,
 };
