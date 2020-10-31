@@ -29,7 +29,7 @@ export default function Issues({ issues, handleCheckboxClick, selections }) {
         }) => (
           <div css={styles.layout} key={issueId}>
             <input
-              onClick={() => handleCheckboxClick(issueId)}
+              onChange={() => handleCheckboxClick(issueId)}
               checked={selections.includes(issueId)}
               type="checkbox"
             />

@@ -9,7 +9,7 @@ export default function TotalCheckBox({
   return (
     <div>
       <input
-        onClick={handleCheckboxSwitch}
+        onChange={handleCheckboxSwitch}
         checked={selectionSwitch}
         type="checkbox"
       />
