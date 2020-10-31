@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+  useState, useEffect, useRef, useCallback,
+} from 'react';
 import { PropTypes } from 'prop-types';
 import DropdownItem from './DropdownItem';
 
@@ -41,24 +43,27 @@ const styles = {
     padding: '5px',
   },
 };
+
 export default function Dropdown({ title, items }) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
-  const itemList = items.map((v) => <DropdownItem id={v.id} value={v.value} />);
+  const itemList = items.map(({ id, value }) => <DropdownItem id={id} value={value} />);
+
   const onClick = () => setIsActive(!isActive);
 
+  const pageClickEvent = useCallback(({ target }) => {
+    const { current } = dropdownRef;
+
+    if (current !== null && !current.contains(target)) {
+      setIsActive(!isActive);
+    }
+  }, [isActive]);
+
   useEffect(() => {
-    const pageClickEvent = (e) => {
-      if (
-        dropdownRef.current !== null
-        && !dropdownRef.current.contains(e.target)
-      ) {
-        setIsActive(!isActive);
-      }
-    };
     if (isActive) {
       window.addEventListener('click', pageClickEvent);
     }
+
     return () => {
       window.removeEventListener('click', pageClickEvent);
     };
@@ -76,7 +81,9 @@ export default function Dropdown({ title, items }) {
           {' '}
           {title}
         </p>
-        <ul css={styles.content}>{itemList}</ul>
+        <ul css={styles.content}>
+          {itemList}
+        </ul>
       </div>
     </div>
   );
