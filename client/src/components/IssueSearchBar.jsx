@@ -8,7 +8,6 @@ import GroupButton from './GroupButton';
 const styles = {
   layout: {
     display: 'flex',
-    margin: '10px 0',
     justifyContent: 'space-between',
     width: '1100px',
     margin: '30px auto',
