@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-const style = {
+const styles = {
   count: {
     backgroundColor: 'lightgrey',
     padding: '3px 10px',
@@ -25,7 +25,7 @@ export default function GroupButton({
         {title}
         {' '}
       </span>
-      <span css={style.count}>{countOfGroup}</span>
+      <span css={styles.count}>{countOfGroup}</span>
     </div>
   );
 }

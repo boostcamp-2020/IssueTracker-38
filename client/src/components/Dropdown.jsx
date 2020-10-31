@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { PropTypes } from 'prop-types';
 import DropdownItem from './DropdownItem';
 
-const style = {
+const styles = {
   dropDown: {
     position: 'absolute',
     border: '1px solid lightgray',
@@ -66,17 +66,17 @@ export default function Dropdown({ title, items }) {
 
   return (
     <div ref={dropdownRef}>
-      <button css={style.button} type="button" onClick={onClick}>
+      <button css={styles.button} type="button" onClick={onClick}>
         {title}
-        <div css={style.downArrow} />
+        <div css={styles.downArrow} />
       </button>
-      <div css={{ ...style.dropDown, display: isActive ? 'block' : 'none' }}>
-        <p css={style.title}>
+      <div css={{ ...styles.dropDown, display: isActive ? 'block' : 'none' }}>
+        <p css={styles.title}>
           Filter by
           {' '}
           {title}
         </p>
-        <ul css={style.content}>{itemList}</ul>
+        <ul css={styles.content}>{itemList}</ul>
       </div>
     </div>
   );

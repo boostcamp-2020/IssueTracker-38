@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 
 import Issue from './Issue';
 
-const style = {
+const styles = {
   layout: {
     display: 'flex',
     width: '100%',
@@ -27,14 +27,14 @@ export default function Issues({ issues, handleCheckboxClick, selections }) {
         ({
           title, milestone, label, issueId, createdAt, asignee,
         }) => (
-          <div css={style.layout} key={issueId}>
+          <div css={styles.layout} key={issueId}>
             <input
               onClick={() => handleCheckboxClick(issueId)}
               checked={selections.includes(issueId)}
               type="checkbox"
             />
             <svg
-              css={style.statusIcon}
+              css={styles.statusIcon}
               className="octicon octicon-issue-opened open"
               viewBox="0 0 16 16"
               version="1.1"
