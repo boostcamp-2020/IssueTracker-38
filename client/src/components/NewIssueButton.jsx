@@ -12,6 +12,7 @@ const styles = {
     boxSizing: 'border-box',
   },
 };
+
 export default function NewIssue() {
   const history = useHistory();
 

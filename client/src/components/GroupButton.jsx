@@ -9,6 +9,7 @@ const styles = {
     borderRadius: '15px',
   },
 };
+
 export default function GroupButton({
   countOfGroup,
   svgPathD,

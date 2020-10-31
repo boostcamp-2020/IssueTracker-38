@@ -30,6 +30,7 @@ const styles = {
     padding: '5px 15px',
   },
 };
+
 export default function IssueSearchBar() {
   return (
     <div css={styles.layout}>
