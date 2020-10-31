@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 export default function TotalCheckBox({
   selections,
@@ -25,3 +26,9 @@ export default function TotalCheckBox({
     </div>
   );
 }
+
+TotalCheckBox.propTypes = {
+  selections: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectionSwitch: PropTypes.bool.isRequired,
+  handleCheckboxSwitch: PropTypes.func.isRequired,
+};

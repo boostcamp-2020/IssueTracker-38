@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PropTypes } from 'prop-types';
 
 import TotalCheckBox from './TotalCheckBox';
 import Issues from './Issues';
@@ -75,3 +76,8 @@ export default function IssueMain({ issues, items }) {
     </div>
   );
 }
+
+IssueMain.propTypes = {
+  issues: PropTypes.arrayOf(PropTypes.object).isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+};

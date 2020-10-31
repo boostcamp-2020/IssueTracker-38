@@ -64,4 +64,6 @@ export default function Issues({ issues, handleCheckboxClick, selections }) {
 
 Issues.propTypes = {
   issues: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleCheckboxClick: PropTypes.func.isRequired,
+  selections: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

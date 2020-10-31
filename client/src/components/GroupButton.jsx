@@ -34,4 +34,5 @@ GroupButton.propTypes = {
   countOfGroup: PropTypes.number.isRequired,
   svgPathD: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  emotion: PropTypes.objectOf(PropTypes.node).isRequired,
 };
