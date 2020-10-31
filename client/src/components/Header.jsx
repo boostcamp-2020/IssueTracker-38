@@ -6,15 +6,15 @@ export default function header() {
       height: '100px',
       backgroundColor: 'black',
       textAlign: 'center',
-      margin: '0'
+      margin: '0',
     },
     title: {
       padding: '0',
       lineHeight: '100px',
       color: 'white',
       fontSize: '25px',
-      fontWeight: 'bold'
-    }
+      fontWeight: 'bold',
+    },
   };
 
   return (

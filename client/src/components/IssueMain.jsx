@@ -9,7 +9,7 @@ const styles = {
     width: '1100px',
     margin: '0 auto',
     border: '1px solid lightgrey',
-    borderRadius: '6px'
+    borderRadius: '6px',
   },
   layout: {
     display: 'flex',
@@ -18,20 +18,20 @@ const styles = {
     borderRadius: '6px 6px 0 0',
     justifyContent: 'space-between',
     padding: '15px',
-    backgroundColor: '#efefef'
+    backgroundColor: '#efefef',
   },
   dropdowns: {
-    display: 'flex'
-  }
+    display: 'flex',
+  },
 };
 
 export default function IssueMain({ issues, items }) {
   const [selections, setSelections] = useState([]);
   const [selectionSwitch, toggleSelectionSwitch] = useState(false);
 
-  const handleCheckboxClick = issueId => {
+  const handleCheckboxClick = (issueId) => {
     if (selections.includes(issueId)) {
-      setSelections(selections.filter(selection => selection !== issueId));
+      setSelections(selections.filter((selection) => selection !== issueId));
       return;
     }
 
@@ -46,7 +46,7 @@ export default function IssueMain({ issues, items }) {
       return;
     }
 
-    const allIssueIds = issues.map(issue => issue.issueId);
+    const allIssueIds = issues.map((issue) => issue.issueId);
     setSelections(allIssueIds);
   };
 

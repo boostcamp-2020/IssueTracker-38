@@ -11,25 +11,25 @@ const style = {
     margin: '10px 0',
     justifyContent: 'space-between',
     width: '1100px',
-    margin: '30px auto'
+    margin: '30px auto',
   },
   searchBar: {
     display: 'flex',
-    width: '60%'
+    width: '60%',
   },
   buttonGroup: {
-    display: 'flex'
+    display: 'flex',
   },
   labelButton: {
     border: '1px solid grey',
     borderRadius: '6px 0 0 6px',
-    padding: '5px 15px'
+    padding: '5px 15px',
   },
   milestoneButton: {
     border: '1px solid grey',
     borderRadius: '0 6px 6px 0',
-    padding: '5px 15px'
-  }
+    padding: '5px 15px',
+  },
 };
 export default function IssueSearchBar() {
   return (

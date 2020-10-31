@@ -7,7 +7,7 @@ const style = {
     position: 'absolute',
     border: '1px solid lightgray',
     padding: '5px',
-    background: 'white'
+    background: 'white',
   },
   button: {
     border: 'none',
@@ -16,7 +16,7 @@ const style = {
     cursor: 'pointer',
     fontSize: '16px',
     color: '#636363',
-    marginLeft: '20px'
+    marginLeft: '20px',
   },
   downArrow: {
     marginLeft: '2px',
@@ -29,29 +29,29 @@ const style = {
     borderTopWidth: '4px',
     borderRight: '4px solid transparent',
     borderBottom: '0 solid transparent',
-    borderLeft: '4px solid transparent'
+    borderLeft: '4px solid transparent',
   },
   title: {
     borderBottom: '1px solid lightgray',
-    margin: '0px'
+    margin: '0px',
   },
   content: {
     listStyle: 'none',
     margin: '5px 0 0 0',
-    padding: '5px'
-  }
+    padding: '5px',
+  },
 };
 export default function Dropdown({ title, items }) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
-  const itemList = items.map(v => <DropdownItem id={v.id} value={v.value} />);
+  const itemList = items.map((v) => <DropdownItem id={v.id} value={v.value} />);
   const onClick = () => setIsActive(!isActive);
 
   useEffect(() => {
-    const pageClickEvent = e => {
+    const pageClickEvent = (e) => {
       if (
-        dropdownRef.current !== null &&
-        !dropdownRef.current.contains(e.target)
+        dropdownRef.current !== null
+        && !dropdownRef.current.contains(e.target)
       ) {
         setIsActive(!isActive);
       }
@@ -68,10 +68,14 @@ export default function Dropdown({ title, items }) {
     <div ref={dropdownRef}>
       <button css={style.button} type="button" onClick={onClick}>
         {title}
-        <div css={style.downArrow}></div>
+        <div css={style.downArrow} />
       </button>
       <div css={{ ...style.dropDown, display: isActive ? 'block' : 'none' }}>
-        <p css={style.title}>Filter by {title}</p>
+        <p css={style.title}>
+          Filter by
+          {' '}
+          {title}
+        </p>
         <ul css={style.content}>{itemList}</ul>
       </div>
     </div>
@@ -80,5 +84,5 @@ export default function Dropdown({ title, items }) {
 
 Dropdown.propTypes = {
   title: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(PropTypes.object).isRequired
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

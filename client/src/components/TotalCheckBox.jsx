@@ -3,7 +3,7 @@ import React from 'react';
 export default function TotalCheckBox({
   selections,
   selectionSwitch,
-  handleCheckboxSwitch
+  handleCheckboxSwitch,
 }) {
   return (
     <div>
@@ -15,7 +15,12 @@ export default function TotalCheckBox({
       {selections.length === 0 ? (
         <></>
       ) : (
-        <span> {selections.length} selected</span>
+        <span>
+          {' '}
+          {selections.length}
+          {' '}
+          selected
+        </span>
       )}
     </div>
   );
