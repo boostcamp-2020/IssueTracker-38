@@ -2,10 +2,10 @@ const sequelize = require('../models');
 const { Issue, IssueLabel, IssueAssignee } = require('../models').models;
 
 module.exports = {
-  readAll: async (req, res, next) => {
+  async readAll(req, res, next) {
     try {
-      const [issuesWithLabel] = await sequelize.query('SELECT * FROM Issue AS I LEFT JOIN `IssueLabel` AS IL ON I.id=IL.IssueId UNION SELECT * FROM Issue AS I RIGHT JOIN `IssueLabel` AS IL ON I.id=IL.IssueId');
-      const [issuesAssignee] = await sequelize.query('SELECT * FROM `IssueAssignee`');
+      const [issuesWithLabel] = await sequelize.query('SELECT * FROM Issue AS I LEFT JOIN IssueLabel AS IL ON I.id=IL.IssueId WHERE deletedAt IS NULL UNION SELECT * FROM Issue AS I RIGHT JOIN IssueLabel AS IL ON I.id=IL.IssueId WHERE deletedAt IS NULL');
+      const [issuesAssignee] = await sequelize.query('SELECT * FROM IssueAssignee');
       const groups = issuesAssignee.reduce((prev, cur) => {
         const result = prev;
         if (!result[cur.IssueId]) result[cur.IssueId] = [];
@@ -18,7 +18,7 @@ module.exports = {
         if (!result[id]) {
           result[id] = groups[id]
             ? { ...cur, assignees: groups[id], labels: [] }
-            : { ...cur, labels: [] };
+            : { ...cur, assignees: [], labels: [] };
           delete result[id].LabelId;
           delete result[id].IssueId;
         }
@@ -30,7 +30,7 @@ module.exports = {
       next(err);
     }
   },
-  update: async (req, res, next) => {
+  async update(req, res, next) {
     const willBeUpdated = req.body;
     const IssueId = willBeUpdated.id;
     delete willBeUpdated.id;
