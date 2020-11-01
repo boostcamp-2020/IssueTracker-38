@@ -11,15 +11,15 @@ const sequelize = new Sequelize(
       freezeTableName: true,
       charset: 'utf8',
       dialectOptions: {
-        collate: 'utf8_general_ci'
+        collate: 'utf8_general_ci',
       },
-      timestamps: false
+      timestamps: false,
     },
     sync: { alter: true },
     pool: {
-      idle: 500
-    }
-  }
+      idle: 500,
+    },
+  },
 );
 
 require('./issue')(sequelize, DataTypes);
@@ -28,9 +28,8 @@ require('./label')(sequelize, DataTypes);
 require('./milestone')(sequelize, DataTypes);
 require('./user')(sequelize, DataTypes);
 
-Object.keys(sequelize.models).forEach(model => {
-  if (sequelize.models[model].associate)
-    sequelize.models[model].associate(sequelize.models);
+Object.keys(sequelize.models).forEach((model) => {
+  if (sequelize.models[model].associate) { sequelize.models[model].associate(sequelize.models); }
 });
 
 module.exports = sequelize;
