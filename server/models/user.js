@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = (models) => {
     User.hasMany(models.Issue, {
       foreignKey: 'userId',
+      allowNull: false,
     });
     User.hasMany(models.Comment, {
       foreignKey: 'userId',
