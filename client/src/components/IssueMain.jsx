@@ -79,6 +79,5 @@ export default function IssueMain({ items }) {
 }
 
 IssueMain.propTypes = {
-  // issues: PropTypes.arrayOf(PropTypes.object).isRequired,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

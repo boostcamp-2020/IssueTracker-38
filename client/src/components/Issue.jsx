@@ -107,6 +107,6 @@ Issue.propTypes = {
   title: PropTypes.string.isRequired,
   userId: PropTypes.number.isRequired,
   milestoneId: PropTypes.number.isRequired,
-  labels: PropTypes.arrayOf(PropTypes.obk).isRequired,
+  labels: PropTypes.arrayOf(PropTypes.object).isRequired,
   createdAt: PropTypes.string.isRequired,
 };
