@@ -32,6 +32,16 @@ export const issueAPI = {
     const result = await customFetch(url, request);
     return result;
   },
+  async markAll(isClosed, issueIds) {
+    const url = `${baseURL}/issue/markall`;
+    const request = {
+      method: 'patch',
+      header: { Authorization: 'Bearer ~' },
+      body: JSON.stringify({ isClosed, issueIds }),
+    };
+    const result = await customFetch(url, request);
+    return result;
+  },
 };
 
 export const milestoneAPI = {
