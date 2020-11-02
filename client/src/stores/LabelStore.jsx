@@ -12,7 +12,7 @@ function labelReducer(labels, { type, payload }) {
       return [...labels, payload];
     case 'UPDATE':
       return updateStoreItem(labels, payload);
-    case 'REMOVE':
+    case 'DELETE':
       return deleteStoreItem(labels, payload);
     default:
       return labels;

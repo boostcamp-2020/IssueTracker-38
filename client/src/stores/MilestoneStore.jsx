@@ -20,11 +20,11 @@ function issueReducer(milestones, { type, payload }) {
 }
 
 export default function MilestoneStore({ children }) {
-  const [issues, dispatch] = useReducer(issueReducer, []);
+  const [milestones, dispatch] = useReducer(issueReducer, []);
 
   const setInitState = async () => {
-    const milestones = await milestoneAPI.readAll();
-    dispatch({ type: 'INIT', payload: milestones });
+    const initState = await milestoneAPI.readAll();
+    dispatch({ type: 'INIT', payload: initState });
   };
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function MilestoneStore({ children }) {
   }, []);
 
   return (
-    <MilestoneContext.Provider value={{ issues, dispatch }}>
+    <MilestoneContext.Provider value={{ milestones, dispatch }}>
       {children}
     </MilestoneContext.Provider>
   );
