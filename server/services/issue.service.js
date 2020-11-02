@@ -68,4 +68,7 @@ module.exports = {
 
     res.json({ message: '수정 되었습니다.' });
   },
+  async updateMarkedIssues(req, res) {
+    // TODO: Implement
+  },
 };
