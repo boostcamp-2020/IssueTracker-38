@@ -11,9 +11,8 @@ import IssueMain from './components/IssueMain';
 import IssueSearchBar from './components/IssueSearchBar';
 import StoreWrapper from './stores/StoreWrapper';
 
-import { dummyIssues, dummyDropdownItems } from './dummyData';
-
 export default function App() {
+
   return (
     <>
       <StoreWrapper>
@@ -22,7 +21,7 @@ export default function App() {
             <Route exact path="/">
               <Header />
               <IssueSearchBar />
-              <IssueMain issues={dummyIssues} items={dummyDropdownItems} />
+              <IssueMain></IssueMain>
             </Route>
             <Route path="/new-issue">
               <Header />
@@ -35,6 +34,7 @@ export default function App() {
             <Redirect path="*" to="/" />
           </Switch>
         </Router>
+
       </StoreWrapper>
     </>
   );
