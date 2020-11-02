@@ -1,6 +1,9 @@
 const customFetch = async (url, request) => {
   try {
     const res = await fetch(url, request);
+    const status = await res.status;
+    if (status >= 500) throw new Error('Server error');
+    if (status >= 400) throw new Error('Client error');
     return res.json();
   } catch (err) {
     return null;
