@@ -67,10 +67,10 @@ export default function IssueMain() {
           handleCheckboxSwitch={handleCheckboxSwitch}
         />
         <div css={styles.dropdowns}>
-          <Dropdown title="Author" items={users.map((v) => ({ ...v, value: v.email }))} />
-          <Dropdown title="Label" items={labels.map((v) => ({ ...v, value: v.name }))} />
-          <Dropdown title="Milestone" items={milestones.map((v) => ({ ...v, value: v.title }))} />
-          <Dropdown title="Asignee" items={users.map((v) => ({ ...v, value: v.email }))} />
+          <Dropdown title="Author" items={users.map((user) => ({ ...user, value: user.email }))} />
+          <Dropdown title="Label" items={labels.map((label) => ({ ...label, value: label.name }))} />
+          <Dropdown title="Milestone" items={milestones.map((milestone) => ({ ...milestone, value: milestone.title }))} />
+          <Dropdown title="Asignee" items={users.map((user) => ({ ...user, value: user.email }))} />
         </div>
       </div>
       <Issues
