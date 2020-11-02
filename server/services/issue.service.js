@@ -1,3 +1,4 @@
+const { Sequelize } = require('sequelize');
 const sequelize = require('../models');
 const { Issue, IssueLabel, IssueAssignee } = require('../models').models;
 
@@ -69,6 +70,19 @@ module.exports = {
     res.json({ message: '수정 되었습니다.' });
   },
   async updateMarkedIssues(req, res) {
-    // TODO: Implement
+    const { isClosed, issueIds } = req.body;
+
+    const updatingCondition = issueIds.map((issueId) => ({ UserId: issueId }));
+
+    Issue.update(
+      { isClosed },
+      {
+        where: {
+          [Sequelize.Op.or]: updatingCondition,
+        },
+      },
+    );
+
+    res.json({ message: '수정 되었습니다.' });
   },
 };
