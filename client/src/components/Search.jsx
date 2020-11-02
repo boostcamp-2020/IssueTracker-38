@@ -6,12 +6,12 @@ const styles = {
     border: '1px solid lightgrey',
     borderRadius: '0 6px 6px 0',
     width: '90%',
-    backgroundColor: '#efefef'
+    backgroundColor: '#efefef',
   },
   input: {
     backgroundColor: '#efefef',
-    border: '0'
-  }
+    border: '0',
+  },
 };
 
 export default function Search() {
