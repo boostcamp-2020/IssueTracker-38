@@ -9,14 +9,14 @@ import {
 import Header from './components/Header';
 import IssueMain from './components/IssueMain';
 import IssueSearchBar from './components/IssueSearchBar';
-import IssueStore from './stores/IssueStore';
+import StoreWrapper from './stores/StoreWrapper';
 
 import { dummyIssues, dummyDropdownItems } from './dummyData';
 
 export default function App() {
   return (
     <>
-      <IssueStore>
+      <StoreWrapper>
         <Router>
           <Switch>
             <Route exact path="/">
@@ -35,7 +35,7 @@ export default function App() {
             <Redirect path="*" to="/" />
           </Switch>
         </Router>
-       </IssueStore>
+      </StoreWrapper>
     </>
   );
 }
