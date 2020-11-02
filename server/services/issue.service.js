@@ -72,9 +72,9 @@ module.exports = {
   async updateMarkedIssues(req, res) {
     const { isClosed, issueIds } = req.body;
 
-    const updatingCondition = issueIds.map((issueId) => ({ UserId: issueId }));
+    const updatingCondition = issueIds.map((issueId) => ({ id: issueId }));
 
-    Issue.update(
+    await Issue.update(
       { isClosed },
       {
         where: {
