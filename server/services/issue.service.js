@@ -16,9 +16,11 @@ module.exports = {
         const result = prev;
         const { id, LabelId } = cur;
         if (!result[id]) {
-          result[id] = groups[id]
-            ? { ...cur, assignees: groups[id], labels: [] }
-            : { ...cur, assignees: [], labels: [] };
+          result[id] = {
+            ...cur,
+            assignees: groups[id] || [],
+            labels: [],
+          };
           delete result[id].LabelId;
           delete result[id].IssueId;
         }
