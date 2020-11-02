@@ -36,7 +36,10 @@ export const issueAPI = {
     const url = `${baseURL}/issue/markall`;
     const request = {
       method: 'PATCH',
-      header: { Authorization: 'Bearer ~' },
+      headers: {
+        Authorization: 'Bearer ~',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({ isClosed, issueIds }),
     };
     const result = await customFetch(url, request);
