@@ -16,7 +16,7 @@ export const issueAPI = {
   async readAll() {
     const url = `${baseURL}/issue`;
     const request = {
-      method: 'get',
+      method: 'GET',
       header: { Authorization: 'Bearer ~' },
     };
     const issues = await customFetch(url, request);
@@ -25,7 +25,7 @@ export const issueAPI = {
   async update(data) {
     const url = `${baseURL}/issue`;
     const request = {
-      method: 'patch',
+      method: 'PATCH',
       header: { Authorization: 'Bearer ~' },
       body: JSON.stringify(data),
     };
@@ -35,7 +35,7 @@ export const issueAPI = {
   async markAll(isClosed, issueIds) {
     const url = `${baseURL}/issue/markall`;
     const request = {
-      method: 'patch',
+      method: 'PATCH',
       header: { Authorization: 'Bearer ~' },
       body: JSON.stringify({ isClosed, issueIds }),
     };
@@ -48,7 +48,7 @@ export const milestoneAPI = {
   async readAll() {
     const url = `${baseURL}/milestone`;
     const request = {
-      method: 'get',
+      method: 'GET',
       header: { Authorization: 'Bearer ~' },
     };
     const milestones = await customFetch(url, request);
@@ -60,7 +60,7 @@ export const labelAPI = {
   async readAll() {
     const url = `${baseURL}/label`;
     const request = {
-      method: 'get',
+      method: 'GET',
       header: { Authorization: 'Bearer ~' },
     };
     const labels = await customFetch(url, request);
@@ -72,7 +72,7 @@ export const userAPI = {
   async readAll() {
     const url = `${baseURL}/user`;
     const request = {
-      method: 'get',
+      method: 'GET',
       header: { Authorization: 'Bearer ~' },
     };
     const users = await customFetch(url, request);
