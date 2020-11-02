@@ -94,7 +94,9 @@ export default function Issue({
         <div css={styles.detail}>
           opened
           {' '}
-          {createdAt}
+          {calElapsedTime(createdAt)}
+          {' '}
+          ago
         </div>
         <div css={styles.detail}>
           by
