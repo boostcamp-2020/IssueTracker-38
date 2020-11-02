@@ -1,8 +1,7 @@
-const express = require('express');
-
-const router = express.Router();
+const router = require('express').Router();
 const userService = require('../services/user.service');
+const errorCatcher = require('../middlewares/errorCatcher');
 
-router.get('/', userService.readAll);
+router.get('/', errorCatcher(userService.readAll));
 
 module.exports = router;
