@@ -51,8 +51,8 @@ export default function Issue({
   const { milestones } = useContext(MilestoneContext);
   const { labels: allLabels } = useContext(LabelsContext);
 
-  const userEmail = users.fileter((u) => u.id === userId)[0].email;
-  const milestoneTitle = milestones.filter((m) => m.id === milestoneId)[0].title;
+  const userEmail = users.length > 0 ? users.filter((u) => u.id === userId)[0].email : ' ';
+  const milestoneTitle = milestones.length > 0 ? milestones.filter((m) => m.id === milestoneId)[0].title : ' ';
 
   return (
     <div css={styles.body}>
