@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { IssuesContext } from '../stores/IssueStore';
 import { PropTypes } from 'prop-types';
-
 import TotalCheckBox from './TotalCheckBox';
 import Issues from './Issues';
 import Dropdown from './Dropdown';
@@ -27,6 +27,7 @@ const styles = {
 };
 
 export default function IssueMain({ issues, items }) {
+  // const {issues} = useContext(IssuesContext);
   const [selections, setSelections] = useState([]);
   const [selectionSwitch, toggleSelectionSwitch] = useState(false);
 
