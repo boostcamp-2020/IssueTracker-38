@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { IssuesContext } from '../stores/IssueStore';
 import { PropTypes } from 'prop-types';
+import { IssuesContext } from '../stores/IssueStore';
 import TotalCheckBox from './TotalCheckBox';
 import Issues from './Issues';
 import Dropdown from './Dropdown';
@@ -26,8 +26,8 @@ const styles = {
   },
 };
 
-export default function IssueMain({ issues, items }) {
-  // const {issues} = useContext(IssuesContext);
+export default function IssueMain({ items }) {
+  const { issues } = useContext(IssuesContext);
   const [selections, setSelections] = useState([]);
   const [selectionSwitch, toggleSelectionSwitch] = useState(false);
 
@@ -79,6 +79,6 @@ export default function IssueMain({ issues, items }) {
 }
 
 IssueMain.propTypes = {
-  issues: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // issues: PropTypes.arrayOf(PropTypes.object).isRequired,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
