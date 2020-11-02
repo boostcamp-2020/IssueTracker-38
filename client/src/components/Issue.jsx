@@ -21,6 +21,7 @@ const styles = {
   },
   label: {
     padding: '5px 10px',
+    margin: '0 5px 0 0',
     backgroundColor: 'violet',
     borderRadius: '12px',
     fontSize: '12px',
