@@ -7,5 +7,5 @@ export default function DropdownItem({ id, value }) {
 
 DropdownItem.propTypes = {
   id: PropTypes.number.isRequired,
-  value: PropTypes.string.isRequired
+  value: PropTypes.string.isRequired,
 };

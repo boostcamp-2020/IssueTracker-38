@@ -1,6 +1,7 @@
 require('dotenv').config();
 
-const express = require('express');
+const express = require('express')
+const path = require('path');
 const cors = require('cors');
 const logger = require('morgan');
 
@@ -14,8 +15,13 @@ sequelize.sync();
 app.use(express.json());
 app.use(cors({ origin: '*' }));
 app.use(logger('dev'));
+app.use(express.static('public'));
 
 app.use('/', require('./routes'));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
