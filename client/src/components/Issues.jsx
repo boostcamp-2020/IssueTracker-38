@@ -35,7 +35,6 @@ export default function Issues({ issues, handleCheckboxClick, selections }) {
             />
             <svg
               css={styles.statusIcon}
-              className="octicon octicon-issue-opened open"
               viewBox="0 0 16 16"
               version="1.1"
               width="16"

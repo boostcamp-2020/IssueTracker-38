@@ -69,8 +69,6 @@ export default function Issue({
         </div>
         <svg
           css={styles.milestoneIcon}
-          aria-label="Milestone"
-          className="octicon octicon-milestone"
           viewBox="0 0 16 16"
           version="1.1"
           width="16"
