@@ -52,8 +52,8 @@ export default function Issue({
   const { milestones } = useContext(MilestoneContext);
   const { labels: allLabels } = useContext(LabelsContext);
 
-  const userEmail = users.length > 0 ? users.filter((u) => u.id === userId)[0].email : ' ';
-  const milestoneTitle = milestones.length > 0 ? milestones.filter((m) => m.id === milestoneId)[0].title : ' ';
+  const { email: userEmail } = users.length > 0 ? users.find((u) => u.id === userId) : ' ';
+  const { title: milestoneTitle } = milestones.length > 0 ? milestones.find((m) => m.id === milestoneId) : ' ';
 
   return (
     <div css={styles.body}>
@@ -62,7 +62,8 @@ export default function Issue({
           {title}
         </a>
         {labels.map((num) => {
-          const target = allLabels.filter((label) => label.id === num)[0];
+          const target = allLabels.find((label) => label.id === num);
+          if (!target) return (<></>);
           return (
             <div css={{ ...styles.label, backgroundColor: target.color }}>
               {target.name}
