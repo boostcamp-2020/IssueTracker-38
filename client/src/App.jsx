@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
 } from 'react-router-dom';
 import Header from './components/Header';
 import IssueMain from './components/IssueMain';
@@ -31,9 +32,10 @@ export default function App() {
               <Header />
               <h1>임시 이슈 상세 페이지입니다.</h1>
             </Route>
+            <Redirect path="*" to="/" />
           </Switch>
         </Router>
-      </IssueStore>
+       </IssueStore>
     </>
   );
 }
