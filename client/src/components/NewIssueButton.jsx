@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useHistory } from 'react-router-dom';
 
-const style = {
+const styles = {
   button: {
     backgroundColor: 'green',
     color: 'white',
@@ -12,6 +12,7 @@ const style = {
     boxSizing: 'border-box',
   },
 };
+
 export default function NewIssue() {
   const history = useHistory();
 
@@ -20,7 +21,7 @@ export default function NewIssue() {
   };
 
   return (
-    <button onClick={handleRedirection} css={style.button} type="button">
+    <button onClick={handleRedirection} css={styles.button} type="button">
       New Issue
     </button>
   );

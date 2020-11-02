@@ -6,28 +6,28 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       title: {
         type: DataTypes.STRING(100),
-        allowNull: false
+        allowNull: false,
       },
       content: {
         type: DataTypes.STRING(100),
-        allowNull: false
-      }
+        allowNull: false,
+      },
     },
     {
-      timestamps: true
-    }
+      timestamps: true,
+    },
   );
-  Comment.associate = models => {
+  Comment.associate = (models) => {
     Comment.belongsTo(models.User, {
-      foreignKey: 'userId'
+      foreignKey: 'userId',
     });
     Comment.belongsTo(models.Issue, {
       foreignKey: 'issueId',
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
     });
   };
 
