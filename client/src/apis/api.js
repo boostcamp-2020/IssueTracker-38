@@ -17,7 +17,7 @@ export const issueAPI = {
     const url = `${baseURL}/issue`;
     const request = {
       method: 'get',
-      header: { Authorization: 'Bearer ~' },
+      headers: { Authorization: 'Bearer ~' },
     };
     const issues = await customFetch(url, request);
     return issues;
@@ -26,7 +26,7 @@ export const issueAPI = {
     const url = `${baseURL}/issue`;
     const request = {
       method: 'patch',
-      header: { Authorization: 'Bearer ~' },
+      headers: { Authorization: 'Bearer ~' },
       body: JSON.stringify(data),
     };
     const result = await customFetch(url, request);
@@ -39,7 +39,7 @@ export const milestoneAPI = {
     const url = `${baseURL}/milestone`;
     const request = {
       method: 'get',
-      header: { Authorization: 'Bearer ~' },
+      headers: { Authorization: 'Bearer ~' },
     };
     const milestones = await customFetch(url, request);
     return milestones;
@@ -51,7 +51,7 @@ export const labelAPI = {
     const url = `${baseURL}/label`;
     const request = {
       method: 'get',
-      header: { Authorization: 'Bearer ~' },
+      headers: { Authorization: 'Bearer ~' },
     };
     const labels = await customFetch(url, request);
     return labels;
@@ -63,9 +63,35 @@ export const userAPI = {
     const url = `${baseURL}/user`;
     const request = {
       method: 'get',
-      header: { Authorization: 'Bearer ~' },
+      headers: { Authorization: 'Bearer ~' },
     };
     const users = await customFetch(url, request);
     return users;
+  },
+};
+
+export const commentAPI = {
+  async create(data) {
+    const url = `${baseURL}/comment`;
+    const request = {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        Authorization: 'Bearer ~',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+    const result = await customFetch(url, request);
+    return result;
+  },
+  async readByIssue(issueId) {
+    const url = `${baseURL}/comment?issueId=${issueId}`;
+    const request = {
+      method: 'get',
+      headers: { Authorization: 'Bearer ~' },
+    };
+    const comments = await customFetch(url, request);
+    return comments;
   },
 };
