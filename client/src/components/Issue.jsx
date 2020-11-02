@@ -62,9 +62,10 @@ export default function Issue({
         </a>
         {labels.map((num) => {
           const target = allLabels.filter((label) => label.id === num)[0];
-          if (target.color) styles.label.backgroundColor = target.color;
           return (
-            <div css={styles.label}>{target.name}</div>
+            <div css={{ ...styles.label, backgroundColor: target.color }}>
+              {target.name}
+            </div>
           );
         })}
       </div>
