@@ -1,16 +1,24 @@
 import React, { useEffect, useReducer } from 'react';
+import { PropTypes } from 'prop-types';
 import { issueAPI } from '../apis/api';
+import { updateStoreItem } from '../utils/utils';
+
 export const IssuesContext = React.createContext();
-function issueReducer(issues, { type, payload }) {
+async function issueReducer(issues, { type, payload }) {
   switch (type) {
     case 'INIT':
       return payload;
     case 'ADD':
       return [...issues, payload];
+    case 'UPDATE':
+      if (!await issueAPI.update(payload)) return issues;
+      return updateStoreItem(issues, payload);
     default:
+      return issues;
   }
 }
-export default function IssueStore(props) {
+
+export default function IssueStore({ children }) {
   const [issues, dispatch] = useReducer(issueReducer, []);
   const setInitState = async () => {
     const initState = await issueAPI.readAll();
@@ -21,7 +29,11 @@ export default function IssueStore(props) {
   }, []);
   return (
     <IssuesContext.Provider value={{ issues, dispatch }}>
-      {props.children}
+      {children}
     </IssuesContext.Provider>
   );
 }
+
+IssueStore.propTypes = {
+  children: PropTypes.node.isRequired,
+};
