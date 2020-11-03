@@ -12,7 +12,7 @@ module.exports = {
       res.sendStatus(400);
       return;
     }
-    const comments = await Comment.findAll({ where: { issueId } });
+    const comments = await Comment.findAll({ where: { issueId }, order: ['createdAt'] });
 
     res.status(200).json(comments);
   },
