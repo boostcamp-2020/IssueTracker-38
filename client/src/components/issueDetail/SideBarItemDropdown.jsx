@@ -32,40 +32,38 @@ export default function SideBarItemDropdown({ items, assigned, title }) {
     const targetIssue = { ...getItemById(issues, +issueId) };
 
     if (title === 'Assignees') {
-      if (type === 'add') {
-        targetIssue.assignees.push(id);
-      } else {
-        const index = targetIssue.assignees.indexOf(id);
-        targetIssue.assignees.splice(index, 1);
-      }
+      const { assignees } = targetIssue;
+      const actions = {
+        add: () => assignees.push(id),
+        delete: () => assignees.splice(assignees.indexOf(id), 1),
+      };
 
+      actions[type]();
       dispatch({ type: 'UPDATE', payload: targetIssue });
       issueAPI.update({ id: issueId, assignee: { type, id } });
-      return;
     }
 
     if (title === 'Labels') {
-      if (type === 'add') {
-        targetIssue.labels.push(id);
-      } else {
-        const index = targetIssue.labels.indexOf(id);
-        targetIssue.labels.splice(index, 1);
-      }
+      const { labels } = targetIssue;
+      const actions = {
+        add: () => labels.push(id),
+        delete: () => labels.splice(labels.indexOf(id), 1),
+      };
 
+      actions[type]();
       dispatch({ type: 'UPDATE', payload: targetIssue });
       issueAPI.update({ id: issueId, label: { type, id } });
-      return;
     }
 
     if (title === 'Milestone') {
-      const milestoneId = type === 'add' ? id : null;
+      let milestoneId = null;
 
-      if (type === 'add') {
-        targetIssue.milestoneId = id;
-      } else {
-        targetIssue.milestoneId = null;
-      }
+      const actions = {
+        add: () => { targetIssue.milestoneId = id; milestoneId = id; },
+        delete: () => { targetIssue.milestoneId = null; },
+      };
 
+      actions[type]();
       dispatch({ type: 'UPDATE', payload: targetIssue });
       issueAPI.update({ id: issueId, milestoneId });
     }
