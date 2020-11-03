@@ -1,11 +1,10 @@
-import React, {
-  useContext, useState, useRef, useCallback, useEffect,
-} from 'react';
+import React, { useContext, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { UsersContext } from '../../stores/UserStore';
 import { AuthContext } from '../../stores/AuthStore';
 import { commentAPI } from '../../apis/api';
 import { calElapsedTime } from '../../utils/utils';
+import CountOfCharacter from './CountOfCharacter';
 
 const styles = {
   header: {
@@ -14,8 +13,8 @@ const styles = {
   writer: {
     fontWeight: '800',
   },
-  count: {
-    display: 'none',
+  role: {
+    margin: '0 5px',
   },
 };
 
@@ -29,44 +28,31 @@ export default function Comment({
 }) {
   const { users } = useContext(UsersContext);
   const { currentUser } = useContext(AuthContext);
-
-  const owner = currentUser.id === userId;
-  const markOfOwner = () => {
-    if (owner) return 'Owner';
-    if (userId === issueAuthorId) return 'Author';
-    return '';
-  };
-
-  const writer = users.length > 0 ? users.find((user) => user.id === userId) : ' ';
-  const elapsedTime = updatedAt ? calElapsedTime(updatedAt) : calElapsedTime(createdAt);
-
-  const editRef = useRef(null);
   const [editState, setEditState] = useState(false);
-
-  const editClickEvent = useCallback(({ target }) => {
-    const { current } = editRef;
-    if (current && current.contains(target)) setEditState(!editState);
-  }, [editState]);
-
-  useEffect(() => {
-    if (editState) window.addEventListener('click', editClickEvent);
-    return () => window.removeEventListener('click', editClickEvent);
-  }, [editState]);
-
-  const originContent = content;
   const [newContent, setNewContent] = useState(content);
   const [countOfCharacter, setCountOfCharacter] = useState(newContent.length);
   const [recentTimeout, setRecentTimeout] = useState(-1);
+  const [displayState, setDisplayState] = useState(false);
 
-  // TODO: 2초 뒤 사라지는 기능 미완
+  const writer = users.length > 0 ? users.find((user) => user.id === userId) : ' ';
+  const elapsedTime = updatedAt ? calElapsedTime(updatedAt) : calElapsedTime(createdAt);
+  const originContent = content;
+  const owner = currentUser.id === userId;
+
+  const markOfOwner = () => {
+    if (owner) return 'Owner';
+    if (userId === issueAuthorId) return 'Author';
+    return 'Member';
+  };
+
   const timeout = () => setTimeout(() => {
-    styles.count.display = 'none';
+    setDisplayState(false);
   }, 2000);
 
   const handleContent = ({ target }) => {
     setNewContent(target.value);
     setCountOfCharacter(target.value.length);
-    styles.count.display = 'block';
+    setDisplayState(true);
     if (recentTimeout > 0) clearTimeout(recentTimeout);
     setRecentTimeout(timeout());
   };
@@ -83,7 +69,7 @@ export default function Comment({
 
     const result = await commentAPI.update({ id, content: newContent });
     if (!result) return alert('Comment update is fail');
-    return onClick();
+    return setEditState(!editState);
   };
 
   return (
@@ -96,15 +82,11 @@ export default function Comment({
             </div>
             <div>
               <textarea value={newContent} onChange={handleContent} />
-              <div css={styles.count}>
-                {countOfCharacter}
-                {' '}
-                characters
-              </div>
               <div>Attach files by checking here.</div>
+              <CountOfCharacter displayState={displayState} count={countOfCharacter} />
             </div>
             <div>
-              <button type="button" ref={editRef} onClick={onClick}>Cancel</button>
+              <button type="button" onClick={onClick}>Cancel</button>
               <button type="button" onClick={updateComment}>Update Comment</button>
             </div>
           </div>
@@ -127,11 +109,11 @@ export default function Comment({
                 ago
                 {' '}
               </div>
-              <div>
+              <div css={styles.role}>
                 {markOfOwner()}
               </div>
               {owner
-                ? (<button type="button" ref={editRef} onClick={onClick}>Edit</button>)
+                ? (<button type="button" onClick={onClick}>Edit</button>)
                 : (<></>)}
             </div>
             <div>
