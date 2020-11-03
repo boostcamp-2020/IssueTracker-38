@@ -87,7 +87,6 @@ module.exports = {
   },
   async updateTitle(req, res) {
     const { issueId, title } = req.body;
-    console.log(req.body)
     await Issue.update(
       { title: title }, { where: { id: issueId } }
     );

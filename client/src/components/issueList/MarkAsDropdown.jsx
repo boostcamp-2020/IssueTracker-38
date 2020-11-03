@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { issueAPI } from '../apis/api';
+import { issueAPI } from '../../apis/api';
 
 const styles = {
   dropDown: {
