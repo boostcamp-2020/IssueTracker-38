@@ -32,7 +32,13 @@ export default function SideBarItem({
         title={title}
         onClick={handleAssignButton}
       />
-      {isAction && <SideBarItemDropdown items={dropdownItems} assigned={assigned} />}
+      {isAction && (
+      <SideBarItemDropdown
+        items={dropdownItems}
+        assigned={assigned}
+        title={title}
+      />
+      )}
       <div>
         {assigned && assigned.length > 0
           ? assigned.map((element) => (

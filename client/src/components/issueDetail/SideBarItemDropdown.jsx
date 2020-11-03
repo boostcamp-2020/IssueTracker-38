@@ -16,15 +16,17 @@ const styles = {
   },
 };
 
-export default function SideBarItemDropdown({ items, assigned }) {
+export default function SideBarItemDropdown({ items, assigned, title }) {
   const { issueId } = useParams();
 
-  const handleAssigning = (id) => () => {
-    // TODO: 해당 이슈에 지정하는 API 로직 구현
-    console.log('issueId: ', issueId, 'assigned: ', id);
-  };
-
   const isAlreadyAssigned = (id) => assigned.find((base) => base.id === id);
+
+  const handleAssigning = (id) => () => {
+    /* TODO: API 로직 구현
+     * isAlreadyAssigned(id) 함수를 사용하여 새롭게 추가하는 건지, 제거하는 건지 구분
+     * issueId에 해당하는 항목(title : Assignee, Label, Milestone)을 골라서 id에 맞게 어사인해줌
+     */
+  };
 
   return (
     <div css={styles.layout}>
@@ -50,4 +52,5 @@ export default function SideBarItemDropdown({ items, assigned }) {
 SideBarItemDropdown.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   assigned: PropTypes.arrayOf(PropTypes.object).isRequired,
+  title: PropTypes.string.isRequired,
 };

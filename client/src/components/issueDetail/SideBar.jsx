@@ -43,8 +43,8 @@ export default function SideBar() {
         assigned={targetIssue ? assignedLabels : []}
       />
       <SideBarItem
-        title="Milestones"
-        defaultMessage="No milestones"
+        title="Milestone"
+        defaultMessage="No milestone"
         dropdownItems={milestones.map(({ id, title }) => ({ id, itemName: title }))}
         assigned={targetIssue ? [assignedMilestone] : []}
       />
