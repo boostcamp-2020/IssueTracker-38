@@ -85,4 +85,12 @@ module.exports = {
 
     res.json({ message: '수정 되었습니다.' });
   },
+  async updateTitle(req, res) {
+    const { issueId, title } = req.body;
+    console.log(req.body)
+    await Issue.update(
+      { title: title }, { where: { id: issueId } }
+    );
+    res.json({ message: '수정 되었습니다.' });
+  },
 };
