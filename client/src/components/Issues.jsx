@@ -23,22 +23,22 @@ export default function Issues({ issues, handleCheckboxClick, selections }) {
     <>
       {issues.map(
         ({
-          title, milestone, label, issueId, createdAt, asignee, isClosed,
+          title, milestoneId, labels, id, createdAt, userId, isClosed,
         }) => (
-          <div css={styles.layout} key={issueId}>
+          <div css={styles.layout} key={id}>
             <input
               css={styles.checkbox}
-              onChange={() => handleCheckboxClick(issueId)}
-              checked={selections.includes(issueId)}
+              onChange={() => handleCheckboxClick(id)}
+              checked={selections.includes(id)}
               type="checkbox"
             />
             <Issue
               title={title}
-              milestone={milestone}
-              label={label}
-              issueId={issueId}
+              milestoneId={milestoneId}
+              labels={labels}
+              id={id}
               createdAt={createdAt}
-              asignee={asignee}
+              userId={userId}
               isClosed={isClosed}
             />
           </div>
