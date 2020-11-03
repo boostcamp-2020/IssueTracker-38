@@ -25,12 +25,12 @@ export default function Issues({ issues, handleCheckboxClick, selections }) {
     <>
       {issues.map(
         ({
-          title, milestone, label, issueId, createdAt, asignee,
+          title, milestoneId, labels, id, createdAt, userId,
         }) => (
-          <div css={styles.layout} key={issueId}>
+          <div css={styles.layout} key={id}>
             <input
-              onChange={() => handleCheckboxClick(issueId)}
-              checked={selections.includes(issueId)}
+              onChange={() => handleCheckboxClick(id)}
+              checked={selections.includes(id)}
               type="checkbox"
             />
             <svg
@@ -48,11 +48,11 @@ export default function Issues({ issues, handleCheckboxClick, selections }) {
             </svg>
             <Issue
               title={title}
-              milestone={milestone}
-              label={label}
-              issueId={issueId}
+              milestoneId={milestoneId}
+              labels={labels}
+              id={id}
               createdAt={createdAt}
-              asignee={asignee}
+              userId={userId}
             />
           </div>
         ),

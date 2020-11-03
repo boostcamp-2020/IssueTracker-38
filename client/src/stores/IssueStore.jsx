@@ -4,14 +4,13 @@ import { issueAPI } from '../apis/api';
 import { updateStoreItem } from '../utils/utils';
 
 export const IssuesContext = React.createContext();
-async function issueReducer(issues, { type, payload }) {
+function issueReducer(issues, { type, payload }) {
   switch (type) {
     case 'INIT':
       return payload;
     case 'ADD':
       return [...issues, payload];
     case 'UPDATE':
-      if (!await issueAPI.update(payload)) return issues;
       return updateStoreItem(issues, payload);
     default:
       return issues;

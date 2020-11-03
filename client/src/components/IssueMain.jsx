@@ -27,8 +27,8 @@ const styles = {
   },
 };
 
-export default function IssueMain({ issues, items }) {
-  // const {issues} = useContext(IssuesContext);
+export default function IssueMain({ items }) {
+  const { issues } = useContext(IssuesContext);
   const [selections, setSelections] = useState([]);
   const [selectionSwitch, toggleSelectionSwitch] = useState(false);
 
@@ -88,6 +88,5 @@ export default function IssueMain({ issues, items }) {
 }
 
 IssueMain.propTypes = {
-  issues: PropTypes.arrayOf(PropTypes.object).isRequired,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

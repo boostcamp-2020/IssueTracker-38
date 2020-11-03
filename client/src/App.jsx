@@ -11,7 +11,7 @@ import IssueMain from './components/IssueMain';
 import IssueSearchBar from './components/IssueSearchBar';
 import StoreWrapper from './stores/StoreWrapper';
 
-import { dummyIssues, dummyDropdownItems } from './dummyData';
+import { dummyDropdownItems } from './dummyData';
 
 export default function App() {
   return (
@@ -22,7 +22,7 @@ export default function App() {
             <Route exact path="/">
               <Header />
               <IssueSearchBar />
-              <IssueMain issues={dummyIssues} items={dummyDropdownItems} />
+              <IssueMain items={dummyDropdownItems} />
             </Route>
             <Route path="/new-issue">
               <Header />
