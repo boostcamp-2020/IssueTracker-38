@@ -20,35 +20,35 @@ export default function DetailTitle({ issue }) {
     const author = user ? user.email : " ";
 
     const [titleState, setTitle] = useState(title);
-    const [isEdit, setEdit] = useState(0);
+    const [isEditActive, setIsEditActive] = useState(0);
 
     const checkEditStatus = () => {
         setTitle(title);
-        isEdit ? setEdit(0) : setEdit(1)
+        isEditActive ? setIsEditActive(0) : setIsEditActive(1)
     }
     const titleSaveClick = async () => {
         await issueAPI.updateTitle({ issueId: issueId, title: titleState });
-        isEdit ? setEdit(0) : setEdit(1)
+        setIsEditActive(1)
     }
 
     return (
         <>
             <div>
-                {isEdit ? <>
+                {isEditActive ? <>
                     <input type="text" value={titleState} onChange={(e) => setTitle(e.target.value)} />
                     <div>#{issueId}</div>
                     <span onClick={titleSaveClick}>
-                        {"save"}
+                        save
                     </span>
                     <span onClick={checkEditStatus}>
-                        {"cancel"}
+                        cancel
                     </span>
                 </>
                     : <>
                         <div>{title}</div>
                         <div>#{issueId}</div>
                         <span onClick={checkEditStatus}>
-                            {"edit"}
+                            edit
                         </span>
                     </>}
             </div>
