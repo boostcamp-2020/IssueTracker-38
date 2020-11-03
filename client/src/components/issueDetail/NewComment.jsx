@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { PropTypes } from 'prop-types';
 import { issueAPI, commentAPI } from '../../apis/api';
+import { IssuesContext } from '../../stores/IssueStore';
 
 const styles = {
   body: {
@@ -18,10 +19,12 @@ const styles = {
 };
 
 export default function NewComment({ user, issue }) {
+  const { dispatch } = useContext(IssuesContext);
   const inputRef = useRef(false);
 
   const createComment = async (e) => {
     e?.preventDefault();
+
     const content = inputRef.current.value;
     if (!content) return;
 
@@ -32,10 +35,13 @@ export default function NewComment({ user, issue }) {
 
   const changeIssueStatus = async (e) => {
     e.preventDefault();
+
     await createComment();
     const result = await issueAPI.update({ id: issue.id, isClosed: !issue.isClosed });
-    // TODO : issue 목록 상태 업데이트 필요함
-    // if(result)
+
+    if (!result) return;
+    const updated = { ...issue, isClosed: !issue.isClosed };
+    dispatch({ type: 'UPDATE', payload: updated });
   };
 
   return (
