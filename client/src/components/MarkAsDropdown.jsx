@@ -2,7 +2,8 @@ import React, {
   useState, useEffect, useRef, useCallback,
 } from 'react';
 import { PropTypes } from 'prop-types';
-import DropdownItem from './DropdownItem';
+
+import { issueAPI } from '../apis/api';
 
 const styles = {
   dropDown: {
@@ -42,14 +43,23 @@ const styles = {
     margin: '5px 0 0 0',
     padding: '5px',
   },
+  markAsButton: {
+    display: 'block',
+    background: 'white',
+    border: 'none',
+    height: '20px',
+  },
 };
 
-export default function Dropdown({ title, items }) {
+export default function MarkAsDropdown({ selections }) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
-  const itemList = items.map(({ id, value }) => <DropdownItem id={id} value={value} />);
 
   const onClick = () => setIsActive(!isActive);
+
+  const handleMarkAsAction = (isClosed) => async () => {
+    await issueAPI.markAll(isClosed, selections);
+  };
 
   const pageClickEvent = useCallback(({ target }) => {
     const { current } = dropdownRef;
@@ -72,24 +82,22 @@ export default function Dropdown({ title, items }) {
   return (
     <div ref={dropdownRef}>
       <button css={styles.button} type="button" onClick={onClick}>
-        {title}
+        Mark As
         <div css={styles.downArrow} />
       </button>
       <div css={{ ...styles.dropDown, display: isActive ? 'block' : 'none' }}>
         <p css={styles.title}>
-          Filter by
-          {' '}
-          {title}
+          Actions
         </p>
-        <ul css={styles.content}>
-          {itemList}
-        </ul>
+        <div css={styles.content}>
+          <button onClick={handleMarkAsAction(false)} css={styles.markAsButton} type="button">Open</button>
+          <button onClick={handleMarkAsAction(true)} css={styles.markAsButton} type="button">Close</button>
+        </div>
       </div>
     </div>
   );
 }
 
-Dropdown.propTypes = {
-  title: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+MarkAsDropdown.propTypes = {
+  selections: PropTypes.arrayOf(PropTypes.number).isRequired,
 };

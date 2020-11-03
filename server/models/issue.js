@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     Issue.belongsTo(models.User, {
       foreignKey: {
         name: 'userId',
+        allowNull: false,
       },
     });
     Issue.belongsTo(models.Milestone, {
@@ -40,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     Issue.hasMany(models.Comment, {
       foreignKey: {
-        name: 'commentId',
+        name: 'issueId',
       },
       onDelete: 'CASCADE',
     });

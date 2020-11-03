@@ -5,7 +5,7 @@ export const dummyIssues = [
     label: '프론트',
     milestone: '1주차',
     asignee: '전우민',
-    createdAt: '2020-10-26'
+    createdAt: '2020-10-26',
   },
   {
     issueId: 2,
@@ -13,7 +13,7 @@ export const dummyIssues = [
     label: '프론트',
     milestone: '1주차',
     asignee: '이헌준',
-    createdAt: '2020-10-27'
+    createdAt: '2020-10-27',
   },
   {
     issueId: 3,
@@ -21,7 +21,7 @@ export const dummyIssues = [
     label: '백',
     milestone: '2주차',
     asignee: '이은솔',
-    createdAt: '2020-10-27'
+    createdAt: '2020-10-27',
   },
   {
     issueId: 4,
@@ -29,12 +29,12 @@ export const dummyIssues = [
     label: '백',
     milestone: '2주차',
     asignee: '안치현',
-    createdAt: '2020-10-28'
-  }
+    createdAt: '2020-10-28',
+  },
 ];
 
 export const dummyDropdownItems = [
   { id: 1, value: '값1' },
   { id: 2, value: '값2' },
-  { id: 3, value: '값3' }
+  { id: 3, value: '값3' },
 ];

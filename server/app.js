@@ -1,13 +1,11 @@
 require('dotenv').config();
 
 const express = require('express');
+const path = require('path');
+const cors = require('cors');
+const logger = require('morgan');
 
 const app = express();
-
-const path = require('path');
-
-const cors = require('cors');
-
 const port = process.env.PORT || 3000;
 
 const sequelize = require('./models');
@@ -16,6 +14,7 @@ sequelize.sync();
 
 app.use(express.json());
 app.use(cors({ origin: '*' }));
+app.use(logger('dev'));
 app.use(express.static('public'));
 
 app.use('/', require('./routes'));

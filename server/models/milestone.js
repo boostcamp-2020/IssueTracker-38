@@ -4,24 +4,24 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
     },
     title: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: false,
     },
     dueDate: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
     },
     description: {
       type: DataTypes.STRING(300),
-      allowNulee: false
-    }
+      allowNulee: false,
+    },
   });
 
-  Milestone.associate = models => {
+  Milestone.associate = (models) => {
     Milestone.hasMany(models.Issue, {
-      foreignKey: 'milestoneId'
+      foreignKey: 'milestoneId',
     });
   };
 
