@@ -75,11 +75,7 @@ export const commentAPI = {
     const url = `${baseURL}/comment`;
     const request = {
       method: 'POST',
-      mode: 'cors',
-      headers: {
-        Authorization: 'Bearer ~',
-        'Content-Type': 'application/json',
-      },
+      headers: { Authorization: 'Bearer ~' },
       body: JSON.stringify(data),
     };
     const result = await customFetch(url, request);

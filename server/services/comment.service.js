@@ -8,7 +8,7 @@ module.exports = {
   async readByIssue(req, res) {
     const { issueId } = req.query;
     if (issueId === undefined) {
-      res.status(400).send();
+      res.sendStatus(400);
       return;
     }
     const comments = await Comment.findAll({ where: { issueId } });
