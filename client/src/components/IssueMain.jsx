@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { IssuesContext } from '../stores/IssueStore';
 import { PropTypes } from 'prop-types';
+import { IssuesContext } from '../stores/IssueStore';
 import TotalCheckBox from './TotalCheckBox';
 import Issues from './Issues';
 import Dropdown from './Dropdown';
+import MarkAsDropdown from './MarkAsDropdown';
 
 const styles = {
   body: {
@@ -60,14 +61,22 @@ export default function IssueMain({ issues, items }) {
           selectionSwitch={selectionSwitch}
           handleCheckboxSwitch={handleCheckboxSwitch}
         />
-        <div css={styles.dropdowns}>
-          <Dropdown title="Author" items={items} />
-          <Dropdown title="Label" items={items} />
-          <Dropdown title="Projects" items={items} />
-          <Dropdown title="Milestone" items={items} />
-          <Dropdown title="Asignee" items={items} />
-          <Dropdown title="Sort" items={items} />
-        </div>
+        {selections.length > 0
+          ? (
+            <div css={styles.dropdowns}>
+              <MarkAsDropdown selections={selections} />
+            </div>
+          )
+          : (
+            <div css={styles.dropdowns}>
+              <Dropdown title="Author" items={items} />
+              <Dropdown title="Label" items={items} />
+              <Dropdown title="Projects" items={items} />
+              <Dropdown title="Milestone" items={items} />
+              <Dropdown title="Asignee" items={items} />
+              <Dropdown title="Sort" items={items} />
+            </div>
+          )}
       </div>
       <Issues
         issues={issues}
