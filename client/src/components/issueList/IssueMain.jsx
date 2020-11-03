@@ -1,10 +1,9 @@
 import React, { useState, useContext } from 'react';
 
-import { IssuesContext } from '../stores/IssueStore';
-import { LabelsContext } from '../stores/LabelStore';
-import { MilestoneContext } from '../stores/MilestoneStore';
-import { UsersContext } from '../stores/UserStore';
-import { IssuesContext } from '../stores/IssueStore';
+import { IssuesContext } from '../../stores/IssueStore';
+import { LabelsContext } from '../../stores/LabelStore';
+import { MilestoneContext } from '../../stores/MilestoneStore';
+import { UsersContext } from '../../stores/UserStore';
 import TotalCheckBox from './TotalCheckBox';
 import Issues from './Issues';
 import Dropdown from './Dropdown';
@@ -31,13 +30,12 @@ const styles = {
   },
 };
 
-
 export default function IssueMain() {
   const { issues } = useContext(IssuesContext);
   const { labels } = useContext(LabelsContext);
   const { milestones } = useContext(MilestoneContext);
   const { users } = useContext(UsersContext);
-  
+
   const [selections, setSelections] = useState([]);
   const [selectionSwitch, toggleSelectionSwitch] = useState(false);
 

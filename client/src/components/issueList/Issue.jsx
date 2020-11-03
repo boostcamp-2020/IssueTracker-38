@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { PropTypes } from 'prop-types';
-import { UsersContext } from '../stores/UserStore';
-import { MilestoneContext } from '../stores/MilestoneStore';
-import { LabelsContext } from '../stores/LabelStore';
+import { UsersContext } from '../../stores/UserStore';
+import { MilestoneContext } from '../../stores/MilestoneStore';
+import { LabelsContext } from '../../stores/LabelStore';
 
 const styles = {
   body: {
@@ -93,7 +93,7 @@ export default function Issue({
               : 'M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm9 3a1 1 0 11-2 0 1 1 0 012 0zm-.25-6.25a.75.75 0 00-1.5 0v3.5a.75.75 0 001.5 0v-3.5z'}
           />
         </svg>
-        <a css={styles.title} href={`/detail/${issueId}`}>
+        <a css={styles.title} href={`/detail/${id}`}>
           {title}
         </a>
         {labels.map((num) => {
