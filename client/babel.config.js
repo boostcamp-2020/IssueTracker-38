@@ -8,7 +8,6 @@ module.exports = {
         corejs: '3',
       },
     ],
-    '@babel/plugin-proposal-optional-chaining',
     '@babel/preset-react',
     '@emotion/babel-preset-css-prop',
   ],
