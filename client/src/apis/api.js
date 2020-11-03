@@ -85,3 +85,25 @@ export const userAPI = {
     return users;
   },
 };
+
+export const commentAPI = {
+  async create(data) {
+    const url = `${baseURL}/comment`;
+    const request = {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ~' },
+      body: JSON.stringify(data),
+    };
+    const result = await customFetch(url, request);
+    return result;
+  },
+  async readByIssue(issueId) {
+    const url = `${baseURL}/comment?issueId=${issueId}`;
+    const request = {
+      method: 'get',
+      headers: { Authorization: 'Bearer ~' },
+    };
+    const comments = await customFetch(url, request);
+    return comments;
+  },
+};
