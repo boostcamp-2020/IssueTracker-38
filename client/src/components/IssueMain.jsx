@@ -1,12 +1,14 @@
 import React, { useState, useContext } from 'react';
+
 import { IssuesContext } from '../stores/IssueStore';
 import { LabelsContext } from '../stores/LabelStore';
 import { MilestoneContext } from '../stores/MilestoneStore';
 import { UsersContext } from '../stores/UserStore';
-import { PropTypes } from 'prop-types';
+import { IssuesContext } from '../stores/IssueStore';
 import TotalCheckBox from './TotalCheckBox';
 import Issues from './Issues';
 import Dropdown from './Dropdown';
+import MarkAsDropdown from './MarkAsDropdown';
 
 const styles = {
   body: {
@@ -29,11 +31,13 @@ const styles = {
   },
 };
 
+
 export default function IssueMain() {
   const { issues } = useContext(IssuesContext);
   const { labels } = useContext(LabelsContext);
   const { milestones } = useContext(MilestoneContext);
   const { users } = useContext(UsersContext);
+  
   const [selections, setSelections] = useState([]);
   const [selectionSwitch, toggleSelectionSwitch] = useState(false);
 
@@ -66,12 +70,20 @@ export default function IssueMain() {
           selectionSwitch={selectionSwitch}
           handleCheckboxSwitch={handleCheckboxSwitch}
         />
-        <div css={styles.dropdowns}>
-          <Dropdown title="Author" items={users.map((user) => ({ ...user, value: user.email }))} />
-          <Dropdown title="Label" items={labels.map((label) => ({ ...label, value: label.name }))} />
-          <Dropdown title="Milestone" items={milestones.map((milestone) => ({ ...milestone, value: milestone.title }))} />
-          <Dropdown title="Asignee" items={users.map((user) => ({ ...user, value: user.email }))} />
-        </div>
+        {selections.length > 0
+          ? (
+            <div css={styles.dropdowns}>
+              <MarkAsDropdown selections={selections} />
+            </div>
+          )
+          : (
+            <div css={styles.dropdowns}>
+              <Dropdown title="Author" items={users.map((user) => ({ ...user, value: user.email }))} />
+              <Dropdown title="Label" items={labels.map((label) => ({ ...label, value: label.name }))} />
+              <Dropdown title="Milestone" items={milestones.map((milestone) => ({ ...milestone, value: milestone.title }))} />
+              <Dropdown title="Asignee" items={users.map((user) => ({ ...user, value: user.email }))} />
+            </div>
+          )}
       </div>
       <Issues
         issues={issues}
@@ -81,7 +93,3 @@ export default function IssueMain() {
     </div>
   );
 }
-
-IssueMain.propTypes = {
-  issues: PropTypes.arrayOf(PropTypes.object).isRequired,
-};

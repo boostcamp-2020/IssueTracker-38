@@ -12,7 +12,6 @@ import IssueSearchBar from './components/IssueSearchBar';
 import StoreWrapper from './stores/StoreWrapper';
 
 export default function App() {
-
   return (
     <>
       <StoreWrapper>
@@ -21,7 +20,7 @@ export default function App() {
             <Route exact path="/">
               <Header />
               <IssueSearchBar />
-              <IssueMain></IssueMain>
+              <IssueMain />
             </Route>
             <Route path="/new-issue">
               <Header />
@@ -34,7 +33,6 @@ export default function App() {
             <Redirect path="*" to="/" />
           </Switch>
         </Router>
-
       </StoreWrapper>
     </>
   );
