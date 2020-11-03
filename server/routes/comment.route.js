@@ -4,5 +4,6 @@ const errorCatcher = require('../middlewares/errorCatcher');
 
 router.post('/', errorCatcher(commentService.create));
 router.get('/', errorCatcher(commentService.readByIssue));
+router.patch('/', errorCatcher(commentService.update));
 
 module.exports = router;
