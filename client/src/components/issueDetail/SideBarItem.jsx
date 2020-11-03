@@ -40,13 +40,13 @@ export default function SideBarItem({
       />
       )}
       <div>
-        {assigned && assigned.length > 0
-          ? assigned.map((element) => (
+        {!assigned || assigned.length === 0 || Object.keys(assigned[0]).length === 0
+          ? defaultMessage
+          : assigned.map((element) => (
             <div css={{ ...styles.item, background: element.color }}>
               {element.name || element.title || element.email }
             </div>
-          ))
-          : defaultMessage}
+          ))}
       </div>
     </div>
   );
