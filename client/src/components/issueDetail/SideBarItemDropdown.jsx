@@ -28,14 +28,21 @@ export default function SideBarItemDropdown({ items, assigned, title }) {
 
     if (title === 'Assignees') {
       issueAPI.update({ id: issueId, assignee: { type, id } });
+      return;
     }
 
     if (title === 'Labels') {
       issueAPI.update({ id: issueId, label: { type, id } });
+      return;
     }
 
     if (title === 'Milestone') {
-      // TODO: 구현
+      if (type === 'add') {
+        issueAPI.update({ id: issueId, milestoneId: id });
+        return;
+      }
+
+      issueAPI.update({ id: issueId, milestoneId: null });
     }
   };
 
