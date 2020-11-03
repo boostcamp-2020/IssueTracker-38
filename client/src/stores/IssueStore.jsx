@@ -26,6 +26,7 @@ export default function IssueStore({ children }) {
   useEffect(() => {
     setInitState();
   }, []);
+
   return (
     <IssuesContext.Provider value={{ issues, dispatch }}>
       {children}

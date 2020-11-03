@@ -17,7 +17,7 @@ export const issueAPI = {
     const url = `${baseURL}/issue`;
     const request = {
       method: 'GET',
-      header: { Authorization: 'Bearer ~' },
+      headers: { Authorization: 'Bearer ~' },
     };
     const issues = await customFetch(url, request);
     return issues;
@@ -26,7 +26,10 @@ export const issueAPI = {
     const url = `${baseURL}/issue`;
     const request = {
       method: 'PATCH',
-      header: { Authorization: 'Bearer ~' },
+      headers: { 
+        Authorization: 'Bearer ~',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(data),
     };
     const result = await customFetch(url, request);
@@ -52,7 +55,7 @@ export const milestoneAPI = {
     const url = `${baseURL}/milestone`;
     const request = {
       method: 'GET',
-      header: { Authorization: 'Bearer ~' },
+      headers: { Authorization: 'Bearer ~' },
     };
     const milestones = await customFetch(url, request);
     return milestones;
@@ -64,7 +67,7 @@ export const labelAPI = {
     const url = `${baseURL}/label`;
     const request = {
       method: 'GET',
-      header: { Authorization: 'Bearer ~' },
+      headers: { Authorization: 'Bearer ~' },
     };
     const labels = await customFetch(url, request);
     return labels;
@@ -76,7 +79,7 @@ export const userAPI = {
     const url = `${baseURL}/user`;
     const request = {
       method: 'GET',
-      header: { Authorization: 'Bearer ~' },
+      headers: { Authorization: 'Bearer ~', 'Content-Type': 'application/json', },
     };
     const users = await customFetch(url, request);
     return users;

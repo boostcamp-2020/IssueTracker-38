@@ -1,5 +1,9 @@
 import React, { useState, useContext } from 'react';
-import { PropTypes } from 'prop-types';
+
+import { IssuesContext } from '../stores/IssueStore';
+import { LabelsContext } from '../stores/LabelStore';
+import { MilestoneContext } from '../stores/MilestoneStore';
+import { UsersContext } from '../stores/UserStore';
 import { IssuesContext } from '../stores/IssueStore';
 import TotalCheckBox from './TotalCheckBox';
 import Issues from './Issues';
@@ -27,8 +31,13 @@ const styles = {
   },
 };
 
-export default function IssueMain({ items }) {
+
+export default function IssueMain() {
   const { issues } = useContext(IssuesContext);
+  const { labels } = useContext(LabelsContext);
+  const { milestones } = useContext(MilestoneContext);
+  const { users } = useContext(UsersContext);
+  
   const [selections, setSelections] = useState([]);
   const [selectionSwitch, toggleSelectionSwitch] = useState(false);
 
@@ -69,12 +78,10 @@ export default function IssueMain({ items }) {
           )
           : (
             <div css={styles.dropdowns}>
-              <Dropdown title="Author" items={items} />
-              <Dropdown title="Label" items={items} />
-              <Dropdown title="Projects" items={items} />
-              <Dropdown title="Milestone" items={items} />
-              <Dropdown title="Asignee" items={items} />
-              <Dropdown title="Sort" items={items} />
+              <Dropdown title="Author" items={users.map((user) => ({ ...user, value: user.email }))} />
+              <Dropdown title="Label" items={labels.map((label) => ({ ...label, value: label.name }))} />
+              <Dropdown title="Milestone" items={milestones.map((milestone) => ({ ...milestone, value: milestone.title }))} />
+              <Dropdown title="Asignee" items={users.map((user) => ({ ...user, value: user.email }))} />
             </div>
           )}
       </div>
@@ -86,7 +93,3 @@ export default function IssueMain({ items }) {
     </div>
   );
 }
-
-IssueMain.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
