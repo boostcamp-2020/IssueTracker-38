@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { useParams } from 'react-router-dom';
+import { IssuesContext } from '../../stores/IssueStore';
+
+import { getItemById } from '../../utils/utils';
 
 import { issueAPI } from '../../apis/api';
 
@@ -20,29 +23,51 @@ const styles = {
 
 export default function SideBarItemDropdown({ items, assigned, title }) {
   const { issueId } = useParams();
+  const { issues, dispatch } = useContext(IssuesContext);
 
   const isAlreadyAssigned = (id) => assigned.find((base) => base.id === id);
 
   const handleAssigning = (id) => async () => {
     const type = isAlreadyAssigned(id) ? 'delete' : 'add';
+    const targetIssue = { ...getItemById(issues, +issueId) };
 
     if (title === 'Assignees') {
+      if (type === 'add') {
+        targetIssue.assignees.push(id);
+      } else {
+        const index = targetIssue.assignees.indexOf(id);
+        targetIssue.assignees.splice(index, 1);
+      }
+
+      dispatch({ type: 'UPDATE', payload: targetIssue });
       issueAPI.update({ id: issueId, assignee: { type, id } });
       return;
     }
 
     if (title === 'Labels') {
+      if (type === 'add') {
+        targetIssue.labels.push(id);
+      } else {
+        const index = targetIssue.labels.indexOf(id);
+        targetIssue.labels.splice(index, 1);
+      }
+
+      dispatch({ type: 'UPDATE', payload: targetIssue });
       issueAPI.update({ id: issueId, label: { type, id } });
       return;
     }
 
     if (title === 'Milestone') {
+      const milestoneId = type === 'add' ? id : null;
+
       if (type === 'add') {
-        issueAPI.update({ id: issueId, milestoneId: id });
-        return;
+        targetIssue.milestoneId = id;
+      } else {
+        targetIssue.milestoneId = null;
       }
 
-      issueAPI.update({ id: issueId, milestoneId: null });
+      dispatch({ type: 'UPDATE', payload: targetIssue });
+      issueAPI.update({ id: issueId, milestoneId });
     }
   };
 
