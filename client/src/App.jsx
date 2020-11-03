@@ -7,8 +7,8 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Header from './components/Header';
-import IssueMain from './components/IssueMain';
-import IssueSearchBar from './components/IssueSearchBar';
+import IssueMain from './components/issueList/IssueMain';
+import IssueSearchBar from './components/issueList/IssueSearchBar';
 import StoreWrapper from './stores/StoreWrapper';
 
 export default function App() {

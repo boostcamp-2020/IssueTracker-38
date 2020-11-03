@@ -26,7 +26,7 @@ export const issueAPI = {
     const url = `${baseURL}/issue`;
     const request = {
       method: 'PATCH',
-      headers: { 
+      headers: {
         Authorization: 'Bearer ~',
         'Content-Type': 'application/json',
       },
@@ -79,7 +79,7 @@ export const userAPI = {
     const url = `${baseURL}/user`;
     const request = {
       method: 'GET',
-      headers: { Authorization: 'Bearer ~', 'Content-Type': 'application/json', },
+      headers: { Authorization: 'Bearer ~' },
     };
     const users = await customFetch(url, request);
     return users;
