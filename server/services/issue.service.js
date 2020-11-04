@@ -1,6 +1,8 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require('../models');
-const { Issue, IssueLabel, IssueAssignee } = require('../models').models;
+const {
+  Issue, IssueLabel, IssueAssignee, Comment,
+} = require('../models').models;
 
 module.exports = {
   async readAll(req, res) {
@@ -84,5 +86,29 @@ module.exports = {
     );
 
     res.json({ message: '수정 되었습니다.' });
+  },
+  async create(req, res) {
+    const newIssue = req.body;
+    const { labels, assignees, content } = newIssue;
+    delete newIssue.labels;
+    delete newIssue.assignees;
+
+    const createdIssue = await Issue.create(newIssue);
+    const IssueId = createdIssue.id;
+
+    const checkedContent = (!content || content.length === 0) ? 'No description' : content;
+    await Comment.create({ content: checkedContent, userId: newIssue.userId, issueId: IssueId });
+
+    if (labels) {
+      const arrLabel = JSON.parse(labels).map((LabelId) => ({ IssueId, LabelId }));
+      await IssueLabel.bulkCreate(arrLabel);
+    }
+
+    if (assignees) {
+      const arrAssignee = JSON.parse(assignees).map((UserId) => ({ IssueId, UserId }));
+      await IssueAssignee.bulkCreate(arrAssignee);
+    }
+
+    res.json({ message: '추가 되었습니다.' });
   },
 };
