@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 
@@ -12,7 +11,7 @@ const styles = {
     width: '300px',
     border: '1px solid',
   },
-  selfAssignButton: {
+  self: {
     '&:hover': {
       color: 'blue',
     },
@@ -20,7 +19,7 @@ const styles = {
 };
 
 export default function NewIssueSideBarItem({
-  title, defaultMessage, dropdownItems, assigned, setAssigned, author,
+  title, dropdownItems, assigned, setAssigned, author,
 }) {
   const [isAction, toggleAction] = useState(false);
 
@@ -33,13 +32,17 @@ export default function NewIssueSideBarItem({
     setAssigned([...assigned, { id, name }]);
   };
 
-  const notAssignedMessage = title === 'Assignees'
-    ? <button type="button" css={styles.selfAssignButton} onClick={assignMyself}>{defaultMessage}</button>
-    : defaultMessage;
+  const defaultMessageMap = {
+    Assignees: <button type="button" css={styles.self} onClick={assignMyself}>No one - assign yourself</button>,
+    Labels: 'None yet',
+    Milestone: 'No Milestone',
+  };
 
-  const assignedDropdowns = title === 'Milestone'
-    ? <MilestoneProgressBar assignedMilestone={assigned[0]} />
-    : <NewIssueSideBarAssignedDropdown assigned={assigned} />;
+  const assignedDropdownMap = {
+    Assignees: <NewIssueSideBarAssignedDropdown assigned={assigned} />,
+    Labels: <NewIssueSideBarAssignedDropdown assigned={assigned} />,
+    Milestone: <MilestoneProgressBar assignedMilestone={assigned[0]} />,
+  };
 
   return (
     <div css={styles.layout}>
@@ -57,8 +60,8 @@ export default function NewIssueSideBarItem({
       )}
       <div>
         {assigned.length === 0
-          ? notAssignedMessage
-          : assignedDropdowns}
+          ? defaultMessageMap[title]
+          : assignedDropdownMap[title]}
       </div>
     </div>
   );
@@ -66,7 +69,6 @@ export default function NewIssueSideBarItem({
 
 NewIssueSideBarItem.propTypes = {
   title: PropTypes.string.isRequired,
-  defaultMessage: PropTypes.string.isRequired,
   dropdownItems: PropTypes.arrayOf(PropTypes.object).isRequired,
   assigned: PropTypes.arrayOf(PropTypes.object).isRequired,
   setAssigned: PropTypes.func.isRequired,
