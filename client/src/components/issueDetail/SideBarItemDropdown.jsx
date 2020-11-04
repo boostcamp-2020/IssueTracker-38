@@ -39,8 +39,8 @@ export default function SideBarItemDropdown({ items, assigned, title }) {
       };
 
       actions[type]();
-      dispatch({ type: 'UPDATE', payload: targetIssue });
-      issueAPI.update({ id: issueId, assignee: { type, id } });
+      const result = await issueAPI.update({ id: issueId, assignee: { type, id } });
+      if (!result) return;
     }
 
     if (title === 'Labels') {
@@ -51,8 +51,8 @@ export default function SideBarItemDropdown({ items, assigned, title }) {
       };
 
       actions[type]();
-      dispatch({ type: 'UPDATE', payload: targetIssue });
-      issueAPI.update({ id: issueId, label: { type, id } });
+      const result = await issueAPI.update({ id: issueId, label: { type, id } });
+      if (!result) return;
     }
 
     if (title === 'Milestone') {
@@ -64,9 +64,11 @@ export default function SideBarItemDropdown({ items, assigned, title }) {
       };
 
       actions[type]();
-      dispatch({ type: 'UPDATE', payload: targetIssue });
-      issueAPI.update({ id: issueId, milestoneId });
+      const result = await issueAPI.update({ id: issueId, milestoneId });
+      if (!result) return;
     }
+
+    dispatch({ type: 'UPDATE', payload: targetIssue });
   };
 
   return (
