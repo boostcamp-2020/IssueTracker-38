@@ -48,6 +48,19 @@ export const issueAPI = {
     const result = await customFetch(url, request);
     return result;
   },
+  async create(newIssue) {
+    const url = `${baseURL}/issue`;
+    const request = {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ~',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newIssue),
+    };
+    const result = await customFetch(url, request);
+    return result;
+  },
 };
 
 export const milestoneAPI = {
