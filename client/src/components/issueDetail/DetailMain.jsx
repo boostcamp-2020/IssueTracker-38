@@ -7,7 +7,7 @@ import DetailTitle from './DetailTitle';
 import NewComment from './NewComment';
 import CommentList from './CommentList';
 import SideBar from './SideBar';
-import { getItemById } from '../../utils/utils';
+import { commentAPI } from '../../apis/api';
 
 const styles = {
   body: {
@@ -22,11 +22,21 @@ export default function DetailMain() {
   const { issues } = useContext(IssuesContext);
   const { issueId } = useParams();
   const [issue, setIssue] = useState();
+  const [comments, setComments] = useState([]);
+  const setInitComments = async () => setComments(await commentAPI.readByIssue(issueId));
+
+  useEffect(() => {
+    setInitComments();
+  }, []);
 
   useEffect(() => {
     const mathched = getItemById(issues, +issueId);
     setIssue(mathched);
   }, [issues]);
+
+  const addComment = (newComment) => {
+    setComments([...comments, newComment]);
+  };
 
   return (
     <div css={styles.body}>
@@ -39,6 +49,7 @@ export default function DetailMain() {
           <NewComment
             user={currentUser}
             issue={issue}
+            addComment={addComment}
           />
         </div>
         <SideBar />
