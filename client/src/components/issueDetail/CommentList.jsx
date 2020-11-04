@@ -1,18 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 import Comment from './Comment';
-import { commentAPI } from '../../apis/api';
 
-export default function CommentList({ issueAuthorId }) {
-  const { issueId } = useParams();
-  const [comments, setComments] = useState([]);
-  const setInit = async () => setComments(await commentAPI.readByIssue(issueId));
-
-  useEffect(() => {
-    setInit();
-  }, []);
-
+export default function CommentList({ issueAuthorId, comments, updateComment }) {
   return (
     <>
       {comments.map(({
@@ -25,6 +15,8 @@ export default function CommentList({ issueAuthorId }) {
           createdAt={createdAt}
           updatedAt={updatedAt}
           issueAuthorId={issueAuthorId}
+          comments={comments}
+          updateComment={updateComment}
         />
       ))}
     </>
@@ -33,4 +25,6 @@ export default function CommentList({ issueAuthorId }) {
 
 CommentList.propTypes = {
   issueAuthorId: PropTypes.number.isRequired,
+  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  updateComment: PropTypes.func.isRequired,
 };
