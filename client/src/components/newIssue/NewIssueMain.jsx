@@ -9,6 +9,9 @@ import NewIssueSideBar from './NewIssueSideBar';
 
 const styles = {
   layout: {
+    display: 'flex',
+  },
+  formLayout: {
     marginTop: '20px',
     marginLeft: '20px',
     display: 'flex',
@@ -65,20 +68,22 @@ export default function NewIssueMain() {
 
   return (
     <div css={styles.layout}>
-      <div css={styles.form}>
-        <NewIssueTitle
-          value={inputTitle}
-          onChange={handleInputTitle}
-        />
-        <NewIssueComment
-          value={inputContent}
-          onChange={handleInputContent}
-        />
-        <NewIssueButton
-          inputContent={inputContent}
-          onSubmit={submitNewIssue}
-          onCancel={cancelNewIssue}
-        />
+      <div css={styles.formLayout}>
+        <div css={styles.form}>
+          <NewIssueTitle
+            value={inputTitle}
+            onChange={handleInputTitle}
+          />
+          <NewIssueComment
+            value={inputContent}
+            onChange={handleInputContent}
+          />
+          <NewIssueButton
+            inputContent={inputContent}
+            onSubmit={submitNewIssue}
+            onCancel={cancelNewIssue}
+          />
+        </div>
       </div>
       <div>
         <NewIssueSideBar
