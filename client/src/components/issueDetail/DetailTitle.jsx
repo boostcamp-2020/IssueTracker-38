@@ -15,20 +15,20 @@ export default function DetailTitle({ issue }) {
     const createdAt = issue ? issue.createdAt : " "
     const { issueId } = useParams();
 
-    const usersObj = useContext(UsersContext);
-    const user = usersObj.users.length > 0 ? usersObj.users.find((user) => user.id === +userId) : " ";
+    const { users } = useContext(UsersContext);
+    const user = users.length > 0 ? users.find((user) => user.id === +userId) : " ";
     const author = user ? user.email : " ";
 
     const [titleState, setTitle] = useState(title);
-    const [isEditActive, setIsEditActive] = useState(0);
+    const [isEditActive, toggleEditActive] = useState(0);
 
     const checkEditStatus = () => {
         setTitle(title);
-        isEditActive ? setIsEditActive(0) : setIsEditActive(1)
+        toggleEditActive(!isEditActive)
     }
     const titleSaveClick = async () => {
         await issueAPI.updateTitle({ issueId: issueId, title: titleState });
-        setIsEditActive(1)
+        toggleEditActive(0)
     }
 
     return (
