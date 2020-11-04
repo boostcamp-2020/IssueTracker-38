@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, {
+  useState, useRef, useCallback, useEffect,
+} from 'react';
 import { PropTypes } from 'prop-types';
 
 import SideBarItemTitle from './SideBarItemTitle';
@@ -27,10 +29,21 @@ export default function SideBarItem({
   title, defaultMessage, dropdownItems, assigned,
 }) {
   const [isAction, toggleAction] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleAssignButton = () => {
     toggleAction(!isAction);
   };
+
+  const pageClickEvent = useCallback(({ target }) => {
+    const { current } = dropdownRef;
+    if (current && !current.contains(target)) toggleAction(!isAction);
+  }, [isAction]);
+
+  useEffect(() => {
+    if (isAction) window.addEventListener('click', pageClickEvent);
+    return () => window.removeEventListener('click', pageClickEvent);
+  }, [isAction]);
 
   return (
     <div css={styles.layout}>
@@ -43,6 +56,7 @@ export default function SideBarItem({
         items={dropdownItems}
         assigned={assigned}
         title={title}
+        dropdownRef={dropdownRef}
       />
       )}
       <div>
