@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { UsersContext } from '../../stores/UserStore';
 import { AuthContext } from '../../stores/AuthStore';
 import { commentAPI } from '../../apis/api';
-import { calElapsedTime } from '../../utils/utils';
+import { calElapsedTime, getItemById } from '../../utils/utils';
 import CountOfCharacter from './CountOfCharacter';
 
 const styles = {
@@ -34,7 +34,7 @@ export default function Comment({
   const [recentTimeout, setRecentTimeout] = useState(-1);
   const [displayState, setDisplayState] = useState(false);
 
-  const writer = users.length > 0 ? users.find((user) => user.id === userId) : ' ';
+  const writer = getItemById(users, +userId);
   const elapsedTime = updatedAt ? calElapsedTime(updatedAt) : calElapsedTime(createdAt);
   const originContent = content;
   const owner = currentUser.id === userId;
@@ -98,7 +98,7 @@ export default function Comment({
                 Profile Image
               </div>
               <div css={styles.writer}>
-                {writer.email}
+                {writer?.email}
                 {' '}
               </div>
               <div>

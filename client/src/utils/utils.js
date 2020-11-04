@@ -1,8 +1,8 @@
 export const updateStoreItem = (prevState, payload) => {
   const nextState = [...prevState];
   const targetIndex = nextState.findIndex((v) => v.id === payload.id);
-  nextState[targetIndex] = payload;
-
+  if (targetIndex < 0) return prevState;
+  nextState[targetIndex] = { ...nextState[targetIndex], ...payload };
   return nextState;
 };
 

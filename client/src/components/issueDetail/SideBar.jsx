@@ -23,7 +23,7 @@ export default function SideBar() {
     return <div />;
   }
 
-  const targetIssue = issues.find((issue) => issue.id === +issueId);
+  const targetIssue = getItemById(issues, +issueId);
 
   const assignedUsers = targetIssue.assignees.map((assigneeId) => {
     const { id, email } = getItemById(users, assigneeId);
@@ -33,7 +33,7 @@ export default function SideBar() {
   const assignedMilestone = getItemById(milestones, targetIssue.milestoneId);
 
   return (
-    <>
+    <div>
       <SideBarItem
         title="Assignees"
         defaultMessage="No one--assign yourself"
@@ -52,6 +52,6 @@ export default function SideBar() {
         dropdownItems={milestones.map(({ id, title }) => ({ id, itemName: title }))}
         assigned={[assignedMilestone]}
       />
-    </>
+    </div>
   );
 }
