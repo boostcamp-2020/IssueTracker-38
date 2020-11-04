@@ -10,6 +10,7 @@ import {
 import StoreWrapper from './stores/StoreWrapper';
 
 import Header from './components/Header';
+import DetailMain from './components/issueDetail/DetailMain';
 import IssueMain from './components/issueList/IssueMain';
 import IssueSearchBar from './components/issueList/IssueSearchBar';
 import SideBar from './components/issueDetail/SideBar';
@@ -31,7 +32,7 @@ export default function App() {
             </Route>
             <Route path="/detail/:issueId">
               <Header />
-              <SideBar />
+              <DetailMain />
             </Route>
             <Redirect path="*" to="/" />
           </Switch>

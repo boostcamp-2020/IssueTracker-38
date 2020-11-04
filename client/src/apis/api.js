@@ -91,7 +91,10 @@ export const commentAPI = {
     const url = `${baseURL}/comment`;
     const request = {
       method: 'POST',
-      headers: { Authorization: 'Bearer ~' },
+      headers: {
+        Authorization: 'Bearer ~',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(data),
     };
     const result = await customFetch(url, request);
