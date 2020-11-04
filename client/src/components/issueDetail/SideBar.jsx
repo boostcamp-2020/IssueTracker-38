@@ -25,6 +25,7 @@ export default function SideBar() {
 
   const targetIssue = getItemById(issues, +issueId);
 
+  const author = users.find((user) => user.id === targetIssue.userId);
   const assignedUsers = targetIssue.assignees.map((assigneeId) => {
     const { id, email } = getItemById(users, assigneeId);
     return { id, email, name: getNicknameByEmail(email) };
@@ -37,21 +38,24 @@ export default function SideBar() {
     <div>
       <SideBarItem
         title="Assignees"
-        defaultMessage="No one--assign yourself"
+        defaultMessage="No one--"
         dropdownItems={users.map(({ id, email }) => ({ id, itemName: getNicknameByEmail(email) }))}
         assigned={assignedUsers}
+        author={author}
       />
       <SideBarItem
         title="Labels"
         defaultMessage="None yet"
         dropdownItems={labels.map(({ id, name }) => ({ id, itemName: name }))}
         assigned={assignedLabels}
+        author={author}
       />
       <SideBarItem
         title="Milestone"
         defaultMessage="No milestone"
         dropdownItems={milestones.map(({ id, title }) => ({ id, itemName: title }))}
         assigned={assignedMilestone}
+        author={author}
       />
     </div>
   );
