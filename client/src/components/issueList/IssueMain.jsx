@@ -56,7 +56,7 @@ export default function IssueMain() {
       return;
     }
 
-    const allIssueIds = issues.map((issue) => issue.issueId);
+    const allIssueIds = issues.map((issue) => issue.id);
     setSelections(allIssueIds);
   };
 
