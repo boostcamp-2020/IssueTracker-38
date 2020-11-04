@@ -54,8 +54,13 @@ export default function NewIssueMain() {
   };
 
   const cancelNewIssue = () => {
-    // TODO: Cancel버튼을 누르면 이슈 목록 화면으로 전환됨
-    // 이때 기존의 폼들을 초기화
+    history.push('/');
+
+    handleInputTitle({ target: { value: '' } });
+    handleInputContent({ target: { value: '' } });
+    setAssignedUsers([]);
+    setAssignedLabels([]);
+    setAssignedMilestone([]);
   };
 
   return (
