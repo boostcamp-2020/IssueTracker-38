@@ -34,7 +34,7 @@ export default function NewComment({ user, issue }) {
   return (
     <EditComment>
       <textarea css={commonStyles.textInput} ref={inputRef} placeholder="Leave a Comment" />
-      <button css={commonStyles.statusButton} type="submit" onClick={changeIssueStatus}>
+      <button css={commonStyles.basicButton} type="submit" onClick={changeIssueStatus}>
         {issue?.isClosed ? 'Reopen issue' : 'Close issue'}
       </button>
       <button css={commonStyles.commentButton} type="submit" onClick={createComment}>

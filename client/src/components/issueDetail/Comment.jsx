@@ -99,7 +99,7 @@ export default function Comment({
             <textarea css={commonStyles.textInput} value={newContent} onChange={handleContent} />
             {/* <div>Attach files by checking here.</div> */}
             <CountOfCharacter displayState={displayState} count={countOfCharacter} />
-            <button css={commonStyles.statusButton} type="button" onClick={onClick}>Cancel</button>
+            <button css={commonStyles.basicButton} type="button" onClick={onClick}>Cancel</button>
             <button css={commonStyles.commentButton} type="button" onClick={updateComment}>Update Comment</button>
           </EditComment>
         )
@@ -109,7 +109,7 @@ export default function Comment({
               &nbsp;
             </div>
             <div css={commonStyles.layout}>
-              <div css={{ ...commonStyles.title, backgroundColor: owner ? '#dbedff' : '#f6f8fa' }}>
+              <div css={{ ...commonStyles.title, backgroundColor: owner ? '#f1f8ff' : '#f6f8fa' }}>
                 <div css={styles.commentTitle}>
                   <div css={styles.nickname}>
                     {writer?.email}
