@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { UsersContext } from '../../stores/UserStore';
 import { MilestoneContext } from '../../stores/MilestoneStore';
 import { LabelsContext } from '../../stores/LabelStore';
-import { calElapsedTime } from '../../utils/utils';
+import { openedIcon, closedIcon, milestoneIcon } from '../../icons/icons';
 
 const styles = {
   body: {
@@ -74,9 +74,7 @@ export default function Issue({
         >
           <path
             fillRule="evenodd"
-            d={isClosed
-              ? 'M7 10h2v2H7v-2zm2-6H7v5h2V4zm1.5 1.5l-1 1L12 9l4-4.5l-1-1L12 7l-1.5-1.5zM8 13.7A5.71 5.71 0 0 1 2.3 8c0-3.14 2.56-5.7 5.7-5.7c1.83 0 3.45.88 4.5 2.2l.92-.92A6.947 6.947 0 0 0 8 1C4.14 1 1 4.14 1 8s3.14 7 7 7s7-3.14 7-7l-1.52 1.52c-.66 2.41-2.86 4.19-5.48 4.19v-.01z'
-              : 'M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm9 3a1 1 0 11-2 0 1 1 0 012 0zm-.25-6.25a.75.75 0 00-1.5 0v3.5a.75.75 0 001.5 0v-3.5z'}
+            d={isClosed ? closedIcon : openedIcon}
           />
         </svg>
         <a css={styles.title} href={`/detail/${id}`}>
@@ -119,7 +117,7 @@ export default function Issue({
         >
           <path
             fillRule="evenodd"
-            d="M7.75 0a.75.75 0 01.75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 010 2.672l-2.07 1.75a1.75 1.75 0 01-1.13.414H8.5v5.25a.75.75 0 11-1.5 0V10H2.75A1.75 1.75 0 011 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 017.75 0zm0 8.5h4.384a.25.25 0 00.161-.06l2.07-1.75a.25.25 0 000-.38l-2.07-1.75a.25.25 0 00-.161-.06H2.75a.25.25 0 00-.25.25v3.5c0 .138.112.25.25.25h5z"
+            d={milestoneIcon}
           />
         </svg>
         <div css={styles.detail}>{milestoneTitle}</div>
