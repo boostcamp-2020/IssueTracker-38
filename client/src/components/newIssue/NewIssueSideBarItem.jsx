@@ -1,23 +1,16 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
-
-import { IssuesContext } from '../../stores/IssueStore';
 
 import NewIssueSideBarItemTitle from './NewIssueSideBarItemTitle';
 import NewIssueSideBarItemDropdown from './NewIssueSideBarItemDropdown';
 import MilestoneProgressBar from './MilestoneProgressBar';
+import NewIssueSideBarAssignedDropdown from './NewIssueSideBarAssignedDropdown';
 
 const styles = {
   layout: {
     width: '300px',
     border: '1px solid',
-  },
-  item: {
-    width: 'max-content',
-    padding: '5px',
-    boxSizing: 'border-box',
-    borderRadius: '15px',
   },
   selfAssignButton: {
     '&:hover': {
@@ -40,6 +33,14 @@ export default function NewIssueSideBarItem({
     setAssigned([...assigned, { id, name }]);
   };
 
+  const notAssignedMessage = title === 'Assignees'
+    ? <button type="button" css={styles.selfAssignButton} onClick={assignMyself}>{defaultMessage}</button>
+    : defaultMessage;
+
+  const assignedDropdowns = title === 'Milestone'
+    ? <MilestoneProgressBar assignedMilestone={assigned[0]} />
+    : <NewIssueSideBarAssignedDropdown assigned={assigned} />;
+
   return (
     <div css={styles.layout}>
       <NewIssueSideBarItemTitle
@@ -56,18 +57,8 @@ export default function NewIssueSideBarItem({
       )}
       <div>
         {assigned.length === 0
-          ? title === 'Assignees'
-            ? (
-              <button type="button" css={styles.selfAssignButton} onClick={assignMyself}>{defaultMessage}</button>
-            )
-            : defaultMessage
-          : title === 'Milestone'
-            ? <MilestoneProgressBar assignedMilestone={assigned[0]} />
-            : assigned.map(({ name, color }) => (
-              <div css={{ ...styles.item, background: color }}>
-                {name}
-              </div>
-            ))}
+          ? notAssignedMessage
+          : assignedDropdowns}
       </div>
     </div>
   );
