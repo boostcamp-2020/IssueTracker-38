@@ -11,3 +11,9 @@ export const deleteStoreItem = (prevState, payload) => {
 
   return nextState;
 };
+
+export const getNicknameByEmail = (email) => email.split('@')[0];
+export const getItemById = (items, id) => {
+  const target = items.find((item) => item.id === id);
+  return target;
+};
