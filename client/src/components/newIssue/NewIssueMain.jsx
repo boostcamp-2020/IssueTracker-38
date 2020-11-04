@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 
+import { useHistory } from 'react-router-dom';
+
 import NewIssueTitle from './NewIssueTitle';
 import NewIssueComment from './NewIssueComment';
 import NewIssueButton from './NewIssueButton';
+import NewIssueSideBar from './NewIssueSideBar';
 
 const styles = {
   layout: {
@@ -31,10 +34,21 @@ const useInput = (initialValue) => {
 };
 
 export default function NewIssueMain() {
+  const history = useHistory();
+
   const [inputTitle, handleInputTitle] = useInput('');
   const [inputContent, handleInputContent] = useInput('');
 
+  const [assignedUsers, setAssignedUsers] = useState([]);
+  const [assignedLabels, setAssignedLabels] = useState([]);
+  const [assignedMilestone, setAssignedMilestone] = useState([]);
+
   const submitNewIssue = () => {
+    console.log('inputTitle', inputTitle);
+    console.log('inputContent', inputContent);
+    console.log('assignedUsers', assignedUsers);
+    console.log('assignedLabels', assignedLabels);
+    console.log('assignedMilestone', assignedMilestone);
     // TODO: 데이터들을 모아서 API 요청을 여기서 하면 됨
     // 필요한 데이터: userId(이슈 생성자), title, content, assignees(id), labels(id), millstoneId(id)
   };
@@ -59,6 +73,16 @@ export default function NewIssueMain() {
           inputContent={inputContent}
           onSubmit={submitNewIssue}
           onCancel={cancelNewIssue}
+        />
+      </div>
+      <div>
+        <NewIssueSideBar
+          assignedUsers={assignedUsers}
+          setAssignedUsers={setAssignedUsers}
+          assignedLabels={assignedLabels}
+          setAssignedLabels={setAssignedLabels}
+          assignedMilestone={assignedMilestone}
+          setAssignedMilestone={setAssignedMilestone}
         />
       </div>
     </div>
