@@ -1,6 +1,6 @@
 export default {
   body: {
-    margin: '10px 30px',
+    margin: '40px 0px',
     display: 'flex',
   },
   profile: {
@@ -13,7 +13,7 @@ export default {
     marginLeft: '20px',
     display: 'flex',
     flexWrap: 'wrap',
-    width: '860px',
+    width: '800px',
     border: '1px solid #e1e4e8',
     borderRadius: '6px 6px 0 0',
   },

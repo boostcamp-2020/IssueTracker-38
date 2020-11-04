@@ -9,6 +9,32 @@ import CountOfCharacter from './CountOfCharacter';
 import commonStyles from './commonStyles';
 
 const styles = {
+  commentTitle: {
+    display: 'flex',
+    margin: '5px 10px',
+  },
+  nickname: {
+    margin: 'auto 0',
+    fontWeight: '600',
+  },
+  description: {
+    margin: 'auto 5px',
+    color: '#6a737d',
+  },
+  ownerMark: {
+    marginLeft: 'auto',
+    padding: '2px 5px',
+    color: '#6a737d',
+    border: '2px solid #e1e4e8',
+    borderRadius: '6px',
+  },
+  editButton: {
+    fontSize: '15px',
+    margin: 'auto 0 auto 10px',
+    color: '#6a737d',
+    backgroundColor: 'transparent',
+    border: 'none',
+  },
 };
 
 export default function Comment({
@@ -83,25 +109,25 @@ export default function Comment({
               &nbsp;
             </div>
             <div css={commonStyles.layout}>
-              <div css={commonStyles.title}>
-                <div>
-                  {writer?.email}
-                  {' '}
-                </div>
-                <div>
-                  commented
-                  {' '}
-                  {elapsedTime}
-                  {' '}
-                  ago
-                  {' '}
-                </div>
-                <div>
-                  {markOfOwner()}
-                </div>
-                <div>
+              <div css={{ ...commonStyles.title, backgroundColor: owner ? '#dbedff' : '#f6f8fa' }}>
+                <div css={styles.commentTitle}>
+                  <div css={styles.nickname}>
+                    {writer?.email}
+                    {' '}
+                  </div>
+                  <div css={styles.description}>
+                    commented
+                    {' '}
+                    {elapsedTime}
+                    {' '}
+                    ago
+                    {' '}
+                  </div>
+                  <div css={styles.ownerMark}>
+                    {markOfOwner()}
+                  </div>
                   {owner
-                    ? (<button type="button" onClick={onClick}>Edit</button>)
+                    ? (<button css={styles.editButton} type="button" onClick={onClick}>Edit</button>)
                     : (<></>)}
                 </div>
               </div>
