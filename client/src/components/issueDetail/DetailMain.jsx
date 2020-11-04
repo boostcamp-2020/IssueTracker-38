@@ -6,6 +6,7 @@ import { IssuesContext } from '../../stores/IssueStore';
 import { LabelsContext } from '../../stores/LabelStore';
 import { MilestoneContext } from '../../stores/MilestoneStore';
 import { UsersContext } from '../../stores/UserStore';
+import DetailTitle from './DetailTitle';
 import NewComment from './NewComment';
 
 const styles = {
@@ -29,6 +30,9 @@ export default function DetailMain() {
 
   return (
     <div css={styles.body}>
+      <DetailTitle
+        issue={issue}
+      />
       <NewComment
         user={currentUser}
         issue={issue}

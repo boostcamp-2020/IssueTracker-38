@@ -48,6 +48,19 @@ export const issueAPI = {
     const result = await customFetch(url, request);
     return result;
   },
+  async updateTitle(data) {
+    const url = `${baseURL}/issue/newtitle`;
+    const request = {
+      method: 'PATCH',
+      headers: {
+        Authorization: 'Bearer ~',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+    const result = await customFetch(url, request);
+    return result;
+  }
 };
 
 export const milestoneAPI = {
