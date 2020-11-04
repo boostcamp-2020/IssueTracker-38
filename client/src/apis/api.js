@@ -109,4 +109,17 @@ export const commentAPI = {
     const comments = await customFetch(url, request);
     return comments;
   },
+  async update(data) {
+    const url = `${baseURL}/comment`;
+    const request = {
+      method: 'PATCH',
+      headers: {
+        Authorization: 'Bearer ~',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+    const result = await customFetch(url, request);
+    return result;
+  },
 };
