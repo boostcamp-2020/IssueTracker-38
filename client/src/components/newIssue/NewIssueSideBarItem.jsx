@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import { PropTypes } from 'prop-types';
+
+import { useSwitch } from '../../hooks/hooks';
 
 import NewIssueSideBarItemTitle from './NewIssueSideBarItemTitle';
 import NewIssueSideBarItemDropdown from './NewIssueSideBarItemDropdown';
@@ -21,11 +24,7 @@ const styles = {
 export default function NewIssueSideBarItem({
   title, dropdownItems, assigned, setAssigned, author,
 }) {
-  const [isAction, toggleAction] = useState(false);
-
-  const switchDropdownShowing = () => {
-    toggleAction(!isAction);
-  };
+  const [isDropdownOn, switchDropdownState] = useSwitch(false);
 
   const assignMyself = () => {
     const { id, name } = author;
@@ -48,9 +47,9 @@ export default function NewIssueSideBarItem({
     <div css={styles.layout}>
       <NewIssueSideBarItemTitle
         title={title}
-        onClick={switchDropdownShowing}
+        onClick={switchDropdownState}
       />
-      {isAction && (
+      {isDropdownOn && (
       <NewIssueSideBarItemDropdown
         items={dropdownItems}
         assigned={assigned}
