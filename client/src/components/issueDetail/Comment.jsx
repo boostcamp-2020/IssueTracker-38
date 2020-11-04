@@ -5,7 +5,6 @@ import { AuthContext } from '../../stores/AuthStore';
 import { commentAPI } from '../../apis/api';
 import { calElapsedTime, getItemById } from '../../utils/utils';
 import EditComment from './EditComment';
-import CountOfCharacter from './CountOfCharacter';
 import commonStyles from './commonStyles';
 
 const styles = {
@@ -49,13 +48,9 @@ export default function Comment({
   const { currentUser } = useContext(AuthContext);
   const [editState, setEditState] = useState(false);
   const [newContent, setNewContent] = useState(content);
-  const [countOfCharacter, setCountOfCharacter] = useState(newContent.length);
-  const [recentTimeout, setRecentTimeout] = useState(-1);
-  const [displayState, setDisplayState] = useState(false);
 
   const writer = getItemById(users, +userId);
   const elapsedTime = updatedAt ? calElapsedTime(updatedAt) : calElapsedTime(createdAt);
-  const originContent = content;
   const owner = currentUser.id === userId;
 
   const markOfOwner = () => {
@@ -64,22 +59,8 @@ export default function Comment({
     return 'Member';
   };
 
-  const timeout = () => setTimeout(() => {
-    setDisplayState(false);
-  }, 2000);
-
-  const handleContent = ({ target }) => {
-    setNewContent(target.value);
-    setCountOfCharacter(target.value.length);
-    setDisplayState(true);
-    if (recentTimeout > 0) clearTimeout(recentTimeout);
-    setRecentTimeout(timeout());
-  };
-
   const onClick = () => {
     setEditState(!editState);
-    setNewContent(originContent);
-    setCountOfCharacter(originContent.length);
   };
 
   const updateComment = async () => {
@@ -95,10 +76,7 @@ export default function Comment({
     <>
       {editState
         ? (
-          <EditComment>
-            <textarea css={commonStyles.textInput} value={newContent} onChange={handleContent} />
-            {/* <div>Attach files by checking here.</div> */}
-            <CountOfCharacter displayState={displayState} count={countOfCharacter} />
+          <EditComment newContent={newContent} setNewContent={setNewContent}>
             <button css={commonStyles.basicButton} type="button" onClick={onClick}>Cancel</button>
             <button css={commonStyles.commentButton} type="button" onClick={updateComment}>Update Comment</button>
           </EditComment>

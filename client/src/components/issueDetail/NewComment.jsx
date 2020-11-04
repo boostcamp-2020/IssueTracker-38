@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { issueAPI, commentAPI } from '../../apis/api';
 import { IssuesContext } from '../../stores/IssueStore';
@@ -7,15 +7,13 @@ import commonStyles from './commonStyles';
 
 export default function NewComment({ user, issue }) {
   const { dispatch } = useContext(IssuesContext);
-  const inputRef = useRef(false);
+  const [newContent, setNewContent] = useState();
 
   const createComment = async (e) => {
     e?.preventDefault();
+    if (!newContent || newContent.length === 0) return;
 
-    const content = inputRef.current.value;
-    if (!content) return;
-
-    const comment = await commentAPI.create({ issueId: issue.id, userId: user.id, content });
+    const comment = await commentAPI.create({ issueId: issue.id, userId: user.id, newContent });
     // TODO : comment 목록 상태 업데이트 필요함
     // if (res) console.log(res);
   };
@@ -32,8 +30,7 @@ export default function NewComment({ user, issue }) {
   };
 
   return (
-    <EditComment>
-      <textarea css={commonStyles.textInput} ref={inputRef} placeholder="Leave a Comment" />
+    <EditComment newContent={newContent} setNewContent={setNewContent}>
       <button css={commonStyles.basicButton} type="submit" onClick={changeIssueStatus}>
         {issue?.isClosed ? 'Reopen issue' : 'Close issue'}
       </button>
