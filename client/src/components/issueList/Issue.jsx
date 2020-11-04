@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import { UsersContext } from '../../stores/UserStore';
 import { MilestoneContext } from '../../stores/MilestoneStore';
 import { LabelsContext } from '../../stores/LabelStore';
+import { calElapsedTime, getItemById } from '../../utils/utils';
 import { openedIcon, closedIcon, milestoneIcon } from '../../icons/icons';
 
 const styles = {
@@ -57,8 +58,8 @@ export default function Issue({
   const { milestones } = useContext(MilestoneContext);
   const { labels: allLabels } = useContext(LabelsContext);
 
-  const { email: userEmail } = users.length > 0 ? users.find((u) => u.id === userId) : ' ';
-  const { title: milestoneTitle } = milestones.length > 0 ? milestones.find((m) => m.id === milestoneId) : ' ';
+  const userEmail = getItemById(users, +userId)?.email;
+  const milestoneTitle = getItemById(milestones, +milestoneId)?.title;
 
   return (
     <div css={styles.body}>
@@ -66,10 +67,8 @@ export default function Issue({
         <svg
           css={styles.statusIcon}
           viewBox="0 0 16 16"
-          version="1.1"
           width="16"
           height="16"
-          aria-hidden="true"
           fill={isClosed ? 'red' : 'green'}
         >
           <path
@@ -80,8 +79,8 @@ export default function Issue({
         <a css={styles.title} href={`/detail/${id}`}>
           {title}
         </a>
-        {labels.map((num) => {
-          const target = allLabels.find((label) => label.id === num);
+        {labels.map((labelId) => {
+          const target = getItemById(allLabels, labelId);
           if (!target) return (<></>);
           return (
             <div css={{ ...styles.label, backgroundColor: target.color }}>
@@ -110,10 +109,8 @@ export default function Issue({
         <svg
           css={styles.milestoneIcon}
           viewBox="0 0 16 16"
-          version="1.1"
           width="16"
           height="16"
-          role="img"
         >
           <path
             fillRule="evenodd"

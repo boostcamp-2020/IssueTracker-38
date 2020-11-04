@@ -8,6 +8,7 @@ import { MilestoneContext } from '../../stores/MilestoneStore';
 import { UsersContext } from '../../stores/UserStore';
 import DetailTitle from './DetailTitle';
 import NewComment from './NewComment';
+import { getItemById } from '../../utils/utils';
 
 const styles = {
   body: {
@@ -24,7 +25,7 @@ export default function DetailMain() {
   const [issue, setIssue] = useState();
 
   useEffect(() => {
-    const mathched = issues.find((v) => v.id === +issueId);
+    const mathched = getItemById(issues, +issueId);
     setIssue(mathched);
   }, [issues]);
 

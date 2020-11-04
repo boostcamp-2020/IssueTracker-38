@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { issueAPI } from '../../apis/api';
 import { useParams } from 'react-router-dom';
+import { calElapsedTime, getItemById } from '../../utils/utils';
 import { openedIcon, closedIcon } from '../../icons/icons';
 
 const styles = {
@@ -16,8 +17,8 @@ export default function DetailTitle({ issue }) {
     const { issueId } = useParams();
 
     const { users } = useContext(UsersContext);
-    const user = users.length > 0 ? users.find((user) => user.id === +userId) : " ";
-    const author = user ? user.email : " ";
+  const user = getItemById(users, +userId);
+  const author = user?.email;
 
     const [titleState, setTitle] = useState(title);
     const [isEditActive, toggleEditActive] = useState(0);

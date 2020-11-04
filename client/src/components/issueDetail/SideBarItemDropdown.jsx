@@ -25,7 +25,7 @@ export default function SideBarItemDropdown({ items, assigned, title }) {
   const { issueId } = useParams();
   const { issues, dispatch } = useContext(IssuesContext);
 
-  const isAlreadyAssigned = (id) => assigned.find((base) => base.id === id);
+  const isAlreadyAssigned = (id) => getItemById(assigned, id);
 
   const handleAssigning = (id) => async () => {
     const type = isAlreadyAssigned(id) ? 'delete' : 'add';

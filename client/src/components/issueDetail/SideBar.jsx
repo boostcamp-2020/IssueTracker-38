@@ -23,7 +23,7 @@ export default function SideBar() {
     return <div />;
   }
 
-  const targetIssue = issues.find((issue) => issue.id === +issueId);
+  const targetIssue = getItemById(issues, +issueId);
 
   const assignedUsers = targetIssue.assignees.map((assigneeId) => {
     const { id, email } = getItemById(users, assigneeId);
