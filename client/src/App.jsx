@@ -6,10 +6,14 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+
+import StoreWrapper from './stores/StoreWrapper';
+
 import Header from './components/Header';
+import DetailMain from './components/issueDetail/DetailMain';
 import IssueMain from './components/issueList/IssueMain';
 import IssueSearchBar from './components/issueList/IssueSearchBar';
-import StoreWrapper from './stores/StoreWrapper';
+import SideBar from './components/issueDetail/SideBar';
 
 export default function App() {
   return (
@@ -26,9 +30,9 @@ export default function App() {
               <Header />
               <h1>임시 이슈 생성 페이지입니다.</h1>
             </Route>
-            <Route path="/detail">
+            <Route path="/detail/:issueId">
               <Header />
-              <h1>임시 이슈 상세 페이지입니다.</h1>
+              <DetailMain />
             </Route>
             <Redirect path="*" to="/" />
           </Switch>

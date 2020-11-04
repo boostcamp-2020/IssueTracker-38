@@ -28,7 +28,7 @@ const styles = {
     borderRadius: '2px',
     fontSize: '12px',
     fontWeight: 'bolder',
-    margin: 'auto 0',
+    margin: 'auto 2px',
   },
   details: {
     display: 'flex',
@@ -135,5 +135,5 @@ Issue.propTypes = {
   milestoneId: PropTypes.number.isRequired,
   labels: PropTypes.arrayOf(PropTypes.number).isRequired,
   createdAt: PropTypes.string.isRequired,
-  isClosed: PropTypes.bool.isRequired,
+  isClosed: PropTypes.number.isRequired,
 };
