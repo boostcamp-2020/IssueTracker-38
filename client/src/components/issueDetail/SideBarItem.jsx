@@ -7,13 +7,19 @@ import SideBarItemDropdown from './SideBarItemDropdown';
 const styles = {
   layout: {
     width: '300px',
-    border: '1px solid',
+    padding: '10px 0',
+    borderBottom: '1px solid #eaecef',
   },
   item: {
     width: 'max-content',
-    padding: '5px',
+    padding: '2px 10px',
+    margin: '5px 5px 0 0',
     boxSizing: 'border-box',
     borderRadius: '15px',
+  },
+  defaultMessage: {
+    color: '#586069',
+    fontWeight: '100',
   },
 };
 
@@ -41,9 +47,9 @@ export default function SideBarItem({
       )}
       <div>
         {!assigned || assigned.length === 0 || Object.keys(assigned[0]).length === 0
-          ? defaultMessage
+          ? (<div css={styles.defaultMessage}>{defaultMessage}</div>)
           : assigned.map((element) => (
-            <div css={{ ...styles.item, background: element.color }}>
+            <div css={{ ...styles.item, background: element.color, display: element.name ? 'inline-block' : 'block' }}>
               {element.name || element.title || element.email }
             </div>
           ))}

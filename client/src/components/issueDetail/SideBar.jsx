@@ -11,6 +11,14 @@ import { getNicknameByEmail, getItemById } from '../../utils/utils';
 
 import SideBarItem from './SideBarItem';
 
+const styles = {
+  wrapper: {
+    margin: '0 20px',
+    fontSize: '12px',
+    fontWeight: '600',
+  },
+};
+
 export default function SideBar() {
   const { issueId } = useParams();
 
@@ -34,7 +42,7 @@ export default function SideBar() {
   if (!assignedMilestone[0]) assignedMilestone.pop();
 
   return (
-    <div>
+    <div css={styles.wrapper}>
       <SideBarItem
         title="Assignees"
         defaultMessage="No one--assign yourself"
@@ -44,7 +52,7 @@ export default function SideBar() {
       <SideBarItem
         title="Labels"
         defaultMessage="None yet"
-        dropdownItems={labels.map(({ id, name }) => ({ id, itemName: name }))}
+        dropdownItems={labels.map(({ id, name, color }) => ({ id, itemName: name, color }))}
         assigned={assignedLabels}
       />
       <SideBarItem
