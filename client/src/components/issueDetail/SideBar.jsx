@@ -30,7 +30,8 @@ export default function SideBar() {
     return { id, email, name: getNicknameByEmail(email) };
   });
   const assignedLabels = targetIssue.labels.map((id) => getItemById(labels, id));
-  const assignedMilestone = getItemById(milestones, targetIssue.milestoneId);
+  const assignedMilestone = [getItemById(milestones, targetIssue.milestoneId)];
+  if (!assignedMilestone[0]) assignedMilestone.pop();
 
   return (
     <div>
@@ -50,7 +51,7 @@ export default function SideBar() {
         title="Milestone"
         defaultMessage="No milestone"
         dropdownItems={milestones.map(({ id, title }) => ({ id, itemName: title }))}
-        assigned={[assignedMilestone]}
+        assigned={assignedMilestone}
       />
     </div>
   );
