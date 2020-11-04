@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
 
+import { useInput } from '../../hooks/hooks';
+
 import NewIssueTitle from './NewIssueTitle';
 import NewIssueComment from './NewIssueComment';
 import NewIssueButton from './NewIssueButton';
@@ -24,16 +26,6 @@ const styles = {
     width: '100%',
     flexWrap: 'wrap',
   },
-};
-
-const useInput = (initialValue) => {
-  const [input, setInput] = useState(initialValue);
-
-  const onChange = (e) => {
-    setInput(e.target.value);
-  };
-
-  return [input, onChange];
 };
 
 export default function NewIssueMain() {
