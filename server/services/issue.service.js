@@ -93,22 +93,33 @@ module.exports = {
     delete newIssue.labels;
     delete newIssue.assignees;
 
-    const createdIssue = await Issue.create(newIssue);
-    const IssueId = createdIssue.id;
+    const transaction = await sequelize.transaction();
+    try {
+      const createdIssue = await Issue.create(newIssue, { transaction });
+      const IssueId = createdIssue.id;
 
-    const checkedContent = (!content || content.length === 0) ? 'No description' : content;
-    await Comment.create({ content: checkedContent, userId: newIssue.userId, issueId: IssueId });
+      const checkedContent = (!content || content.length === 0) ? 'No description' : content;
+      await Comment.create(
+        { content: checkedContent, userId: newIssue.userId, issueId: IssueId },
+        { transaction },
+      );
 
-    if (labels) {
-      const arrLabel = JSON.parse(labels).map((LabelId) => ({ IssueId, LabelId }));
-      await IssueLabel.bulkCreate(arrLabel);
+      if (labels) {
+        const arrLabel = JSON.parse(labels).map((LabelId) => ({ IssueId, LabelId }));
+        await IssueLabel.bulkCreate(arrLabel, { transaction });
+      }
+
+      if (assignees) {
+        const arrAssignee = JSON.parse(assignees).map((UserId) => ({ IssueId, UserId }));
+        await IssueAssignee.bulkCreate(arrAssignee, { transaction });
+      }
+
+      await transaction.commit();
+    } catch (err) {
+      await transaction.rollback();
+      throw new Error(err);
     }
 
-    if (assignees) {
-      const arrAssignee = JSON.parse(assignees).map((UserId) => ({ IssueId, UserId }));
-      await IssueAssignee.bulkCreate(arrAssignee);
-    }
-
-    res.json({ message: '추가 되었습니다.' });
+    res.status(200).json({ message: '추가 되었습니다.' });
   },
 };
