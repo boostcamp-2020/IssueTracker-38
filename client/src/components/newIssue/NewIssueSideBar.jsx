@@ -32,7 +32,7 @@ export default function NewIssueSideBar({
     <div>
       <NewIssueSideBarItem
         title="Assignees"
-        defaultMessage="No one--"
+        defaultMessage="No one - assign yourself"
         dropdownItems={users.map((user) => ({ ...user, itemName: getNicknameByEmail(user.email) }))}
         assigned={assignedUsers}
         setAssigned={setAssignedUsers}
