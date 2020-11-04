@@ -108,7 +108,7 @@ export default function NewComment({ user, issue }) {
           <p css={styles.titleContent}>Write</p>
         </div>
         <div css={styles.inputWrapper}>
-          <input type="text" css={styles.input} ref={inputRef} placeholder="Leave a Comment" />
+          <textarea css={styles.input} ref={inputRef} placeholder="Leave a Comment" />
           <button css={styles.statusButton} type="submit" onClick={changeIssueStatus}>
             {issue?.isClosed ? 'Reopen issue' : 'Close issue'}
           </button>

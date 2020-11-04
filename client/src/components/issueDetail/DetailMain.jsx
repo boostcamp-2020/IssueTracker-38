@@ -3,24 +3,23 @@ import { useParams } from 'react-router-dom';
 
 import { AuthContext } from '../../stores/AuthStore';
 import { IssuesContext } from '../../stores/IssueStore';
-import { LabelsContext } from '../../stores/LabelStore';
-import { MilestoneContext } from '../../stores/MilestoneStore';
-import { UsersContext } from '../../stores/UserStore';
 import DetailTitle from './DetailTitle';
 import NewComment from './NewComment';
+import CommentList from './CommentList';
+import SideBar from './SideBar';
 import { getItemById } from '../../utils/utils';
 
 const styles = {
   body: {
+  },
+  main: {
+    display: 'flex',
   },
 };
 
 export default function DetailMain() {
   const { currentUser } = useContext(AuthContext);
   const { issues } = useContext(IssuesContext);
-  const { labels } = useContext(LabelsContext);
-  const { milestones } = useContext(MilestoneContext);
-  const { users } = useContext(UsersContext);
   const { issueId } = useParams();
   const [issue, setIssue] = useState();
 
@@ -34,10 +33,17 @@ export default function DetailMain() {
       <DetailTitle
         issue={issue}
       />
-      <NewComment
-        user={currentUser}
-        issue={issue}
-      />
+      <div css={styles.main}>
+        <div>
+          <CommentList issueAuthorId={issue?.userId} />
+          <NewComment
+            user={currentUser}
+            issue={issue}
+          />
+        </div>
+        <SideBar />
+      </div>
+
     </div>
   );
 }
