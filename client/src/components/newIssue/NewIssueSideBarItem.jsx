@@ -36,7 +36,11 @@ const styles = {
 export default function NewIssueSideBarItem({
   title, defaultMessage, dropdownItems, assigned, setAssigned, author,
 }) {
-  const { issues } = useContext(IssuesContext);
+  let issues;
+  if (title === 'Milestone') {
+    issues = useContext(IssuesContext).issues;
+  }
+
   const [isAction, toggleAction] = useState(false);
 
   const handleAssignButton = () => {
@@ -44,12 +48,10 @@ export default function NewIssueSideBarItem({
   };
 
   const progressPercentage = (milestoneId) => {
-    let closedCount = 0;
-    const checkPoints = issues.filter((checkpoint) => checkpoint.milestoneId === +milestoneId);
-    checkPoints.forEach((element) => {
-      if (element.isClosed === 1) closedCount += 1;
-    });
-    return checkPoints.length ? (closedCount * 100) / checkPoints.length : 0;
+    const issuesWithMilestone = issues.filter((issue) => issue.milestoneId === +milestoneId);
+    const closedCount = issuesWithMilestone.filter((e) => e.isClosed === 1).length;
+
+    return (closedCount / issuesWithMilestone.length) * 100;
   };
 
   const assignMyself = () => {
@@ -78,7 +80,6 @@ export default function NewIssueSideBarItem({
               <>
                 {defaultMessage}
                 <button type="button" css={styles.selfAssignButton} onClick={assignMyself}>assign yourself</button>
-                {' '}
               </>
             )
             : defaultMessage
