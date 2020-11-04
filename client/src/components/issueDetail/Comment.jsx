@@ -4,18 +4,11 @@ import { UsersContext } from '../../stores/UserStore';
 import { AuthContext } from '../../stores/AuthStore';
 import { commentAPI } from '../../apis/api';
 import { calElapsedTime, getItemById } from '../../utils/utils';
+import EditComment from './EditComment';
 import CountOfCharacter from './CountOfCharacter';
+import commonStyles from './commonStyles';
 
 const styles = {
-  header: {
-    display: 'flex',
-  },
-  writer: {
-    fontWeight: '800',
-  },
-  role: {
-    margin: '0 5px',
-  },
 };
 
 export default function Comment({
@@ -76,48 +69,45 @@ export default function Comment({
     <>
       {editState
         ? (
-          <div>
-            <div>
-              <div>Write</div>
-            </div>
-            <div>
-              <textarea value={newContent} onChange={handleContent} />
-              <div>Attach files by checking here.</div>
-              <CountOfCharacter displayState={displayState} count={countOfCharacter} />
-            </div>
-            <div>
-              <button type="button" onClick={onClick}>Cancel</button>
-              <button type="button" onClick={updateComment}>Update Comment</button>
-            </div>
-          </div>
+          <EditComment>
+            <textarea css={commonStyles.textInput} value={newContent} onChange={handleContent} />
+            {/* <div>Attach files by checking here.</div> */}
+            <CountOfCharacter displayState={displayState} count={countOfCharacter} />
+            <button css={commonStyles.statusButton} type="button" onClick={onClick}>Cancel</button>
+            <button css={commonStyles.commentButton} type="button" onClick={updateComment}>Update Comment</button>
+          </EditComment>
         )
         : (
-          <div>
-            <div css={styles.header}>
-              <div>
-                Profile Image
-              </div>
-              <div css={styles.writer}>
-                {writer?.email}
-                {' '}
-              </div>
-              <div>
-                commented
-                {' '}
-                {elapsedTime}
-                {' '}
-                ago
-                {' '}
-              </div>
-              <div css={styles.role}>
-                {markOfOwner()}
-              </div>
-              {owner
-                ? (<button type="button" onClick={onClick}>Edit</button>)
-                : (<></>)}
+          <div css={commonStyles.body}>
+            <div css={commonStyles.profile}>
+              &nbsp;
             </div>
-            <div>
-              <div>{content}</div>
+            <div css={commonStyles.layout}>
+              <div css={commonStyles.title}>
+                <div>
+                  {writer?.email}
+                  {' '}
+                </div>
+                <div>
+                  commented
+                  {' '}
+                  {elapsedTime}
+                  {' '}
+                  ago
+                  {' '}
+                </div>
+                <div>
+                  {markOfOwner()}
+                </div>
+                <div>
+                  {owner
+                    ? (<button type="button" onClick={onClick}>Edit</button>)
+                    : (<></>)}
+                </div>
+              </div>
+              <div css={commonStyles.contentWrapper}>
+                <div css={commonStyles.content}>{content}</div>
+              </div>
             </div>
           </div>
         )}
