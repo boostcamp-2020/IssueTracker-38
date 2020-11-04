@@ -6,11 +6,13 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+
+import StoreWrapper from './stores/StoreWrapper';
+
 import Header from './components/Header';
+import DetailMain from './components/issueDetail/DetailMain';
 import IssueMain from './components/issueList/IssueMain';
 import IssueSearchBar from './components/issueList/IssueSearchBar';
-import StoreWrapper from './stores/StoreWrapper';
-import DetailMain from './components/issueDetail/DetailMain';
 
 export default function App() {
   return (
