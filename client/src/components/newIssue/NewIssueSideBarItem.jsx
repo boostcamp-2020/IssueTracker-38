@@ -23,7 +23,7 @@ export default function NewIssueSideBarItem({
 }) {
   const [isAction, toggleAction] = useState(false);
 
-  const handleAssignButton = () => {
+  const switchDropdownShowing = () => {
     toggleAction(!isAction);
   };
 
@@ -48,7 +48,7 @@ export default function NewIssueSideBarItem({
     <div css={styles.layout}>
       <NewIssueSideBarItemTitle
         title={title}
-        onClick={handleAssignButton}
+        onClick={switchDropdownShowing}
       />
       {isAction && (
       <NewIssueSideBarItemDropdown
