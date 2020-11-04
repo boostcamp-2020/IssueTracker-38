@@ -30,19 +30,6 @@ export default {
   content: {
     margin: '10px',
   },
-  textInput: {
-    border: '1px solid #e1e4e8',
-    borderRadius: '6px',
-    boxShadow: '0px 0px 5px #e1e4e8',
-    width: '100%',
-    height: '150px',
-    margin: '20px 10px 10px 10px',
-    padding: '10px',
-    '&:focus': {
-      backgroundColor: '#f6f8fa',
-      outline: 'none',
-    },
-  },
   basicButton: {
     margin: '0 10px 10px auto',
     padding: '5px 16px',
