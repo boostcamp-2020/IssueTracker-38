@@ -37,22 +37,22 @@ export default function SideBar() {
   return (
     <div>
       <SideBarItem
-        title="Assignees"
-        defaultMessage="No one--"
+        title='Assignees'
+        defaultMessage='No one--'
         dropdownItems={users.map(({ id, email }) => ({ id, itemName: getNicknameByEmail(email) }))}
         assigned={assignedUsers}
         author={author}
       />
       <SideBarItem
-        title="Labels"
-        defaultMessage="None yet"
+        title='Labels'
+        defaultMessage='None yet'
         dropdownItems={labels.map(({ id, name }) => ({ id, itemName: name }))}
         assigned={assignedLabels}
         author={author}
       />
       <SideBarItem
-        title="Milestone"
-        defaultMessage="No milestone"
+        title='Milestone'
+        defaultMessage='No milestone'
         dropdownItems={milestones.map(({ id, title }) => ({ id, itemName: title }))}
         assigned={assignedMilestone}
         author={author}
