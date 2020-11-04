@@ -26,28 +26,33 @@ export default function NewIssueSideBar({
     return <div />;
   }
 
+  const temptAuthor = { id: 9999, name: 'tester' };
+
   return (
     <div>
       <NewIssueSideBarItem
         title="Assignees"
-        defaultMessage="No one--assign yourself"
-        dropdownItems={users.map(({ id, email }) => ({ id, itemName: getNicknameByEmail(email) }))}
+        defaultMessage="No one--"
+        dropdownItems={users.map((user) => ({ ...user, itemName: getNicknameByEmail(user.email) }))}
         assigned={assignedUsers}
         setAssigned={setAssignedUsers}
+        author={temptAuthor}
       />
       <NewIssueSideBarItem
         title="Labels"
         defaultMessage="None yet"
-        dropdownItems={labels.map(({ id, name }) => ({ id, itemName: name }))}
+        dropdownItems={labels.map((label) => ({ ...label, itemName: label.name }))}
         assigned={assignedLabels}
         setAssigned={setAssignedLabels}
+        author={temptAuthor}
       />
       <NewIssueSideBarItem
         title="Milestone"
         defaultMessage="No milestone"
-        dropdownItems={milestones.map(({ id, title }) => ({ id, itemName: title }))}
+        dropdownItems={milestones.map((milestone) => ({ ...milestone, itemName: milestone.title }))}
         assigned={assignedMilestone}
         setAssigned={setAssignedMilestone}
+        author={temptAuthor}
       />
     </div>
   );
