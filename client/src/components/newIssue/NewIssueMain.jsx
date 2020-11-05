@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { useHistory } from 'react-router-dom';
 
 import { useInput } from '../../hooks/hooks';
 
+import { issueAPI } from '../../apis/api';
+
 import { AuthContext } from '../../stores/AuthStore';
+import { IssuesContext } from '../../stores/IssueStore';
+
 import NewIssueTitle from './NewIssueTitle';
 import NewIssueComment from './NewIssueComment';
 import NewIssueButton from './NewIssueButton';
@@ -32,6 +36,7 @@ const styles = {
 export default function NewIssueMain() {
   const history = useHistory();
   const { currentUser } = useContext(AuthContext);
+  const { issues, dispatch } = useContext(IssuesContext);
 
   const [inputTitle, handleInputTitle] = useInput('');
   const [inputContent, handleInputContent] = useInput('');
@@ -46,6 +51,31 @@ export default function NewIssueMain() {
     setAssignedUsers([]);
     setAssignedLabels([]);
     setAssignedMilestone([]);
+  };
+
+  const submitNewIssue = async () => {
+    if (inputTitle.trim().length === 0) {
+      alert('제목을 입력해주세요');
+      return;
+    }
+
+    const newIssue = {
+      title: inputTitle,
+      userId: currentUser.id,
+      content: inputContent || 'No description',
+      assignees: assignedUsers.map((user) => +user.id) || [],
+      labels: assignedLabels.map((label) => +label.id) || [],
+      milestoneId: +assignedMilestone[0]?.id || null,
+    };
+
+    const result = await issueAPI.create(newIssue);
+    if (!result) return;
+
+    alert('새로운 이슈를 추가하였습니다');
+    resetForm();
+    // TODO: 서버쪽 로직 구현 뒤 주석 해제
+    // dispatch({ type: 'ADD', payload: result });
+    history.push('/');
   };
 
   const cancelNewIssue = () => {
