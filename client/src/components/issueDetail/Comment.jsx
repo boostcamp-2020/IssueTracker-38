@@ -43,6 +43,7 @@ export default function Comment({
   createdAt,
   updatedAt,
   issueAuthorId,
+  updateComment,
 }) {
   const { users } = useContext(UsersContext);
   const { currentUser } = useContext(AuthContext);
@@ -63,13 +64,11 @@ export default function Comment({
     setEditState(!editState);
   };
 
-  const updateComment = async () => {
-    // TODO : 구현된 commentAPI.update()와 연결하기
-    if (!commentAPI.update) return alert('Comment update is not function');
-
+  const triggerUpdate = async () => {
     const result = await commentAPI.update({ id, content: newContent });
-    if (!result) return alert('Comment update is fail');
-    return setEditState(!editState);
+    if (!result) return;
+    updateComment(id, newContent);
+    setEditState(!editState);
   };
 
   return (
@@ -126,4 +125,5 @@ Comment.propTypes = {
   createdAt: PropTypes.string.isRequired,
   updatedAt: PropTypes.string.isRequired,
   issueAuthorId: PropTypes.number.isRequired,
+  updateComment: PropTypes.func.isRequired,
 };

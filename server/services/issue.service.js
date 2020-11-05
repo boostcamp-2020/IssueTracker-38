@@ -1,6 +1,8 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require('../models');
-const { Issue, IssueLabel, IssueAssignee } = require('../models').models;
+const {
+  Issue, IssueLabel, IssueAssignee, Comment,
+} = require('../models').models;
 
 module.exports = {
   async readAll(req, res) {
@@ -84,5 +86,40 @@ module.exports = {
     );
 
     res.json({ message: '수정 되었습니다.' });
+  },
+  async create(req, res) {
+    const newIssue = req.body;
+    const { labels, assignees, content } = newIssue;
+    delete newIssue.labels;
+    delete newIssue.assignees;
+
+    const transaction = await sequelize.transaction();
+    try {
+      const createdIssue = await Issue.create(newIssue, { transaction });
+      const IssueId = createdIssue.id;
+
+      const checkedContent = (!content || content.length === 0) ? 'No description' : content;
+      await Comment.create(
+        { content: checkedContent, userId: newIssue.userId, issueId: IssueId },
+        { transaction },
+      );
+
+      if (labels) {
+        const arrLabel = JSON.parse(labels).map((LabelId) => ({ IssueId, LabelId }));
+        await IssueLabel.bulkCreate(arrLabel, { transaction });
+      }
+
+      if (assignees) {
+        const arrAssignee = JSON.parse(assignees).map((UserId) => ({ IssueId, UserId }));
+        await IssueAssignee.bulkCreate(arrAssignee, { transaction });
+      }
+
+      await transaction.commit();
+    } catch (err) {
+      await transaction.rollback();
+      throw new Error(err);
+    }
+
+    res.status(200).json({ message: '추가 되었습니다.' });
   },
 };

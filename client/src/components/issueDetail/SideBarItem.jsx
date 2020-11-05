@@ -1,4 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, {
+  useState, useRef, useCallback, useEffect, useContext
+} from 'react';
 import { PropTypes } from 'prop-types';
 
 import SideBarItemTitle from './SideBarItemTitle';
@@ -13,13 +15,19 @@ import { issueAPI } from '../../apis/api';
 const styles = {
   layout: {
     width: '300px',
-    border: '1px solid',
+    padding: '10px 0',
+    borderBottom: '1px solid #eaecef',
   },
   item: {
     width: 'max-content',
-    padding: '5px',
+    padding: '2px 10px',
+    margin: '5px 5px 0 0',
     boxSizing: 'border-box',
     borderRadius: '15px',
+  },
+  defaultMessage: {
+    color: '#586069',
+    fontWeight: '100',
   },
   selfAssignButton: {
     '&:hover': {
@@ -40,12 +48,23 @@ export default function SideBarItem({
   title, defaultMessage, dropdownItems, assigned, author
 }) {
   const [isAction, toggleAction] = useState(false);
+  const dropdownRef = useRef(null);
   const { issueId } = useParams();
   const { issues, dispatch } = useContext(IssuesContext);
 
   const handleAssignButton = () => {
     toggleAction(!isAction);
   };
+
+  const pageClickEvent = useCallback(({ target }) => {
+    const { current } = dropdownRef;
+    if (current && !current.contains(target)) toggleAction(!isAction);
+  }, [isAction]);
+
+  useEffect(() => {
+    if (isAction) window.addEventListener('click', pageClickEvent);
+    return () => window.removeEventListener('click', pageClickEvent);
+  }, [isAction]);
 
   const assignMyself = (id) => async () => {
     const type = 'add';
@@ -66,12 +85,10 @@ export default function SideBarItem({
     checkPoints.forEach(element => {
       if (element.isClosed === 1) closedCount = closedCount + 1
     });
-    console.log(checkPoints)
-    console.log(closedCount);
+
     return checkPoints.length ? (closedCount * 100) / checkPoints.length : 0
   }
 
-  console.log(progressPercentage(2))
   return (
     <div css={styles.layout}>
       <SideBarItemTitle
@@ -83,32 +100,31 @@ export default function SideBarItem({
           items={dropdownItems}
           assigned={assigned}
           title={title}
-        />
+          dropdownRef={dropdownRef} 
+       />
       )}
       <div>
         {!assigned || assigned.length === 0 || Object.keys(assigned[0]).length === 0
           ? title === 'Assignees'
-            ? <>{defaultMessage}<span css={styles.selfAssignButton} onClick={assignMyself(author.id)}>assign yourself</span> </> : defaultMessage
+            ? <div css={styles.defaultMessage}>{defaultMessage}<span css={styles.selfAssignButton} onClick={assignMyself(author.id)}>assign yourself</span></div> 
+            : <div css={styles.defaultMessage}>{defaultMessage}</div>
           : title === 'Milestone' ?
             assigned.map((element) => (
-              <div css={{ ...styles.item, background: element.color }}>
+              <div css={styles.item}>
                 <div css={styles.bar}>
                   <div css={{ ...styles.progress, width: progressPercentage(element.id) + '%' }}></div>
                 </div>{element.title}
               </div>
             ))
             : assigned.map((element) => (
-              <div css={{ ...styles.item, background: element.color }}>
-                {element.name || element.title || element.email}
+              <div css={{ ...styles.item, background: element.color, display: element.name ? 'inline-block' : 'block' }}>
+                {element.name || element.title || element.email }
               </div>
             ))}
       </div>
     </div>
   );
 }
-
-
-
 
 SideBarItem.propTypes = {
   title: PropTypes.string.isRequired,

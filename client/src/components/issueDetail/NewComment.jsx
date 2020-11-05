@@ -5,7 +5,7 @@ import { IssuesContext } from '../../stores/IssueStore';
 import EditComment from './EditComment';
 import commonStyles from './commonStyles';
 
-export default function NewComment({ user, issue }) {
+export default function NewComment({ user, issue, addComment }) {
   const { dispatch } = useContext(IssuesContext);
   const [newContent, setNewContent] = useState();
 
@@ -13,9 +13,12 @@ export default function NewComment({ user, issue }) {
     e?.preventDefault();
     if (!newContent || newContent.length === 0) return;
 
-    const comment = await commentAPI.create({ issueId: issue.id, userId: user.id, newContent });
-    // TODO : comment 목록 상태 업데이트 필요함
-    // if (res) console.log(res);
+    const content = inputRef.current.value;
+    if (!content) return;
+
+    const comment = await commentAPI.create({ issueId: issue.id, userId: user.id, content });
+    if (!comment) return;
+    addComment(comment);
   };
 
   const changeIssueStatus = async (e) => {
@@ -44,4 +47,5 @@ export default function NewComment({ user, issue }) {
 NewComment.propTypes = {
   user: PropTypes.shape.isRequired,
   issue: PropTypes.shape.isRequired,
+  addComment: PropTypes.func.isRequired,
 };
