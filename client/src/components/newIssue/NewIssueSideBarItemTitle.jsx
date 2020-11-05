@@ -6,11 +6,14 @@ import { settingIcon } from '../../icons/icons';
 const styles = {
   assignButton: {
     display: 'flex',
+    marginBottom: '5px',
     justifyContent: 'space-between',
     cursor: 'pointer',
+    color: '#586069',
+    fill: '#959da5',
     '&:hover': {
-      color: 'blue',
-      fill: 'blue',
+      color: '#0366d6',
+      fill: '#0366d6',
     },
   },
 };

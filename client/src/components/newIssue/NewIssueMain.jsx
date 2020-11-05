@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { useHistory } from 'react-router-dom';
 
 import { useInput } from '../../hooks/hooks';
+
+import { issueAPI } from '../../apis/api';
+
+import { AuthContext } from '../../stores/AuthStore';
+import { IssuesContext } from '../../stores/IssueStore';
 
 import NewIssueTitle from './NewIssueTitle';
 import NewIssueComment from './NewIssueComment';
@@ -12,10 +17,10 @@ import NewIssueSideBar from './NewIssueSideBar';
 const styles = {
   layout: {
     display: 'flex',
+    justifyContent: 'center',
   },
   formLayout: {
-    marginTop: '20px',
-    marginLeft: '20px',
+    margin: '20px',
     display: 'flex',
     flexWrap: 'wrap',
     width: '800px',
@@ -30,6 +35,8 @@ const styles = {
 
 export default function NewIssueMain() {
   const history = useHistory();
+  const { currentUser } = useContext(AuthContext);
+  const { issues, dispatch } = useContext(IssuesContext);
 
   const [inputTitle, handleInputTitle] = useInput('');
   const [inputContent, handleInputContent] = useInput('');
@@ -38,24 +45,50 @@ export default function NewIssueMain() {
   const [assignedLabels, setAssignedLabels] = useState([]);
   const [assignedMilestone, setAssignedMilestone] = useState([]);
 
-  const submitNewIssue = () => {
-    console.log('inputTitle', inputTitle);
-    console.log('inputContent', inputContent);
-    console.log('assignedUsers', assignedUsers);
-    console.log('assignedLabels', assignedLabels);
-    console.log('assignedMilestone', assignedMilestone);
-    // TODO: 데이터들을 모아서 API 요청을 여기서 하면 됨
-    // 필요한 데이터: userId(이슈 생성자), title, content, assignees(id), labels(id), millstoneId(id)
-  };
-
-  const cancelNewIssue = () => {
-    history.push('/');
-
+  const resetForm = () => {
     handleInputTitle({ target: { value: '' } });
     handleInputContent({ target: { value: '' } });
     setAssignedUsers([]);
     setAssignedLabels([]);
     setAssignedMilestone([]);
+  };
+
+  const submitNewIssue = async () => {
+    if (inputTitle.trim().length === 0) {
+      alert('제목을 입력해주세요');
+      return;
+    }
+
+    const newIssue = {
+      title: inputTitle,
+      userId: currentUser.id,
+      content: inputContent || 'No description',
+      assignees: assignedUsers.map((user) => +user.id) || [],
+      labels: assignedLabels.map((label) => +label.id) || [],
+      milestoneId: +assignedMilestone[0]?.id || null,
+    };
+
+    const result = await issueAPI.create(newIssue);
+    if (!result) return;
+
+    alert('새로운 이슈를 추가하였습니다');
+    resetForm();
+    dispatch({
+      type: 'ADD',
+      payload: {
+        ...result,
+        assignees: newIssue.assignees,
+        labels: newIssue.labels,
+        milestoneId: newIssue.milestoneId,
+      },
+    });
+    history.push('/');
+  };
+
+  const cancelNewIssue = () => {
+    resetForm();
+
+    history.push('/');
   };
 
   return (
@@ -79,6 +112,7 @@ export default function NewIssueMain() {
       </div>
       <div>
         <NewIssueSideBar
+          currentUser={currentUser}
           assignedUsers={assignedUsers}
           setAssignedUsers={setAssignedUsers}
           assignedLabels={assignedLabels}

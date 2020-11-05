@@ -5,14 +5,14 @@ import { PropTypes } from 'prop-types';
 const styles = {
   input: {
     margin: '10px',
-    fontSize: '16px',
+    fontSize: '20px',
     background: '#f6f8fa',
     border: 'none',
     boxShadow: 'inset 0 0 2px 0px #bababa',
-    height: '28px',
+    height: '35px',
     padding: '0 5px',
     borderRadius: '4px',
-    width: '400px',
+    width: '96%',
   },
 };
 
