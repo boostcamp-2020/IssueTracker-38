@@ -12,10 +12,10 @@ import NewIssueSideBar from './NewIssueSideBar';
 const styles = {
   layout: {
     display: 'flex',
+    justifyContent: 'center',
   },
   formLayout: {
-    marginTop: '20px',
-    marginLeft: '20px',
+    margin: '20px',
     display: 'flex',
     flexWrap: 'wrap',
     width: '800px',

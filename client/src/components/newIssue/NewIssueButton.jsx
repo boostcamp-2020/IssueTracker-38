@@ -3,20 +3,26 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 const styles = {
+  layout: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
   commentButton: {
+    fontSize: '16px',
     color: 'white',
-    padding: '5px 16px',
+    padding: '10px 16px',
     margin: '0 10px 10px 10px',
     borderRadius: '6px',
     border: '1px solid #e1e4e8',
     fontWeight: '600',
   },
   cancelButton: {
+    fontSize: '16px',
     backgroundColor: 'white',
-    padding: '5px 16px',
+    padding: '10px 16px',
     margin: '0 10px 10px 10px',
     borderRadius: '6px',
-    border: '1px solid #e1e4e8',
+    border: 'none',
     fontWeight: '600',
   },
 };
@@ -27,14 +33,14 @@ export default function NewIssueButton({ inputContent, onSubmit, onCancel }) {
   };
 
   return (
-    <>
+    <div css={styles.layout}>
       <button onClick={onCancel} css={styles.cancelButton} type="button">
         Cancel
       </button>
       <button onClick={onSubmit} css={{ ...styles.commentButton, ...buttonColor }} type="button">
-        Comment
+        Submit new issue
       </button>
-    </>
+    </div>
   );
 }
 
