@@ -40,24 +40,18 @@ export default function NewIssueMain() {
   const [assignedLabels, setAssignedLabels] = useState([]);
   const [assignedMilestone, setAssignedMilestone] = useState([]);
 
-  const submitNewIssue = () => {
-    console.log('inputTitle', inputTitle);
-    console.log('inputContent', inputContent);
-    console.log('assignedUsers', assignedUsers);
-    console.log('assignedLabels', assignedLabels);
-    console.log('assignedMilestone', assignedMilestone);
-    // TODO: 데이터들을 모아서 API 요청을 여기서 하면 됨
-    // 필요한 데이터: userId(이슈 생성자), title, content, assignees(id), labels(id), millstoneId(id)
-  };
-
-  const cancelNewIssue = () => {
-    history.push('/');
-
+  const resetForm = () => {
     handleInputTitle({ target: { value: '' } });
     handleInputContent({ target: { value: '' } });
     setAssignedUsers([]);
     setAssignedLabels([]);
     setAssignedMilestone([]);
+  };
+
+  const cancelNewIssue = () => {
+    resetForm();
+
+    history.push('/');
   };
 
   return (
