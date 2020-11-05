@@ -13,10 +13,10 @@ export default function NewComment({ user, issue, addComment }) {
     e?.preventDefault();
     if (newContent.length === 0) return;
 
-    const content = inputRef.current.value;
-    if (!content) return;
+    const comment = await commentAPI.create(
+      { issueId: issue.id, userId: user.id, content: newContent },
+    );
 
-    const comment = await commentAPI.create({ issueId: issue.id, userId: user.id, content });
     if (!comment) return;
     addComment(comment);
   };

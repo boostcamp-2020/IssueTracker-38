@@ -1,16 +1,15 @@
 import React, {
-  useState, useRef, useCallback, useEffect, useContext
+  useState, useRef, useCallback, useEffect, useContext,
 } from 'react';
 import { PropTypes } from 'prop-types';
 
+import { useParams } from 'react-router-dom';
 import SideBarItemTitle from './SideBarItemTitle';
 import SideBarItemDropdown from './SideBarItemDropdown';
 
-import { useParams } from 'react-router-dom';
 import { IssuesContext } from '../../stores/IssueStore';
 import { getItemById } from '../../utils/utils';
 import { issueAPI } from '../../apis/api';
-
 
 const styles = {
   layout: {
@@ -36,16 +35,16 @@ const styles = {
   },
   progress: {
     height: '10px',
-    backgroundColor: '#4CAF50'
+    backgroundColor: '#4CAF50',
   },
   bar: {
     width: '100%',
-    backgroundColor: ' #ddd'
-  }
+    backgroundColor: ' #ddd',
+  },
 };
 
 export default function SideBarItem({
-  title, defaultMessage, dropdownItems, assigned, author
+  title, defaultMessage, dropdownItems, assigned, author,
 }) {
   const [isAction, toggleAction] = useState(false);
   const dropdownRef = useRef(null);
@@ -71,7 +70,7 @@ export default function SideBarItem({
     const targetIssue = { ...getItemById(issues, +issueId) };
 
     const { assignees } = targetIssue;
-    assignees.push(id)
+    assignees.push(id);
 
     const result = await issueAPI.update({ id: issueId, assignee: { type, id } });
     if (!result) return;
@@ -82,12 +81,12 @@ export default function SideBarItem({
   const progressPercentage = (milestoneId) => {
     let closedCount = 0;
     const checkPoints = issues.filter((checkpoint) => checkpoint.milestoneId === +milestoneId);
-    checkPoints.forEach(element => {
-      if (element.isClosed === 1) closedCount = closedCount + 1
+    checkPoints.forEach((element) => {
+      if (element.isClosed === 1) closedCount += 1;
     });
 
-    return checkPoints.length ? (closedCount * 100) / checkPoints.length : 0
-  }
+    return checkPoints.length ? (closedCount * 100) / checkPoints.length : 0;
+  };
 
   return (
     <div css={styles.layout}>
@@ -100,20 +99,26 @@ export default function SideBarItem({
           items={dropdownItems}
           assigned={assigned}
           title={title}
-          dropdownRef={dropdownRef} 
-       />
+          dropdownRef={dropdownRef}
+        />
       )}
       <div>
         {!assigned || assigned.length === 0 || Object.keys(assigned[0]).length === 0
           ? title === 'Assignees'
-            ? <div css={styles.defaultMessage}>{defaultMessage}<span css={styles.selfAssignButton} onClick={assignMyself(author.id)}>assign yourself</span></div> 
+            ? (
+              <div css={styles.defaultMessage}>
+                {defaultMessage}
+                <span css={styles.selfAssignButton} onClick={assignMyself(author.id)}>assign yourself</span>
+              </div>
+            )
             : <div css={styles.defaultMessage}>{defaultMessage}</div>
-          : title === 'Milestone' ?
-            assigned.map((element) => (
+          : title === 'Milestone'
+            ? assigned.map((element) => (
               <div css={styles.item}>
                 <div css={styles.bar}>
-                  <div css={{ ...styles.progress, width: progressPercentage(element.id) + '%' }}></div>
-                </div>{element.title}
+                  <div css={{ ...styles.progress, width: `${progressPercentage(element.id)}%` }} />
+                </div>
+                {element.title}
               </div>
             ))
             : assigned.map((element) => (
@@ -131,5 +136,5 @@ SideBarItem.propTypes = {
   defaultMessage: PropTypes.string.isRequired,
   dropdownItems: PropTypes.arrayOf(PropTypes.object).isRequired,
   assigned: PropTypes.arrayOf(PropTypes.object).isRequired,
-  author: PropTypes.node.isRequired
+  author: PropTypes.node.isRequired,
 };
