@@ -4,17 +4,35 @@ import { UsersContext } from '../../stores/UserStore';
 import { AuthContext } from '../../stores/AuthStore';
 import { commentAPI } from '../../apis/api';
 import { calElapsedTime, getItemById } from '../../utils/utils';
-import CountOfCharacter from './CountOfCharacter';
+import EditComment from './EditComment';
+import commonStyles from './commonStyles';
 
 const styles = {
-  header: {
+  commentTitle: {
     display: 'flex',
+    margin: '5px 10px',
   },
-  writer: {
-    fontWeight: '800',
+  nickname: {
+    margin: 'auto 0',
+    fontWeight: '600',
   },
-  role: {
-    margin: '0 5px',
+  description: {
+    margin: 'auto 5px',
+    color: '#6a737d',
+  },
+  ownerMark: {
+    marginLeft: 'auto',
+    padding: '2px 5px',
+    color: '#6a737d',
+    border: '2px solid #e1e4e8',
+    borderRadius: '6px',
+  },
+  editButton: {
+    fontSize: '15px',
+    margin: 'auto 0 auto 10px',
+    color: '#6a737d',
+    backgroundColor: 'transparent',
+    border: 'none',
   },
 };
 
@@ -30,13 +48,9 @@ export default function Comment({
   const { currentUser } = useContext(AuthContext);
   const [editState, setEditState] = useState(false);
   const [newContent, setNewContent] = useState(content);
-  const [countOfCharacter, setCountOfCharacter] = useState(newContent.length);
-  const [recentTimeout, setRecentTimeout] = useState(-1);
-  const [displayState, setDisplayState] = useState(false);
 
   const writer = getItemById(users, +userId);
   const elapsedTime = updatedAt ? calElapsedTime(updatedAt) : calElapsedTime(createdAt);
-  const originContent = content;
   const owner = currentUser.id === userId;
 
   const markOfOwner = () => {
@@ -45,22 +59,8 @@ export default function Comment({
     return 'Member';
   };
 
-  const timeout = () => setTimeout(() => {
-    setDisplayState(false);
-  }, 2000);
-
-  const handleContent = ({ target }) => {
-    setNewContent(target.value);
-    setCountOfCharacter(target.value.length);
-    setDisplayState(true);
-    if (recentTimeout > 0) clearTimeout(recentTimeout);
-    setRecentTimeout(timeout());
-  };
-
   const onClick = () => {
     setEditState(!editState);
-    setNewContent(originContent);
-    setCountOfCharacter(originContent.length);
   };
 
   const updateComment = async () => {
@@ -76,48 +76,42 @@ export default function Comment({
     <>
       {editState
         ? (
-          <div>
-            <div>
-              <div>Write</div>
-            </div>
-            <div>
-              <textarea value={newContent} onChange={handleContent} />
-              <div>Attach files by checking here.</div>
-              <CountOfCharacter displayState={displayState} count={countOfCharacter} />
-            </div>
-            <div>
-              <button type="button" onClick={onClick}>Cancel</button>
-              <button type="button" onClick={updateComment}>Update Comment</button>
-            </div>
-          </div>
+          <EditComment newContent={newContent} setNewContent={setNewContent}>
+            <button css={commonStyles.basicButton} type="button" onClick={onClick}>Cancel</button>
+            <button css={commonStyles.commentButton} type="button" onClick={updateComment}>Update Comment</button>
+          </EditComment>
         )
         : (
-          <div>
-            <div css={styles.header}>
-              <div>
-                Profile Image
-              </div>
-              <div css={styles.writer}>
-                {writer?.email}
-                {' '}
-              </div>
-              <div>
-                commented
-                {' '}
-                {elapsedTime}
-                {' '}
-                ago
-                {' '}
-              </div>
-              <div css={styles.role}>
-                {markOfOwner()}
-              </div>
-              {owner
-                ? (<button type="button" onClick={onClick}>Edit</button>)
-                : (<></>)}
+          <div css={commonStyles.body}>
+            <div css={commonStyles.profile}>
+              &nbsp;
             </div>
-            <div>
-              <div>{content}</div>
+            <div css={commonStyles.layout}>
+              <div css={{ ...commonStyles.title, backgroundColor: owner ? '#f1f8ff' : '#f6f8fa' }}>
+                <div css={styles.commentTitle}>
+                  <div css={styles.nickname}>
+                    {writer?.email}
+                    {' '}
+                  </div>
+                  <div css={styles.description}>
+                    commented
+                    {' '}
+                    {elapsedTime}
+                    {' '}
+                    ago
+                    {' '}
+                  </div>
+                  <div css={styles.ownerMark}>
+                    {markOfOwner()}
+                  </div>
+                  {owner
+                    ? (<button css={styles.editButton} type="button" onClick={onClick}>Edit</button>)
+                    : (<></>)}
+                </div>
+              </div>
+              <div css={commonStyles.contentWrapper}>
+                <div css={commonStyles.content}>{content}</div>
+              </div>
             </div>
           </div>
         )}

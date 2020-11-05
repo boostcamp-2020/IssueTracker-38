@@ -11,8 +11,14 @@ import { getItemById } from '../../utils/utils';
 
 const styles = {
   body: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: '1200px',
+    boxSizing: 'border-box',
+    margin: '0 auto',
   },
   main: {
+    width: '1200px',
     display: 'flex',
   },
 };
@@ -43,7 +49,6 @@ export default function DetailMain() {
         </div>
         <SideBar />
       </div>
-
     </div>
   );
 }
