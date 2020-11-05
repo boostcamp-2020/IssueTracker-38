@@ -10,6 +10,14 @@ import { getNicknameByEmail } from '../../utils/utils';
 
 import NewIssueSideBarItem from './NewIssueSideBarItem';
 
+const styles = {
+  wrapper: {
+    margin: '20px',
+    fontSize: '12px',
+    fontWeight: '600',
+  },
+};
+
 export default function NewIssueSideBar({
   assignedUsers,
   setAssignedUsers,
@@ -29,7 +37,7 @@ export default function NewIssueSideBar({
   const temptAuthor = { id: 9999, name: 'tester' };
 
   return (
-    <div>
+    <div css={styles.wrapper}>
       <NewIssueSideBarItem
         title="Assignees"
         dropdownItems={users.map((user) => ({ ...user, itemName: getNicknameByEmail(user.email) }))}

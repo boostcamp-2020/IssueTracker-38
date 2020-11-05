@@ -7,7 +7,8 @@ import { IssuesContext } from '../../stores/IssueStore';
 const styles = {
   item: {
     width: 'max-content',
-    padding: '5px',
+    padding: '2px 10px',
+    margin: '5px 5px 0 0',
     boxSizing: 'border-box',
     borderRadius: '15px',
   },
@@ -15,9 +16,9 @@ const styles = {
     height: '10px',
     backgroundColor: '#4CAF50',
   },
-  myBar: {
+  bar: {
     width: '100%',
-    backgroundColor: '#ddd',
+    backgroundColor: ' #ddd',
   },
 };
 
@@ -35,7 +36,7 @@ export default function MilestoneProgressBar({ assignedMilestone }) {
 
   return (
     <div css={styles.item}>
-      <div css={styles.myBar}>
+      <div css={styles.bar}>
         <div css={{ ...styles.myProgress, width: `${progressPercentage(assignedMilestone.id)}%` }} />
       </div>
       {assignedMilestone.name}

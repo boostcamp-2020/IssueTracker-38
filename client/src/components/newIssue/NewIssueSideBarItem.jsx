@@ -12,12 +12,17 @@ import NewIssueSideBarAssignedDropdown from './NewIssueSideBarAssignedDropdown';
 const styles = {
   layout: {
     width: '300px',
-    border: '1px solid',
+    borderBottom: '1px solid #eaecef',
+    padding: '10px 0',
   },
   self: {
     '&:hover': {
       color: 'blue',
     },
+  },
+  defaultMessage: {
+    color: '#586069',
+    fontWeight: '100',
   },
 };
 
@@ -32,9 +37,9 @@ export default function NewIssueSideBarItem({
   };
 
   const defaultMessageMap = {
-    Assignees: <button type="button" css={styles.self} onClick={assignMyself}>No one - assign yourself</button>,
-    Labels: 'None yet',
-    Milestone: 'No Milestone',
+    Assignees: <div css={styles.defaultMessage}><span css={styles.self} onClick={assignMyself}>No one - assign yourself</span></div>,
+    Labels: <div css={styles.defaultMessage}>None yet</div>,
+    Milestone: <div css={styles.defaultMessage}>No Milestone</div>,
   };
 
   const assignedDropdownMap = {
