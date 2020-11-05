@@ -105,12 +105,12 @@ module.exports = {
       );
 
       if (labels) {
-        const arrLabel = JSON.parse(labels).map((LabelId) => ({ IssueId, LabelId }));
+        const arrLabel = labels.map((LabelId) => ({ IssueId, LabelId }));
         await IssueLabel.bulkCreate(arrLabel, { transaction });
       }
 
       if (assignees) {
-        const arrAssignee = JSON.parse(assignees).map((UserId) => ({ IssueId, UserId }));
+        const arrAssignee = assignees.map((UserId) => ({ IssueId, UserId }));
         await IssueAssignee.bulkCreate(arrAssignee, { transaction });
       }
 
