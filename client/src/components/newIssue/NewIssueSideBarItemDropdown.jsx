@@ -40,7 +40,7 @@ const styles = {
 };
 
 export default function NewIssueSideBarItemDropdown({
-  items, assigned, setAssigned, title,
+  items, assigned, setAssigned, title, dropdownRef,
 }) {
   const { labels } = useContext(LabelsContext);
   const { users } = useContext(UsersContext);
@@ -99,7 +99,7 @@ export default function NewIssueSideBarItemDropdown({
   };
 
   return (
-    <div css={styles.layout}>
+    <div css={styles.layout} ref={dropdownRef}>
       <div css={styles.haedMessage}>
         {getHeadMessage()}
       </div>
@@ -130,4 +130,5 @@ NewIssueSideBarItemDropdown.propTypes = {
   assigned: PropTypes.arrayOf(PropTypes.object).isRequired,
   setAssigned: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
+  dropdownRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape]).isRequired,
 };

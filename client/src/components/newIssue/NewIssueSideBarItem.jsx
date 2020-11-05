@@ -1,5 +1,6 @@
-import React from 'react';
-
+import React, {
+  useRef, useCallback, useEffect,
+} from 'react';
 import { PropTypes } from 'prop-types';
 
 import { useSwitch } from '../../hooks/hooks';
@@ -30,6 +31,17 @@ export default function NewIssueSideBarItem({
   title, dropdownItems, assigned, setAssigned, author,
 }) {
   const [isDropdownOn, switchDropdownState] = useSwitch(false);
+  const dropdownRef = useRef(null);
+
+  const pageClickEvent = useCallback(({ target }) => {
+    const { current } = dropdownRef;
+    if (current && !current.contains(target)) switchDropdownState(!isDropdownOn);
+  }, [isDropdownOn]);
+
+  useEffect(() => {
+    if (isDropdownOn) window.addEventListener('click', pageClickEvent);
+    return () => window.removeEventListener('click', pageClickEvent);
+  }, [isDropdownOn]);
 
   const assignMyself = () => {
     const { id, name } = author;
@@ -60,6 +72,7 @@ export default function NewIssueSideBarItem({
         assigned={assigned}
         setAssigned={setAssigned}
         title={title}
+        dropdownRef={dropdownRef}
       />
       )}
       <div>
