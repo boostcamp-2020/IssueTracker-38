@@ -1,9 +1,10 @@
 import React, {
-  useState, useEffect, useRef, useCallback,
+  useState, useEffect, useRef, useCallback, useContext,
 } from 'react';
 import { PropTypes } from 'prop-types';
+import { IssuesContext } from '../../stores/IssueStore';
 
-import { issueAPI } from '../apis/api';
+import { issueAPI } from '../../apis/api';
 
 const styles = {
   dropDown: {
@@ -54,11 +55,14 @@ const styles = {
 export default function MarkAsDropdown({ selections }) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
+  const { dispatch } = useContext(IssuesContext);
 
   const onClick = () => setIsActive(!isActive);
 
   const handleMarkAsAction = (isClosed) => async () => {
-    await issueAPI.markAll(isClosed, selections);
+    const result = await issueAPI.markAll(isClosed, selections);
+    if (!result) return;
+    selections.forEach((issueId) => dispatch({ type: 'UPDATE', payload: { id: issueId, isClosed } }));
   };
 
   const pageClickEvent = useCallback(({ target }) => {

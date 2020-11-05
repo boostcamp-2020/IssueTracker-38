@@ -26,7 +26,7 @@ export const issueAPI = {
     const url = `${baseURL}/issue`;
     const request = {
       method: 'PATCH',
-      headers: { 
+      headers: {
         Authorization: 'Bearer ~',
         'Content-Type': 'application/json',
       },
@@ -44,6 +44,19 @@ export const issueAPI = {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ isClosed, issueIds }),
+    };
+    const result = await customFetch(url, request);
+    return result;
+  },
+  async create(newIssue) {
+    const url = `${baseURL}/issue`;
+    const request = {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ~',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newIssue),
     };
     const result = await customFetch(url, request);
     return result;
@@ -79,7 +92,7 @@ export const userAPI = {
     const url = `${baseURL}/user`;
     const request = {
       method: 'GET',
-      headers: { Authorization: 'Bearer ~', 'Content-Type': 'application/json', },
+      headers: { Authorization: 'Bearer ~' },
     };
     const users = await customFetch(url, request);
     return users;
@@ -91,7 +104,10 @@ export const commentAPI = {
     const url = `${baseURL}/comment`;
     const request = {
       method: 'POST',
-      headers: { Authorization: 'Bearer ~' },
+      headers: {
+        Authorization: 'Bearer ~',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(data),
     };
     const result = await customFetch(url, request);
@@ -105,5 +121,18 @@ export const commentAPI = {
     };
     const comments = await customFetch(url, request);
     return comments;
+  },
+  async update(data) {
+    const url = `${baseURL}/comment`;
+    const request = {
+      method: 'PATCH',
+      headers: {
+        Authorization: 'Bearer ~',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+    const result = await customFetch(url, request);
+    return result;
   },
 };
