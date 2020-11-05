@@ -10,7 +10,7 @@ import {
 import StoreWrapper from './stores/StoreWrapper';
 
 import Header from './components/Header';
-import DetailMain from './components/issueDetail/DetailMain';
+import DetailMain from './components/issueDetail/IssueDetailPage';
 import IssueMain from './components/issueList/IssueMain';
 import IssueSearchBar from './components/issueList/IssueSearchBar';
 import NewIssueMain from './components/newIssue/NewIssueMain';

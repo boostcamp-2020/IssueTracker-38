@@ -1,14 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { AuthContext } from '../../stores/AuthStore';
-import { IssuesContext } from '../../stores/IssueStore';
+import { AuthContext } from '../../../stores/AuthStore';
+import { IssuesContext } from '../../../stores/IssueStore';
 import DetailTitle from './DetailTitle';
 import NewComment from './NewComment';
-import CommentList from './CommentList';
+import CommentList from '../presentational/CommentList';
 import SideBar from './SideBar';
-import { getItemById, updateStoreItem } from '../../utils/utils';
-import { commentAPI } from '../../apis/api';
+import { getItemById, updateStoreItem } from '../../../utils/utils';
+import { commentAPI } from '../../../apis/api';
 
 const styles = {
   body: {
@@ -54,6 +54,7 @@ export default function DetailMain() {
     <div css={styles.body}>
       <DetailTitle
         issue={issue}
+        countOfComments={comments.length}
       />
       <div css={styles.main}>
         <div>

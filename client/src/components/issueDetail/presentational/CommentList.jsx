@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import Comment from './Comment';
+import Comment from '../container/Comment';
 
 export default function CommentList({ issueAuthorId, comments, updateComment }) {
   return (
