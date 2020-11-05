@@ -73,8 +73,15 @@ export default function NewIssueMain() {
 
     alert('새로운 이슈를 추가하였습니다');
     resetForm();
-    // TODO: 서버쪽 로직 구현 뒤 주석 해제
-    // dispatch({ type: 'ADD', payload: result });
+    dispatch({
+      type: 'ADD',
+      payload: {
+        ...result,
+        assignees: newIssue.assignees,
+        labels: newIssue.labels,
+        milestoneId: newIssue.milestoneId,
+      },
+    });
     history.push('/');
   };
 

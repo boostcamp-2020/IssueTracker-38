@@ -115,11 +115,11 @@ module.exports = {
       }
 
       await transaction.commit();
+
+      res.status(200).json(createdIssue);
     } catch (err) {
       await transaction.rollback();
       throw new Error(err);
     }
-
-    res.status(200).json({ message: '추가 되었습니다.' });
   },
 };
