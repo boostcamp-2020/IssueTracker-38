@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 
 import { useParams } from 'react-router-dom';
 
-import { UsersContext } from '../../stores/UserStore';
-import { IssuesContext } from '../../stores/IssueStore';
-import { LabelsContext } from '../../stores/LabelStore';
-import { MilestoneContext } from '../../stores/MilestoneStore';
+import { UsersContext } from '../../../stores/UserStore';
+import { IssuesContext } from '../../../stores/IssueStore';
+import { LabelsContext } from '../../../stores/LabelStore';
+import { MilestoneContext } from '../../../stores/MilestoneStore';
 
-import { getNicknameByEmail, getItemById } from '../../utils/utils';
+import { getNicknameByEmail, getItemById } from '../../../utils/utils';
 
 import SideBarItem from './SideBarItem';
 
@@ -45,8 +45,8 @@ export default function SideBar() {
   return (
     <div css={styles.wrapper}>
       <SideBarItem
-        title='Assignees'
-        defaultMessage='No one--'
+        title="Assignees"
+        defaultMessage="No one--"
         dropdownItems={users.map(({ id, email }) => ({ id, itemName: getNicknameByEmail(email) }))}
         assigned={assignedUsers}
         author={author}
@@ -59,8 +59,8 @@ export default function SideBar() {
         author={author}
       />
       <SideBarItem
-        title='Milestone'
-        defaultMessage='No milestone'
+        title="Milestone"
+        defaultMessage="No milestone"
         dropdownItems={milestones.map(({ id, title }) => ({ id, itemName: title }))}
         assigned={assignedMilestone}
         author={author}

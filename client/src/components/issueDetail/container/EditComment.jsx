@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
-import commonStyles from './commonStyles';
-import CountOfCharacter from './CountOfCharacter';
+import CountOfCharacter from '../presentational/CountOfCharacter';
+import CommentLayout from '../presentational/CommentLayout';
+import CommentTitleWrapper from '../presentational/CommentTitleWrapper';
+import CommentContentWrapper from '../presentational/CommentContentWrapper';
 
 const styles = {
   editTitle: {
@@ -47,22 +49,17 @@ export default function EditComment({ children, newContent, setNewContent }) {
   };
 
   return (
-    <div css={commonStyles.body}>
-      <div css={commonStyles.profile}>
-        &nbsp;
-      </div>
-      <div css={commonStyles.layout}>
-        <div css={commonStyles.title}>
-          <p css={styles.editTitle}>Write</p>
-        </div>
-        <div css={{ ...commonStyles.contentWrapper, position: 'relative' }}>
-          <textarea css={styles.textInput} value={newContent} placeholder="Leave a Comment" onChange={handleContent} />
-          {/* <div>Attach files by checking here.</div> */}
-          <CountOfCharacter displayState={displayState} count={countOfCharacter} />
-          {children}
-        </div>
-      </div>
-    </div>
+    <CommentLayout>
+      <CommentTitleWrapper>
+        <p css={styles.editTitle}>Write</p>
+      </CommentTitleWrapper>
+      <CommentContentWrapper>
+        <textarea css={styles.textInput} value={newContent} placeholder="Leave a Comment" onChange={handleContent} />
+        {/* <div>Attach files by checking here.</div> */}
+        <CountOfCharacter displayState={displayState} count={countOfCharacter} />
+        {children}
+      </CommentContentWrapper>
+    </CommentLayout>
   );
 }
 

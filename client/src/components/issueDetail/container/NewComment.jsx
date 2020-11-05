@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { PropTypes } from 'prop-types';
-import { issueAPI, commentAPI } from '../../apis/api';
-import { IssuesContext } from '../../stores/IssueStore';
+import { issueAPI, commentAPI } from '../../../apis/api';
+import { IssuesContext } from '../../../stores/IssueStore';
 import EditComment from './EditComment';
-import commonStyles from './commonStyles';
+import DefaultButton from '../presentational/DefaultButton';
+import SubmitButton from '../presentational/SubmitButton';
 
 export default function NewComment({ user, issue, addComment }) {
   const { dispatch } = useContext(IssuesContext);
@@ -12,6 +13,7 @@ export default function NewComment({ user, issue, addComment }) {
   const createComment = async (e) => {
     e?.preventDefault();
     if (newContent.length === 0) return;
+    setNewContent('');
 
     const comment = await commentAPI.create(
       { issueId: issue.id, userId: user.id, content: newContent },
@@ -34,12 +36,8 @@ export default function NewComment({ user, issue, addComment }) {
 
   return (
     <EditComment newContent={newContent} setNewContent={setNewContent}>
-      <button css={commonStyles.basicButton} type="submit" onClick={changeIssueStatus}>
-        {issue?.isClosed ? 'Reopen issue' : 'Close issue'}
-      </button>
-      <button css={{ ...commonStyles.commentButton, backgroundColor: newContent.length === 0 ? '#94d3a2' : '#2ea44f' }} type="submit" onClick={createComment}>
-        Comment
-      </button>
+      <DefaultButton text={issue?.isClosed ? 'Reopen issue' : 'Close issue'} onClick={changeIssueStatus} />
+      <SubmitButton text="Comment" onClick={createComment} isActive={newContent.length !== 0} />
     </EditComment>
   );
 }
