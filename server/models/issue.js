@@ -12,10 +12,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(50),
         allowNull: false,
       },
-      content: {
-        type: DataTypes.STRING(500),
-        allowNull: false,
-      },
       isClosed: {
         type: DataTypes.BOOLEAN,
         allowNull: false,

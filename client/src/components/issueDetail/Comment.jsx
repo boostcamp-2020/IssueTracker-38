@@ -77,7 +77,7 @@ export default function Comment({
         ? (
           <EditComment newContent={newContent} setNewContent={setNewContent}>
             <button css={commonStyles.basicButton} type="button" onClick={onClick}>Cancel</button>
-            <button css={commonStyles.commentButton} type="button" onClick={updateComment}>Update Comment</button>
+            <button css={commonStyles.commentButton} type="button" onClick={triggerUpdate}>Update Comment</button>
           </EditComment>
         )
         : (

@@ -7,16 +7,16 @@ import commonStyles from './commonStyles';
 
 export default function NewComment({ user, issue, addComment }) {
   const { dispatch } = useContext(IssuesContext);
-  const [newContent, setNewContent] = useState();
+  const [newContent, setNewContent] = useState('');
 
   const createComment = async (e) => {
     e?.preventDefault();
-    if (!newContent || newContent.length === 0) return;
+    if (newContent.length === 0) return;
 
-    const content = inputRef.current.value;
-    if (!content) return;
+    const comment = await commentAPI.create(
+      { issueId: issue.id, userId: user.id, content: newContent },
+    );
 
-    const comment = await commentAPI.create({ issueId: issue.id, userId: user.id, content });
     if (!comment) return;
     addComment(comment);
   };
@@ -37,7 +37,7 @@ export default function NewComment({ user, issue, addComment }) {
       <button css={commonStyles.basicButton} type="submit" onClick={changeIssueStatus}>
         {issue?.isClosed ? 'Reopen issue' : 'Close issue'}
       </button>
-      <button css={commonStyles.commentButton} type="submit" onClick={createComment}>
+      <button css={{ ...commonStyles.commentButton, backgroundColor: newContent.length === 0 ? '#94d3a2' : '#2ea44f' }} type="submit" onClick={createComment}>
         Comment
       </button>
     </EditComment>

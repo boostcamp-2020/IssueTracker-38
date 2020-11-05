@@ -42,7 +42,7 @@ export default {
     },
   },
   commentButton: {
-    backgroundColor: '#2ea44f', // #94d3a2
+    backgroundColor: '#2ea44f',
     color: 'white',
     padding: '5px 16px',
     margin: '0 10px 10px 10px',
