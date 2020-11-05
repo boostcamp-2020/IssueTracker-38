@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useInput } from '../../hooks/hooks';
 
+import { AuthContext } from '../../stores/AuthStore';
 import NewIssueTitle from './NewIssueTitle';
 import NewIssueComment from './NewIssueComment';
 import NewIssueButton from './NewIssueButton';
@@ -30,6 +31,7 @@ const styles = {
 
 export default function NewIssueMain() {
   const history = useHistory();
+  const { currentUser } = useContext(AuthContext);
 
   const [inputTitle, handleInputTitle] = useInput('');
   const [inputContent, handleInputContent] = useInput('');
@@ -79,6 +81,7 @@ export default function NewIssueMain() {
       </div>
       <div>
         <NewIssueSideBar
+          currentUser={currentUser}
           assignedUsers={assignedUsers}
           setAssignedUsers={setAssignedUsers}
           assignedLabels={assignedLabels}
