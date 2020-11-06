@@ -59,7 +59,7 @@ export default function Issue({
   const { labels: allLabels } = useContext(LabelsContext);
 
   const userEmail = getItemById(users, +userId)?.email;
-  const author = getNicknameByEmail(userEmail);
+  const author = getNicknameByEmail(userEmail || '@');
   const milestoneTitle = getItemById(milestones, +milestoneId)?.title;
 
   return (
