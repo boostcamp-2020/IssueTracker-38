@@ -54,7 +54,7 @@ export default function DetailMain() {
     <div css={styles.body}>
       <DetailTitle
         issue={issue}
-        countOfComments={comments.length}
+        countOfComments={comments.length - 1}
       />
       <div css={styles.main}>
         <div>
