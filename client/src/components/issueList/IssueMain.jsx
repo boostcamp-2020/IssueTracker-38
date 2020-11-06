@@ -4,6 +4,7 @@ import { IssuesContext } from '../../stores/IssueStore';
 import { LabelsContext } from '../../stores/LabelStore';
 import { MilestoneContext } from '../../stores/MilestoneStore';
 import { UsersContext } from '../../stores/UserStore';
+import IssueSearchBar from './IssueSearchBar';
 import TotalCheckBox from './TotalCheckBox';
 import Issues from './Issues';
 import Dropdown from './Dropdown';
@@ -61,33 +62,36 @@ export default function IssueMain() {
   };
 
   return (
-    <div css={styles.body}>
-      <div css={styles.layout}>
-        <TotalCheckBox
+    <>
+      <IssueSearchBar countOfLabels={labels.length} countOfMilestones={milestones.length} />
+      <div css={styles.body}>
+        <div css={styles.layout}>
+          <TotalCheckBox
+            selections={selections}
+            selectionSwitch={selectionSwitch}
+            handleCheckboxSwitch={handleCheckboxSwitch}
+          />
+          {selections.length > 0
+            ? (
+              <div css={styles.dropdowns}>
+                <MarkAsDropdown selections={selections} />
+              </div>
+            )
+            : (
+              <div css={styles.dropdowns}>
+                <Dropdown title="Author" items={users.map((user) => ({ ...user, value: user.email }))} />
+                <Dropdown title="Label" items={labels.map((label) => ({ ...label, value: label.name }))} />
+                <Dropdown title="Milestone" items={milestones.map((milestone) => ({ ...milestone, value: milestone.title }))} />
+                <Dropdown title="Asignee" items={users.map((user) => ({ ...user, value: user.email }))} />
+              </div>
+            )}
+        </div>
+        <Issues
+          issues={issues}
+          handleCheckboxClick={handleCheckboxClick}
           selections={selections}
-          selectionSwitch={selectionSwitch}
-          handleCheckboxSwitch={handleCheckboxSwitch}
         />
-        {selections.length > 0
-          ? (
-            <div css={styles.dropdowns}>
-              <MarkAsDropdown selections={selections} />
-            </div>
-          )
-          : (
-            <div css={styles.dropdowns}>
-              <Dropdown title="Author" items={users.map((user) => ({ ...user, value: user.email }))} />
-              <Dropdown title="Label" items={labels.map((label) => ({ ...label, value: label.name }))} />
-              <Dropdown title="Milestone" items={milestones.map((milestone) => ({ ...milestone, value: milestone.title }))} />
-              <Dropdown title="Asignee" items={users.map((user) => ({ ...user, value: user.email }))} />
-            </div>
-          )}
       </div>
-      <Issues
-        issues={issues}
-        handleCheckboxClick={handleCheckboxClick}
-        selections={selections}
-      />
-    </div>
+    </>
   );
 }

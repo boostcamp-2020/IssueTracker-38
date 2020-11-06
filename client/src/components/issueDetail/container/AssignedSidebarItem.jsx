@@ -44,7 +44,7 @@ export default function AssignedSidebarItem({
   return (
     title === 'Milestone'
       ? assigned.map((element) => (
-        <div css={styles.item}>
+        <div css={{ ...styles.item, width: '200px' }}>
           <div css={styles.bar}>
             <div css={{ ...styles.progress, width: `${progressPercentage(element.id)}%` }} />
           </div>

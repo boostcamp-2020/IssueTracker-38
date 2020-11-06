@@ -6,7 +6,7 @@ import { IssuesContext } from '../../stores/IssueStore';
 
 const styles = {
   item: {
-    width: 'max-content',
+    width: '200px',
     padding: '2px 10px',
     margin: '5px 5px 0 0',
     boxSizing: 'border-box',
