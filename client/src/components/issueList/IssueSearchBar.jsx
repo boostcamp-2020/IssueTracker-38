@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { PropTypes } from 'prop-types';
 import FilterButton from './FilterButton';
 import NewIssue from './NewIssueButton';
 import Search from './Search';
@@ -34,7 +34,7 @@ const styles = {
   },
 };
 
-export default function IssueSearchBar() {
+export default function IssueSearchBar({ countOfLabels, countOfMilestones }) {
   return (
     <div css={styles.layout}>
       <div css={styles.searchBar}>
@@ -44,13 +44,13 @@ export default function IssueSearchBar() {
       <div css={styles.buttonGroup}>
         <GroupButton
           title="Labels"
-          countOfGroup={4}
+          countOfGroup={countOfLabels}
           emotion={styles.labelButton}
           svgPathD={labelIcon}
         />
         <GroupButton
           title="Milestones"
-          countOfGroup={4}
+          countOfGroup={countOfMilestones}
           emotion={styles.milestoneButton}
           svgPathD={milestoneIcon}
         />
@@ -59,3 +59,8 @@ export default function IssueSearchBar() {
     </div>
   );
 }
+
+IssueSearchBar.propTypes = {
+  countOfLabels: PropTypes.number.isRequired,
+  countOfMilestones: PropTypes.number.isRequired,
+};

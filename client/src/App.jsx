@@ -12,7 +12,6 @@ import StoreWrapper from './stores/StoreWrapper';
 import Header from './components/Header';
 import DetailMain from './components/issueDetail/IssueDetailPage';
 import IssueMain from './components/issueList/IssueMain';
-import IssueSearchBar from './components/issueList/IssueSearchBar';
 import NewIssueMain from './components/newIssue/NewIssueMain';
 
 export default function App() {
@@ -23,7 +22,6 @@ export default function App() {
           <Switch>
             <Route exact path="/">
               <Header />
-              <IssueSearchBar />
               <IssueMain />
             </Route>
             <Route path="/new-issue">

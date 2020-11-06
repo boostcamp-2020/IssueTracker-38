@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { UsersContext } from '../../stores/UserStore';
 import { MilestoneContext } from '../../stores/MilestoneStore';
 import { LabelsContext } from '../../stores/LabelStore';
-import { calElapsedTime, getItemById } from '../../utils/utils';
+import { calElapsedTime, getItemById, getNicknameByEmail } from '../../utils/utils';
 import { openedIcon, closedIcon, milestoneIcon } from '../../icons/icons';
 
 const styles = {
@@ -59,6 +59,7 @@ export default function Issue({
   const { labels: allLabels } = useContext(LabelsContext);
 
   const userEmail = getItemById(users, +userId)?.email;
+  const author = getNicknameByEmail(userEmail);
   const milestoneTitle = getItemById(milestones, +milestoneId)?.title;
 
   return (
@@ -104,7 +105,7 @@ export default function Issue({
         <div css={styles.detail}>
           by
           {' '}
-          {userEmail}
+          {author}
         </div>
         <svg
           css={styles.milestoneIcon}

@@ -21,7 +21,7 @@ export default function IssueStore({ children }) {
   const [issues, dispatch] = useReducer(issueReducer, []);
   const setInitState = async () => {
     const initState = await issueAPI.readAll();
-    dispatch({ type: 'INIT', payload: initState });
+    dispatch({ type: 'INIT', payload: initState.reverse() });
   };
   useEffect(() => {
     setInitState();

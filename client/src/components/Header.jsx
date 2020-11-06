@@ -13,13 +13,14 @@ const styles = {
     color: 'white',
     fontSize: '25px',
     fontWeight: 'bold',
+    textDecoration: 'none',
   },
 };
 
 export default function header() {
   return (
     <header css={styles.header}>
-      <p css={styles.title}>ISSUES</p>
+      <a css={styles.title} href="/">ISSUES</a>
     </header>
   );
 }
