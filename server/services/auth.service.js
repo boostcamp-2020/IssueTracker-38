@@ -1,4 +1,6 @@
 const axios = require('axios');
+const { User } = require('../models').models;
+
 module.exports = {
   async token(req, res) {
     const { code } = req.body;
@@ -17,5 +19,11 @@ module.exports = {
       },
     });
 
+    const { login: nickname } = userData;
+    const { dataValues: user } = await User.findOne({ where: { nickname } });
+    if (!user) return res.status(200).send({ accessToken, ...user.dataValues });
+
+    const { dataValues: newUser } = await User.create({ nickname });
+    return res.status(200).send({ accessToken, ...newUser });
   },
 };
