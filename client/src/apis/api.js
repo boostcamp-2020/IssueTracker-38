@@ -136,3 +136,16 @@ export const commentAPI = {
     return result;
   },
 };
+
+export const oauthAPI = {
+  async getAccessToken(code) {
+    const url = `${baseURL}/auth`;
+    const request = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
+    };
+    const result = await customFetch(url, request);
+    return result;
+  },
+};
