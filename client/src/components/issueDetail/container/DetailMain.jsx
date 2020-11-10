@@ -8,7 +8,7 @@ import CommentList from '../presentational/CommentList';
 import SideBar from './SideBar';
 import { getItemById, updateStoreItem } from '../../../utils/utils';
 import { commentAPI } from '../../../apis/api';
-import { DetailMainWrapper, DetailContentWrapper } from '../layouts/DetailMainLayout';
+import { DetailMainWrapper, DetailContentWrapper } from '../layouts/DetailMainWrapper';
 
 export default function DetailMain() {
   const currentUser = JSON.parse(localStorage.getItem('userInfo'));

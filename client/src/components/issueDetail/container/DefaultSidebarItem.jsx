@@ -6,7 +6,7 @@ import { IssuesContext } from '../../../stores/IssueStore';
 import { getItemById } from '../../../utils/utils';
 import { issueAPI } from '../../../apis/api';
 import SelfAssignButton from '../presentational/SelfAssignButton';
-import DefaultMessageWrapper from '../layouts/DefaultSidebarItemLayout';
+import DefaultMessageWrapper from '../layouts/DefaultSidebarItemWrapper';
 
 export default function DefaultSidebarItem({
   title, author, defaultMessage,
