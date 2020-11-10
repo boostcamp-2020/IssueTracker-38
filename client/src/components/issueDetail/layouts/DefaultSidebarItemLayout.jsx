@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
-const DefaultMessageLayout = styled.div`
+const DefaultMessageWrapper = styled.div`
 color: #586069;
 font-weight: 100;
 `;
 
-export default DefaultMessageLayout;
+export default DefaultMessageWrapper;

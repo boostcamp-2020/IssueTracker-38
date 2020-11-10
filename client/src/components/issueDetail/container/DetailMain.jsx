@@ -8,7 +8,7 @@ import CommentList from '../presentational/CommentList';
 import SideBar from './SideBar';
 import { getItemById, updateStoreItem } from '../../../utils/utils';
 import { commentAPI } from '../../../apis/api';
-import { WrapperLayout, ContentLayout } from '../layouts/DetailMainLayout';
+import { DetailMainWrapper, DetailContentWrapper } from '../layouts/DetailMainLayout';
 
 export default function DetailMain() {
   const currentUser = JSON.parse(localStorage.getItem('userInfo'));
@@ -37,12 +37,12 @@ export default function DetailMain() {
   };
 
   return (
-    <WrapperLayout>
+    <DetailMainWrapper>
       <DetailTitle
         issue={issue}
         countOfComments={comments.length - 1}
       />
-      <ContentLayout>
+      <DetailContentWrapper>
         <div>
           <CommentList
             issueAuthorId={issue?.userId}
@@ -56,7 +56,7 @@ export default function DetailMain() {
           />
         </div>
         <SideBar />
-      </ContentLayout>
-    </WrapperLayout>
+      </DetailContentWrapper>
+    </DetailMainWrapper>
   );
 }

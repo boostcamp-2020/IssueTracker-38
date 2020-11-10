@@ -6,7 +6,7 @@ import { IssuesContext } from '../../../stores/IssueStore';
 import { getItemById } from '../../../utils/utils';
 import { issueAPI } from '../../../apis/api';
 import SelfAssignButton from '../presentational/SelfAssignButton';
-import DefaultMessageLayout from '../layouts/DefaultSidebarItemLayout';
+import DefaultMessageWrapper from '../layouts/DefaultSidebarItemLayout';
 
 export default function DefaultSidebarItem({
   title, author, defaultMessage,
@@ -30,12 +30,12 @@ export default function DefaultSidebarItem({
     <div>
       {title === 'Assignees'
         ? (
-          <DefaultMessageLayout>
+          <DefaultMessageWrapper>
             {defaultMessage}
             <SelfAssignButton onClick={assignMyself(author.id)} />
-          </DefaultMessageLayout>
+          </DefaultMessageWrapper>
         )
-        : <DefaultMessageLayout>{defaultMessage}</DefaultMessageLayout>}
+        : <DefaultMessageWrapper>{defaultMessage}</DefaultMessageWrapper>}
 
     </div>
   );
