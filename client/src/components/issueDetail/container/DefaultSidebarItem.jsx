@@ -1,25 +1,12 @@
 import { React, useContext } from 'react';
 import { PropTypes } from 'prop-types';
 import { useParams } from 'react-router-dom';
+
 import { IssuesContext } from '../../../stores/IssueStore';
 import { getItemById } from '../../../utils/utils';
 import { issueAPI } from '../../../apis/api';
-import TextButton from '../presentational/TextButton';
-
-const styles = {
-  defaultMessage: {
-    color: '#586069',
-    fontWeight: '100',
-  },
-  selfAssignButton: {
-    marginLeft: '0',
-    fontSize: '12px',
-    cursor: 'pointer',
-    '&:hover': {
-      color: 'blue',
-    },
-  },
-};
+import SelfAssignButton from '../presentational/SelfAssignButton';
+import DefaultMessageLayout from '../layouts/DefaultSidebarItemLayout';
 
 export default function DefaultSidebarItem({
   title, author, defaultMessage,
@@ -43,16 +30,12 @@ export default function DefaultSidebarItem({
     <div>
       {title === 'Assignees'
         ? (
-          <div css={styles.defaultMessage}>
+          <DefaultMessageLayout>
             {defaultMessage}
-            <TextButton
-              text="assign yourself"
-              extraStyle={styles.selfAssignButton}
-              onClick={assignMyself(author.id)}
-            />
-          </div>
+            <SelfAssignButton onClick={assignMyself(author.id)} />
+          </DefaultMessageLayout>
         )
-        : <div css={styles.defaultMessage}>{defaultMessage}</div>}
+        : <DefaultMessageLayout>{defaultMessage}</DefaultMessageLayout>}
 
     </div>
   );
