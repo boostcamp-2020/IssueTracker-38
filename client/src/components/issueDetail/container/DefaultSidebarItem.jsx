@@ -14,6 +14,7 @@ const styles = {
   selfAssignButton: {
     marginLeft: '0',
     fontSize: '12px',
+    cursor: 'pointer',
     '&:hover': {
       color: 'blue',
     },
@@ -32,11 +33,12 @@ export default function DefaultSidebarItem({
     const { assignees } = targetIssue;
     assignees.push(id);
 
-    const result = await issueAPI.update({ id: issueId, assignee: { type, id } });
+    const result = await issueAPI.update({ id: issueId, assignee: { type, id: author.id } });
     if (!result) return;
 
     dispatch({ type: 'UPDATE', payload: targetIssue });
   };
+
   return (
     <div>
       {title === 'Assignees'

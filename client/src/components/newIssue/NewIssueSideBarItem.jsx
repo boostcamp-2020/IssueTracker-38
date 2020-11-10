@@ -17,6 +17,7 @@ const styles = {
     padding: '10px 0',
   },
   self: {
+    cursor: 'pointer',
     '&:hover': {
       color: 'blue',
     },
@@ -49,7 +50,7 @@ export default function NewIssueSideBarItem({
   };
 
   const defaultMessageMap = {
-    Assignees: <div css={styles.defaultMessage}><span css={styles.self} onClick={assignMyself}>No one - assign yourself</span></div>,
+    Assignees: <div css={styles.defaultMessage}>No one - <span css={styles.self} onClick={assignMyself}>assign yourself</span></div>,
     Labels: <div css={styles.defaultMessage}>None yet</div>,
     Milestone: <div css={styles.defaultMessage}>No Milestone</div>,
   };
@@ -67,13 +68,13 @@ export default function NewIssueSideBarItem({
         onClick={switchDropdownState}
       />
       {isDropdownOn && (
-      <NewIssueSideBarItemDropdown
-        items={dropdownItems}
-        assigned={assigned}
-        setAssigned={setAssigned}
-        title={title}
-        dropdownRef={dropdownRef}
-      />
+        <NewIssueSideBarItemDropdown
+          items={dropdownItems}
+          assigned={assigned}
+          setAssigned={setAssigned}
+          title={title}
+          dropdownRef={dropdownRef}
+        />
       )}
       <div>
         {assigned.length === 0

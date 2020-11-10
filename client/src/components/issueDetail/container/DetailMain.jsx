@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { AuthContext } from '../../../stores/AuthStore';
 import { IssuesContext } from '../../../stores/IssueStore';
 import DetailTitle from './DetailTitle';
 import NewComment from './NewComment';
@@ -25,7 +24,7 @@ const styles = {
 };
 
 export default function DetailMain() {
-  const { currentUser } = useContext(AuthContext);
+  const currentUser = JSON.parse(localStorage.getItem('userInfo'));
   const { issues } = useContext(IssuesContext);
   const { issueId } = useParams();
   const [issue, setIssue] = useState();
@@ -59,7 +58,7 @@ export default function DetailMain() {
       <div css={styles.main}>
         <div>
           <CommentList
-            issueAuthorId={issue?.userId}
+            issueAuthorId={issue ?.userId}
             comments={comments}
             updateComment={updateComment}
           />
