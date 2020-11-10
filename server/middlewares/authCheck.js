@@ -1,19 +1,15 @@
-const axios = require('axios');
+const jwt = require('jsonwebtoken');
 
-// TODO: Implement
-const authCheck = (router) => (req, res, next) => {
-  if (req.headers.Authorization) {
-    const token = req.headers.Authorization.split('Bearer ');
-  }
-  const clientId = localStorage('userInformation').id;
-  const authenticationUrl = 'https://api.github.com/applications/';
-  // :client_id/tokens/:token
-  axios.post(authenticationUrl, {
-    client_id,
-    token,
+const authCheck = (req, res, next) => {
+  const token = req.headers.authorization.split('Bearer ')[1];
+
+  jwt.verify(token, process.env.TOKEN_SECRETKEY, (err, decoded) => {
+    if (err || decoded.iss !== process.env.TOKEN_ISS) {
+      res.status(401).json({ error: 'Auth Error from authChecker' });
+      return;
+    }
+    next();
   });
 };
 
 module.exports = authCheck;
-
-//  https://api.github.com/applications/:client_id/tokens/:token | "Authorization: token OAUTH-TOKEN"
