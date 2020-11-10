@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { UsersContext } from '../../stores/UserStore';
 import { MilestoneContext } from '../../stores/MilestoneStore';
 import { LabelsContext } from '../../stores/LabelStore';
-import { calElapsedTime, getItemById, getNicknameByEmail } from '../../utils/utils';
+import { calElapsedTime, getItemById } from '../../utils/utils';
 import { openedIcon, closedIcon, milestoneIcon } from '../../icons/icons';
 
 const styles = {
@@ -58,9 +59,8 @@ export default function Issue({
   const { milestones } = useContext(MilestoneContext);
   const { labels: allLabels } = useContext(LabelsContext);
 
-  const userEmail = getItemById(users, +userId)?.email;
-  const author = getNicknameByEmail(userEmail || '@');
-  const milestoneTitle = getItemById(milestones, +milestoneId)?.title;
+  const author = getItemById(users, +userId) ?.nickname;
+  const milestoneTitle = getItemById(milestones, +milestoneId) ?.title;
 
   return (
     <div css={styles.body}>
@@ -77,9 +77,11 @@ export default function Issue({
             d={isClosed ? closedIcon : openedIcon}
           />
         </svg>
-        <a css={styles.title} href={`/detail/${id}`}>
-          {title}
-        </a>
+        <Link to={`/detail/${id}`}>
+          <div css={styles.title}>
+            {title}
+          </div>
+        </Link>
         {labels.map((labelId) => {
           const target = getItemById(allLabels, labelId);
           if (!target) return (<></>);

@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 import { issueAPI } from '../../../apis/api';
 import { UsersContext } from '../../../stores/UserStore';
 import { IssuesContext } from '../../../stores/IssueStore';
-import { calElapsedTime, getItemById, getNicknameByEmail } from '../../../utils/utils';
+import { calElapsedTime, getItemById } from '../../../utils/utils';
 import IssueTitle from '../presentational/IssueTitle';
 import IssueState from '../presentational/IssueState';
 import IssueDetail from '../presentational/IssueDetail';
@@ -28,16 +28,15 @@ const styles = {
 };
 
 export default function DetailTitle({ issue, countOfComments }) {
-  const title = issue?.title;
-  const isClosed = issue?.isClosed;
-  const userId = issue?.userId;
-  const createdAt = issue?.createdAt;
+  const title = issue ?.title;
+  const isClosed = issue ?.isClosed;
+  const userId = issue ?.userId;
+  const createdAt = issue ?.createdAt;
   const { issueId } = useParams();
 
   const { dispatch } = useContext(IssuesContext);
   const { users } = useContext(UsersContext);
-  const user = getItemById(users, +userId);
-  const author = getNicknameByEmail(user?.email || '@');
+  const author = getItemById(users, +userId) ?.nickname;
 
   const [titleState, setTitle] = useState(title);
   const [isEditActive, toggleEditActive] = useState(0);

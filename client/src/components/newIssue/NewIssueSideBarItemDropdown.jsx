@@ -7,7 +7,7 @@ import { MilestoneContext } from '../../stores/MilestoneStore';
 
 import { checkMarkIcon } from '../../icons/icons';
 
-import { getItemById, getNicknameByEmail } from '../../utils/utils';
+import { getItemById } from '../../utils/utils';
 
 const styles = {
   layout: {
@@ -57,7 +57,7 @@ export default function NewIssueSideBarItemDropdown({
 
     if (title === 'Assignees') {
       const targetItem = getItemById(users, id);
-      const name = getNicknameByEmail(targetItem.email);
+      const name = targetItem.nickname;
 
       const actions = {
         add: () => setAssigned([...assigned, { id, name }]),

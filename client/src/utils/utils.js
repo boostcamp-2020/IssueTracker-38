@@ -27,7 +27,6 @@ export const calElapsedTime = (createdAt) => {
   return `${Math.floor(seconds)} seconds`;
 };
 
-export const getNicknameByEmail = (email) => email.split('@')[0];
 export const getItemById = (items, id) => {
   const target = items.find((item) => item.id === id);
   return target;
