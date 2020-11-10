@@ -11,16 +11,7 @@ import { issueAPI } from '../../../apis/api';
 import SideBarItemDropdownItem from '../presentational/SideBarItemDropdownItem';
 import SideBarItemDropdownHeader from '../presentational/SideBarItemDropdownHeader';
 
-const styles = {
-  layout: {
-    position: 'absolute',
-    width: '300px',
-    marginLeft: '-10px',
-    border: '1px solid #eff1f3',
-    background: 'white',
-    boxShadow: '0px 0px 20px 5px #d2d2d2',
-  },
-};
+import SideBarItemDropdownWrapper from '../layouts/SideBarItemDropdownWrapper';
 
 export default function SideBarItemAssigneesDropdown({
   items, assigned, type, dropdownRef,
@@ -48,7 +39,7 @@ export default function SideBarItemAssigneesDropdown({
   };
 
   return (
-    <div css={styles.layout} ref={dropdownRef}>
+    <SideBarItemDropdownWrapper ref={dropdownRef}>
       <SideBarItemDropdownHeader type={type} />
       {items.map(({ id, itemName, color }) => (
         <SideBarItemDropdownItem
@@ -60,7 +51,7 @@ export default function SideBarItemAssigneesDropdown({
           handleAssigning={handleAssigneesAssigning(id)}
         />
       ))}
-    </div>
+    </SideBarItemDropdownWrapper>
   );
 }
 
