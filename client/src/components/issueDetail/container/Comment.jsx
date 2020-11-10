@@ -25,7 +25,7 @@ export default function Comment({
   const [editState, setEditState] = useState(false);
   const [newContent, setNewContent] = useState(content);
 
-  const writerNickname = getItemById(users, +userId) ?.nickname;
+  const writerNickname = getItemById(users, +userId)?.nickname;
   const elapsedTime = updatedAt ? calElapsedTime(updatedAt) : calElapsedTime(createdAt);
   const owner = currentUser.id === userId;
 
