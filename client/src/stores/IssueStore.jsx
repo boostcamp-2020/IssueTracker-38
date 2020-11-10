@@ -9,7 +9,7 @@ function issueReducer(issues, { type, payload }) {
     case 'INIT':
       return payload;
     case 'ADD':
-      return [...issues, payload];
+      return [payload, ...issues];
     case 'UPDATE':
       return updateStoreItem(issues, payload);
     default:

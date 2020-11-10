@@ -7,7 +7,7 @@ import { IssuesContext } from '../../../stores/IssueStore';
 import { LabelsContext } from '../../../stores/LabelStore';
 import { MilestoneContext } from '../../../stores/MilestoneStore';
 
-import { getNicknameByEmail, getItemById } from '../../../utils/utils';
+import { getItemById } from '../../../utils/utils';
 
 import SideBarItem from './SideBarItem';
 
@@ -33,10 +33,10 @@ export default function SideBar() {
 
   const targetIssue = getItemById(issues, +issueId);
 
-  const author = users.find((user) => user.id === targetIssue.userId);
+  const author = JSON.parse(localStorage.getItem('userInfo'));
   const assignedUsers = targetIssue.assignees.map((assigneeId) => {
-    const { id, email } = getItemById(users, assigneeId);
-    return { id, email, name: getNicknameByEmail(email) };
+    const { id, nickname } = getItemById(users, assigneeId);
+    return { id, nickname };
   });
   const assignedLabels = targetIssue.labels.map((id) => getItemById(labels, id));
   const assignedMilestone = [getItemById(milestones, targetIssue.milestoneId)];
@@ -46,8 +46,8 @@ export default function SideBar() {
     <div css={styles.wrapper}>
       <SideBarItem
         title="Assignees"
-        defaultMessage="No one--"
-        dropdownItems={users.map(({ id, email }) => ({ id, itemName: getNicknameByEmail(email) }))}
+        defaultMessage="No one - "
+        dropdownItems={users.map(({ id, nickname }) => ({ id, itemName: nickname }))}
         assigned={assignedUsers}
         author={author}
       />

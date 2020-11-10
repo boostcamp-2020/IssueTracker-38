@@ -6,7 +6,6 @@ import { useInput } from '../../hooks/hooks';
 
 import { issueAPI } from '../../apis/api';
 
-import { AuthContext } from '../../stores/AuthStore';
 import { IssuesContext } from '../../stores/IssueStore';
 
 import NewIssueTitle from './NewIssueTitle';
@@ -35,7 +34,7 @@ const styles = {
 
 export default function NewIssueMain() {
   const history = useHistory();
-  const { currentUser } = useContext(AuthContext);
+  const currentUser = JSON.parse(localStorage.getItem('userInfo'));
   const { issues, dispatch } = useContext(IssuesContext);
 
   const [inputTitle, handleInputTitle] = useInput('');

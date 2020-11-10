@@ -8,9 +8,12 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      email: {
+      nickname: {
         type: DataTypes.STRING(100),
         allowNull: false,
+      },
+      refreshToken: {
+        type: DataTypes.STRING(255),
       },
     },
     {

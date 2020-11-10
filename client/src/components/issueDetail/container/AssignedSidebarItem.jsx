@@ -53,7 +53,7 @@ export default function AssignedSidebarItem({
       ))
       : assigned.map((element) => (
         <div css={{ ...styles.item, background: element.color, display: element.name ? 'inline-block' : 'block' }}>
-          {element.name || element.title || element.email}
+          {element.name || element.title || element.nickname}
         </div>
       ))
   );
