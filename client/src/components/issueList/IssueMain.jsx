@@ -14,7 +14,6 @@ const styles = {
   body: {
     width: '1100px',
     margin: '0 auto',
-    border: '1px solid lightgrey',
     borderRadius: '6px',
   },
   layout: {
