@@ -6,8 +6,6 @@ import { UsersContext } from '../../stores/UserStore';
 import { LabelsContext } from '../../stores/LabelStore';
 import { MilestoneContext } from '../../stores/MilestoneStore';
 
-import { getNicknameByEmail } from '../../utils/utils';
-
 import NewIssueSideBarItem from './NewIssueSideBarItem';
 
 const styles = {
@@ -35,13 +33,13 @@ export default function NewIssueSideBar({
     return <div />;
   }
 
-  const author = { ...currentUser, name: getNicknameByEmail(currentUser.email) };
+  const author = { ...currentUser, name: currentUser.nickname };
 
   return (
     <div css={styles.wrapper}>
       <NewIssueSideBarItem
         title="Assignees"
-        dropdownItems={users.map((user) => ({ ...user, itemName: getNicknameByEmail(user.email) }))}
+        dropdownItems={users.map((user) => ({ ...user, itemName: user.nickname }))}
         assigned={assignedUsers}
         setAssigned={setAssignedUsers}
         author={author}

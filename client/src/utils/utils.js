@@ -27,8 +27,15 @@ export const calElapsedTime = (createdAt) => {
   return `${Math.floor(seconds)} seconds`;
 };
 
-export const getNicknameByEmail = (email) => email.split('@')[0];
 export const getItemById = (items, id) => {
   const target = items.find((item) => item.id === id);
   return target;
+};
+
+export const removeUserInfo = () => {
+  window.localStorage.removeItem('accessToken');
+  window.localStorage.removeItem('refreshToken');
+  window.localStorage.removeItem('userInfo');
+
+  window.location.href = '/login';
 };

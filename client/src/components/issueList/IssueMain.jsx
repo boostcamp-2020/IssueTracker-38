@@ -79,10 +79,10 @@ export default function IssueMain() {
             )
             : (
               <div css={styles.dropdowns}>
-                <Dropdown title="Author" items={users.map((user) => ({ ...user, value: user.email }))} />
+                <Dropdown title="Author" items={users.map((user) => ({ ...user, value: user.nickname }))} />
                 <Dropdown title="Label" items={labels.map((label) => ({ ...label, value: label.name }))} />
                 <Dropdown title="Milestone" items={milestones.map((milestone) => ({ ...milestone, value: milestone.title }))} />
-                <Dropdown title="Asignee" items={users.map((user) => ({ ...user, value: user.email }))} />
+                <Dropdown title="Asignee" items={users.map((user) => ({ ...user, value: user.nickname }))} />
               </div>
             )}
         </div>

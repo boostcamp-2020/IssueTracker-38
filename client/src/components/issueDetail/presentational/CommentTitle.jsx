@@ -25,12 +25,12 @@ const styles = {
 };
 
 export default function CommentTitle({
-  email, elapsedTime, mark, isOwner, editClickHandler,
+  nickname, elapsedTime, mark, isOwner, editClickHandler,
 }) {
   return (
     <div css={styles.title}>
       <div css={styles.nickname}>
-        {email}
+        {nickname}
       </div>
       <div css={styles.description}>
         commented
@@ -50,7 +50,7 @@ export default function CommentTitle({
 }
 
 CommentTitle.propTypes = {
-  email: PropTypes.string.isRequired,
+  nickname: PropTypes.string.isRequired,
   elapsedTime: PropTypes.string.isRequired,
   mark: PropTypes.string.isRequired,
   isOwner: PropTypes.bool.isRequired,
