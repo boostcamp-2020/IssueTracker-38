@@ -10,4 +10,8 @@ module.exports = {
 
     res.json(users);
   },
+  async update(id, refreshToken) {
+    const result = await User.update({ refreshToken }, { where: { id } });
+    return result;
+  },
 };

@@ -26,7 +26,7 @@ app.get('*', (req, res) => {
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).send('Error handler catches server error');
+  res.status(500).send(err);
 });
 
 app.listen(port, () => {
