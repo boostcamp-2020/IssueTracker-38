@@ -11,18 +11,18 @@ import IssueDetail from '../presentational/IssueDetail';
 import IssueTitleEditInput from '../presentational/IssueTitleEditInput';
 import IssueTitleButton from '../presentational/IssueTitleButton';
 import DefaultButton from '../presentational/DefaultButton';
-import styles from '../layouts/DetailTitle';
+import { DetailTitleWrapper, DetailTitleDescriptionWrapper } from '../layouts/DetailTitleWrapper';
 
 export default function DetailTitle({ issue, countOfComments }) {
-  const title = issue?.title;
-  const isClosed = issue?.isClosed;
-  const userId = issue?.userId;
-  const createdAt = issue?.createdAt;
+  const title = issue ?.title;
+  const isClosed = issue ?.isClosed;
+  const userId = issue ?.userId;
+  const createdAt = issue ?.createdAt;
   const { issueId } = useParams();
 
   const { dispatch } = useContext(IssuesContext);
   const { users } = useContext(UsersContext);
-  const author = getItemById(users, +userId)?.nickname;
+  const author = getItemById(users, +userId) ?.nickname;
 
   const [titleState, setTitle] = useState(title);
   const [isEditActive, toggleEditActive] = useState(0);
@@ -40,7 +40,7 @@ export default function DetailTitle({ issue, countOfComments }) {
 
   return (
     <>
-      <div css={styles.issueTitle}>
+      <DetailTitleWrapper>
         {isEditActive
           ? (
             <>
@@ -55,15 +55,15 @@ export default function DetailTitle({ issue, countOfComments }) {
               <DefaultButton text="Edit" onClick={checkEditStatus} />
             </>
           )}
-      </div>
-      <div css={styles.description}>
+      </DetailTitleWrapper>
+      <DetailTitleDescriptionWrapper>
         <IssueState isClosed={isClosed} />
         <IssueDetail
           author={author}
           elapsedTime={calElapsedTime(createdAt)}
           countOfComments={countOfComments}
         />
-      </div>
+      </DetailTitleDescriptionWrapper>
     </>
   );
 }
