@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router, Switch, Route, Redirect,
+} from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import StoreWrapper from '../stores/StoreWrapper';
 import Header from '../components/Header';
@@ -28,8 +30,8 @@ export default function RouteIf({ path, exact = false }) {
         );
       }
 
-      return <Redirect to="/login" />;
-    }}
+        return <Redirect to="/login" />;
+      }}
     />
   );
 }
@@ -38,4 +40,4 @@ RouteIf.propTypes = {
   path: PropTypes.string.isRequired,
   exact: PropTypes.bool.isRequired,
   component: PropTypes.shape.isRequired,
-}
+};

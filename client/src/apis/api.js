@@ -39,28 +39,64 @@ const customFetch = async (url, request) => {
   }
 };
 
+const createData = async (path, data) => {
+  const url = `${baseURL}/${path}`;
+  const request = {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  };
+  const result = await customFetch(url, request);
+  return result;
+};
+
+const readAllData = async (path) => {
+  const url = `${baseURL}/${path}`;
+  const request = {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
+  };
+  const result = await customFetch(url, request);
+  return result;
+};
+
+const updateData = async (path, data) => {
+  const url = `${baseURL}/${path}`;
+  const request = {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  };
+  const result = await customFetch(url, request);
+  return result;
+};
+
+const deleteData = async (path, id) => {
+  const url = `${baseURL}/${path}`;
+  const request = {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id }),
+  };
+  const result = await customFetch(url, request);
+  return result;
+};
+
 export const issueAPI = {
   async readAll() {
-    const url = `${baseURL}/issue`;
-    const request = {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
-    };
-    const issues = await customFetch(url, request);
-    return issues;
+    return readAllData('issue');
   },
   async update(data) {
-    const url = `${baseURL}/issue`;
-    const request = {
-      method: 'PATCH',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    };
-    const result = await customFetch(url, request);
-    return result;
+    return updateData('issue', data);
   },
   async markAll(isClosed, issueIds) {
     const url = `${baseURL}/issue/markall`;
@@ -76,69 +112,40 @@ export const issueAPI = {
     return result;
   },
   async create(newIssue) {
-    const url = `${baseURL}/issue`;
-    const request = {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newIssue),
-    };
-    const result = await customFetch(url, request);
-    return result;
+    return createData('issue', newIssue);
   },
 };
 
 export const milestoneAPI = {
   async readAll() {
-    const url = `${baseURL}/milestone`;
-    const request = {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
-    };
-    const milestones = await customFetch(url, request);
-    return milestones;
+    return readAllData('milestone');
   },
 };
 
 export const labelAPI = {
+  async create(newLabel) {
+    return createData('label', newLabel);
+  },
   async readAll() {
-    const url = `${baseURL}/label`;
-    const request = {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
-    };
-    const labels = await customFetch(url, request);
-    return labels;
+    return readAllData('label');
+  },
+  async update(data) {
+    return updateData('label', data);
+  },
+  async remove(id) {
+    return deleteData('label', id);
   },
 };
 
 export const userAPI = {
   async readAll() {
-    const url = `${baseURL}/user`;
-    const request = {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
-    };
-    const users = await customFetch(url, request);
-    return users;
+    return readAllData('user');
   },
 };
 
 export const commentAPI = {
-  async create(data) {
-    const url = `${baseURL}/comment`;
-    const request = {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    };
-    const result = await customFetch(url, request);
-    return result;
+  async create(newComment) {
+    return createData('comment', newComment);
   },
   async readByIssue(issueId) {
     const url = `${baseURL}/comment?issueId=${issueId}`;
@@ -150,17 +157,7 @@ export const commentAPI = {
     return comments;
   },
   async update(data) {
-    const url = `${baseURL}/comment`;
-    const request = {
-      method: 'PATCH',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    };
-    const result = await customFetch(url, request);
-    return result;
+    return updateData('comment', data);
   },
 };
 
