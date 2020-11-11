@@ -7,9 +7,9 @@ import DropdownItem from './DropdownItem';
 const styles = {
   dropDown: {
     position: 'absolute',
-    border: '1px solid lightgray',
-    padding: '5px',
+    border: '1px solid #eff1f3',
     background: 'white',
+    boxShadow: '0px 0px 20px 5px #d2d2d2',
   },
   button: {
     border: 'none',
@@ -34,13 +34,12 @@ const styles = {
     borderLeft: '4px solid transparent',
   },
   title: {
-    borderBottom: '1px solid lightgray',
-    margin: '0px',
+    padding: '10px',
+    backgroundColor: '#f7f8fa',
+    borderBottom: '1px solid #eff1f3',
   },
   content: {
     listStyle: 'none',
-    margin: '5px 0 0 0',
-    padding: '5px',
   },
 };
 
