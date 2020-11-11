@@ -7,7 +7,7 @@ import CommentContentWrapper from '../layouts/CommentContentWrapper';
 import { EditCommentTitleWrapper, EditCommentTextInputWrapper } from '../layouts/EditCommentWrapper';
 
 export default function EditComment({ children, newContent, setNewContent }) {
-  const [countOfCharacter, setCountOfCharacter] = useState(newContent ?.length || 0);
+  const [countOfCharacter, setCountOfCharacter] = useState(newContent?.length||0);
   const [recentTimeout, setRecentTimeout] = useState(-1);
   const [displayState, setDisplayState] = useState(false);
 

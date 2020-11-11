@@ -14,15 +14,15 @@ import DefaultButton from '../presentational/DefaultButton';
 import { DetailTitleWrapper, DetailTitleDescriptionWrapper } from '../layouts/DetailTitleWrapper';
 
 export default function DetailTitle({ issue, countOfComments }) {
-  const title = issue ?.title;
-  const isClosed = issue ?.isClosed;
-  const userId = issue ?.userId;
-  const createdAt = issue ?.createdAt;
+  const title = issue?.title;
+  const isClosed = issue?.isClosed;
+  const userId = issue?.userId;
+  const createdAt = issue?.createdAt;
   const { issueId } = useParams();
 
   const { dispatch } = useContext(IssuesContext);
   const { users } = useContext(UsersContext);
-  const author = getItemById(users, +userId) ?.nickname;
+  const author = getItemById(users, +userId)?.nickname;
 
   const [titleState, setTitle] = useState(title);
   const [isEditActive, toggleEditActive] = useState(0);
