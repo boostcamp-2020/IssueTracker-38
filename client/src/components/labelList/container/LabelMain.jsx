@@ -1,42 +1,25 @@
-import React from 'react';
-import GroupButton from '../../issueList/GroupButton';
-import { labelIcon, milestoneIcon } from '../../../icons/icons';
+import React,{ useState } from 'react';
+import LabelInputForm from '../presentational/LabelInputForm';
+import DefaultButton from '../../issueDetail/presentational/DefaultButton';
+import LabelOrMilestoneButton from '../presentational/LableOrMilestoneButton';
 
 export default function LableMain() {
-const styles = {
-  labelButton: {
-    border: '1px solid grey',
-    borderRadius: '6px 0 0 6px',
-    padding: '5px 10px',
-    display: 'flex',
-    backgroundColor:'blue',
-  },
-  milestoneButton: {
-    border: '1px solid grey',
-    borderRadius: '0 6px 6px 0',
-    padding: '5px 10px',
-    display: 'flex',
-  },
-  groupButtonWrapper:{
-    display:'flex',
-    width: '250px',
-    height:'30px',
-  }
+  const styles = {
+    newLabelButton:{
+      backgroundColor:'green'
+    }
 }
-  return (
-    <div css={styles.groupButtonWrapper}>
-        <GroupButton
-          title="Labels"
-          emotion={styles.labelButton}
-          svgPathD={labelIcon}
-          linkTo='/labelList'
-        />
-        <GroupButton
-          title="Milestone"
-          emotion={styles.milestoneButton}
-          svgPathD={milestoneIcon}
-          linkTo='/milestoneList'
-        />
-    </div>
+const [newLabel,setNewLabel]= useState(0);
+const showCreateLabelInput = () =>{
+  newLabel?setNewLabel(0):setNewLabel(1)
+  return;
+}
+  return (<>
+      <LabelOrMilestoneButton></LabelOrMilestoneButton>
+      <DefaultButton text='New Label' onClick={showCreateLabelInput} extraStyle={styles.newLabelButton}></DefaultButton>
+      {newLabel
+        ?<LabelInputForm saveText='Create Label' onClick={showCreateLabelInput}></LabelInputForm>
+        :<div></div>}
+    </>
   );
 }
