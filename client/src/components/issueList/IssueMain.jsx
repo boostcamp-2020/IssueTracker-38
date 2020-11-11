@@ -39,12 +39,12 @@ export default function IssueMain() {
   const [selections, setSelections] = useState([]);
   const [selectionSwitch, toggleSelectionSwitch] = useState(false);
   const [filters, setFilters] = useState({
-    Author: null, Label: [], Milestone: null, Asignee: null,
+    Author: null, Label: [], Milestone: null, Assignee: null,
   });
   const [filteredIssues, setFilteredIssues] = useState([]);
 
   const checkFilter = (item) => {
-    if (filters.Asignee && item.asignees.indexOf(filters.Asignee) === -1) return false;
+    if (filters.Assignee && item.assignees.indexOf(filters.Assignee) === -1) return false;
     if (filters.Author && item.userId !== filters.Author) return false;
     if (filters.Milestone && item.milestoneId !== filters.Milestone) return false;
     if (filters.Label.length !== 0) {
@@ -55,7 +55,7 @@ export default function IssueMain() {
   };
 
   const checkIsFilterActive = () => filters.Author || filters.Label.length
-  || filters.Milestone || filters.Asignee;
+  || filters.Milestone || filters.Assignee;
 
   const filterIssues = (isFilterActive) => {
     if (!isFilterActive) {
@@ -120,7 +120,7 @@ export default function IssueMain() {
                 <Dropdown title="Author" items={users.map((user) => ({ ...user, value: user.nickname }))} filters={filters} setFilters={setFilters} />
                 <Dropdown title="Label" items={labels.map((label) => ({ ...label, value: label.name }))} filters={filters} setFilters={setFilters} />
                 <Dropdown title="Milestone" items={milestones.map((milestone) => ({ ...milestone, value: milestone.title }))} filters={filters} setFilters={setFilters} />
-                <Dropdown title="Asignee" items={users.map((user) => ({ ...user, value: user.nickname }))} filters={filters} setFilters={setFilters} />
+                <Dropdown title="Assignee" items={users.map((user) => ({ ...user, value: user.nickname }))} filters={filters} setFilters={setFilters} />
               </div>
             )}
         </div>
