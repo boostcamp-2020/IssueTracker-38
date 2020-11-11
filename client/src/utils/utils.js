@@ -39,3 +39,10 @@ export const removeUserInfo = () => {
 
   window.location.href = '/login';
 };
+
+export const decideTextColor = (backgroundRGB) => {
+  const RGBcode = backgroundRGB.replace(/#/g, '');
+  const value = parseInt(RGBcode, 16);
+
+  return value > 7000000 ? 'black' : 'white';
+};
