@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import DetailMain from '../components/issueDetail/IssueDetailPage';
 import IssueMain from '../components/issueList/IssueMain';
 import NewIssueMain from '../components/newIssue/NewIssueMain';
+import LabelMain from '../components/labelList/container/LabelMain';
 
 export default function RouteIf({ path, exact = false }) {
   return (
@@ -18,6 +19,7 @@ export default function RouteIf({ path, exact = false }) {
                 <Header />
                 <Route exact path="/" component={IssueMain} />
                 <Route path="/new-issue" component={NewIssueMain} />
+                <Route path="/labelList" component={LabelMain} />
                 <Route path="/detail/:issueId" component={DetailMain} />
                 <Redirect path="*" to="/" />
               </StoreWrapper>
