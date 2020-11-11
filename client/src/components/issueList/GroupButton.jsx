@@ -1,5 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const styles = {
   count: {
@@ -13,6 +14,10 @@ const styles = {
   buttonIcon: {
     margin: 'auto 5px',
   },
+  title:{
+    textDecoration:'none',
+    color:'black',
+  }
 };
 
 export default function GroupButton({
@@ -20,18 +25,20 @@ export default function GroupButton({
   svgPathD,
   title,
   emotion,
+  linkTo,
 }) {
-  return (
+  return (    
     <div css={emotion}>
       <svg viewBox="0 0 16 16" width="16" height="16" css={styles.buttonIcon}>
         <path fillRule="evenodd" d={svgPathD} />
       </svg>
       <span>
         {' '}
-        {title}
+        <Link to={linkTo} style={styles.title}>{title}</Link>
         {' '}
       </span>
-      <span css={styles.count}>{countOfGroup}</span>
+      {countOfGroup?  <span css={styles.count}>{countOfGroup}</span>
+      :<></>}
     </div>
   );
 }
@@ -41,4 +48,5 @@ GroupButton.propTypes = {
   svgPathD: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   emotion: PropTypes.objectOf(PropTypes.node).isRequired,
+  onClick: PropTypes.shape.isRequired,
 };

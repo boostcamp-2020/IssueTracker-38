@@ -23,11 +23,7 @@ const styles = {
 export default function header() {
   return (
     <header css={styles.header}>
-      <Link to="/">
-        <div css={styles.title}>
-          ISSUES
-        </div>
-      </Link>
+      <Link to="/" style={styles.title}>ISSUES</Link>
       <Logout />
     </header>
   );

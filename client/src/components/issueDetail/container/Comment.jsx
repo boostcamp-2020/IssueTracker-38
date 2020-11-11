@@ -4,9 +4,9 @@ import { UsersContext } from '../../../stores/UserStore';
 import { commentAPI } from '../../../apis/api';
 import { calElapsedTime, getItemById } from '../../../utils/utils';
 import CommentLayout from '../presentational/CommentLayout';
-import CommentTitleWrapper from '../presentational/CommentTitleWrapper';
+import CommentTitleWrapper from '../layouts/CommentTitleWrapper';
 import CommentTitle from '../presentational/CommentTitle';
-import CommentContentWrapper from '../presentational/CommentContentWrapper';
+import CommentContentWrapper from '../layouts/CommentContentWrapper';
 import EditComment from './EditComment';
 import DefaultButtom from '../presentational/DefaultButton';
 import SubmitButton from '../presentational/SubmitButton';
@@ -25,7 +25,7 @@ export default function Comment({
   const [editState, setEditState] = useState(false);
   const [newContent, setNewContent] = useState(content);
 
-  const writerNickname = getItemById(users, +userId) ?.nickname;
+  const writerNickname = getItemById(users, +userId)?.nickname;
   const elapsedTime = updatedAt ? calElapsedTime(updatedAt) : calElapsedTime(createdAt);
   const owner = currentUser.id === userId;
 
