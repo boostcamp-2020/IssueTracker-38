@@ -8,7 +8,12 @@ import ColorRefreshButton from './ColorRefreshButton';
 
 describe('<ColorRefreshButton />', () => {
   it('renders color refresh button', () => {
-    const { getByRole } = render(<ColorRefreshButton />);
+    const backgroundColor = '#ffffff';
+    const { getByRole } = render(
+      <ColorRefreshButton
+        backgroundColor={backgroundColor}
+      />,
+    );
     const colorChangeButton = getByRole('button', { label: 'colorChange' });
 
     expect(colorChangeButton).toBeDefined();
