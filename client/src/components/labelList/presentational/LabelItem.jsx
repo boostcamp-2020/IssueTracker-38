@@ -34,7 +34,7 @@ export default function LabelItem({
           {description || 'No description' }
         </div>
         <div css={styles.buttons}>
-          {editState ? <></> : <TextButton text="Edit" onClick={editEvent} />}
+          {!editState && <TextButton text="Edit" onClick={editEvent} />}
           <TextButton text="Delete" onClick={deleteEvent} />
         </div>
       </LabelItemWrapper>
