@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 import CountOfCharacter from '../presentational/CountOfCharacter';
 import CommentLayout from '../presentational/CommentLayout';
-import CommentTitleWrapper from '../presentational/CommentTitleWrapper';
-import CommentContentWrapper from '../presentational/CommentContentWrapper';
+import CommentTitleWrapper from '../layouts/CommentTitleWrapper';
+import CommentContentWrapper from '../layouts/CommentContentWrapper';
 
 const styles = {
   editTitle: {

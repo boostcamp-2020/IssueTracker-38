@@ -12,7 +12,7 @@ const styles = {
 
 export default function AuthorProfile({ authorId }) {
   const { users } = useContext(UsersContext);
-  const authorNickname = getItemById(users, authorId) ?.nickname;
+  const authorNickname = getItemById(users, authorId)?.nickname;
 
   return (
     <div>

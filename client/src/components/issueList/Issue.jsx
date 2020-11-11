@@ -59,8 +59,8 @@ export default function Issue({
   const { milestones } = useContext(MilestoneContext);
   const { labels: allLabels } = useContext(LabelsContext);
 
-  const author = getItemById(users, +userId) ?.nickname;
-  const milestoneTitle = getItemById(milestones, +milestoneId) ?.title;
+  const author = getItemById(users, +userId)?.nickname;
+  const milestoneTitle = getItemById(milestones, +milestoneId)?.title;
 
   return (
     <div css={styles.body}>
@@ -77,11 +77,7 @@ export default function Issue({
             d={isClosed ? closedIcon : openedIcon}
           />
         </svg>
-        <Link to={`/detail/${id}`}>
-          <div css={styles.title}>
-            {title}
-          </div>
-        </Link>
+        <Link to={`/detail/${id}`} style={styles.title}>{title}</Link>
         {labels.map((labelId) => {
           const target = getItemById(allLabels, labelId);
           if (!target) return (<></>);
