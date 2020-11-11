@@ -19,4 +19,10 @@ module.exports = {
 
     res.status(200).json({ message: '수정 되었습니다.' });
   },
+  async remove(req, res) {
+    const { id } = req.body;
+    await Label.destroy({ where: { id } });
+
+    res.status(200).json({ message: '삭제 되었습니다.' });
+  },
 };
