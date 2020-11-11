@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { PropTypes } from 'prop-types';
+
 import { decideTextColor } from '../../../utils/utils';
 
 const style = {
@@ -19,3 +21,8 @@ export default function LabelPreview({ name, color }) {
     </div>
   );
 }
+
+LabelPreview.propTypes = {
+  name: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+};

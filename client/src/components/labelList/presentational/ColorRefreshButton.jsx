@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { PropTypes } from 'prop-types';
+
 import { colorRefreshIcon } from '../../../icons/icons';
 
 const style = {
@@ -18,3 +20,7 @@ export default function ColorRefreshButton({ backgroundColor }) {
     </button>
   );
 }
+
+ColorRefreshButton.propTypes = {
+  backgroundColor: PropTypes.string.isRequired,
+};
