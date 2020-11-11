@@ -46,3 +46,21 @@ export const decideTextColor = (backgroundRGB) => {
 
   return value > 7000000 ? 'black' : 'white';
 };
+
+const getRandomCharacter = (characters) => {
+  const randomIndex = Math.floor(Math.random() * 100) % characters.length;
+
+  return characters[randomIndex];
+};
+
+const getRandomColorCode = () => {
+  const CODE_LENGTH = 6;
+  const characters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+
+  let colorCode = '#';
+  for (let i = 0; i < CODE_LENGTH; i += 1) {
+    colorCode += getRandomCharacter(characters);
+  }
+
+  return colorCode;
+};
