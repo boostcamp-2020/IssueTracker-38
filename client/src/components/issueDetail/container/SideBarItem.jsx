@@ -9,18 +9,7 @@ import SideBarItemDropdown from '../presentational/SideBarItemDropdown';
 import DefaultSidebarItem from './DefaultSidebarItem';
 import AssignedSidebarItem from './AssignedSidebarItem';
 
-const styles = {
-  layout: {
-    width: '300px',
-    padding: '10px 0',
-    borderBottom: '1px solid #eaecef',
-  },
-  selfAssignButton: {
-    '&:hover': {
-      color: 'blue',
-    },
-  },
-};
+import SideBarItemWrapper from '../layouts/SideBarItemWrapper';
 
 export default function SideBarItem({
   title, defaultMessage, dropdownItems, assigned, author,
@@ -42,7 +31,7 @@ export default function SideBarItem({
   }, [isAction]);
 
   return (
-    <div css={styles.layout}>
+    <SideBarItemWrapper>
       <SideBarItemTitle
         title={title}
         onClick={handleAssignButton}
@@ -61,7 +50,7 @@ export default function SideBarItem({
           ? <DefaultSidebarItem author={author} title={title} defaultMessage={defaultMessage} />
           : <AssignedSidebarItem title={title} assigned={assigned} />}
       </div>
-    </div>
+    </SideBarItemWrapper>
   );
 }
 

@@ -10,14 +10,7 @@ import { MilestoneContext } from '../../../stores/MilestoneStore';
 import { getItemById } from '../../../utils/utils';
 
 import SideBarItem from './SideBarItem';
-
-const styles = {
-  wrapper: {
-    margin: '0 20px',
-    fontSize: '12px',
-    fontWeight: '600',
-  },
-};
+import SideBarWrapper from '../layouts/SideBarWrapper';
 
 export default function SideBar() {
   const { issueId } = useParams();
@@ -43,7 +36,7 @@ export default function SideBar() {
   if (!assignedMilestone[0]) assignedMilestone.pop();
 
   return (
-    <div css={styles.wrapper}>
+    <SideBarWrapper>
       <SideBarItem
         title="Assignees"
         defaultMessage="No one - "
@@ -65,6 +58,6 @@ export default function SideBar() {
         assigned={assignedMilestone}
         author={author}
       />
-    </div>
+    </SideBarWrapper>
   );
 }

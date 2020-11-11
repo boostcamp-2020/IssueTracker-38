@@ -34,7 +34,7 @@ module.exports = {
     res.status(200).send({ accessToken, refreshToken, userInfo: { id: user.id, nickname: user.nickname } });
   },
   async getFreshAcessToken(req, res) {
-    const refreshToken = req.headers.Authorization.split('Bearer ')[1];
+    const refreshToken = req.headers.authorization.split('Bearer ')[1];
     const { dataValues: user } = await User.findOne({ where: { refreshToken } });
 
     if (!user) {
