@@ -11,21 +11,7 @@ import IssueDetail from '../presentational/IssueDetail';
 import IssueTitleEditInput from '../presentational/IssueTitleEditInput';
 import IssueTitleButton from '../presentational/IssueTitleButton';
 import DefaultButton from '../presentational/DefaultButton';
-
-const styles = {
-  issueTitle: {
-    display: 'flex',
-    width: '100%',
-    paddingTop: '20px',
-  },
-  description: {
-    display: 'flex',
-    color: '#6a737d',
-    width: '100%',
-    padding: '5px 0 20px 0',
-    borderBottom: '1px solid #e1e4e8',
-  },
-};
+import { DetailTitleWrapper, DetailTitleDescriptionWrapper } from '../layouts/DetailTitleWrapper';
 
 export default function DetailTitle({ issue, countOfComments }) {
   const title = issue?.title;
@@ -54,7 +40,7 @@ export default function DetailTitle({ issue, countOfComments }) {
 
   return (
     <>
-      <div css={styles.issueTitle}>
+      <DetailTitleWrapper>
         {isEditActive
           ? (
             <>
@@ -69,15 +55,15 @@ export default function DetailTitle({ issue, countOfComments }) {
               <DefaultButton text="Edit" onClick={checkEditStatus} />
             </>
           )}
-      </div>
-      <div css={styles.description}>
+      </DetailTitleWrapper>
+      <DetailTitleDescriptionWrapper>
         <IssueState isClosed={isClosed} />
         <IssueDetail
           author={author}
           elapsedTime={calElapsedTime(createdAt)}
           countOfComments={countOfComments}
         />
-      </div>
+      </DetailTitleDescriptionWrapper>
     </>
   );
 }
