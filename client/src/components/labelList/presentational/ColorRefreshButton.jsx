@@ -11,9 +11,9 @@ const style = {
   cursor: 'pointer',
 };
 
-export default function ColorRefreshButton({ backgroundColor }) {
+export default function ColorRefreshButton({ backgroundColor,onClick }) {
   return (
-    <button type="button" css={{ ...style, backgroundColor }} aria-label="colorChange">
+    <button onClick={onClick} type="button" css={{ ...style, backgroundColor }} aria-label="colorChange"> 
       <svg viewBox="0 0 16 16" width="16" height="16">
         <path fillRule="evenodd" d={colorRefreshIcon} />
       </svg>
