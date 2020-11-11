@@ -112,7 +112,7 @@ export default function IssueMain() {
           {selections.length > 0
             ? (
               <div css={styles.dropdowns}>
-                <MarkAsDropdown selections={selections} />
+                <MarkAsDropdown selections={selections} setSelections={setSelections} />
               </div>
             )
             : (
