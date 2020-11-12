@@ -16,6 +16,7 @@ const getFreshAccessToken = async () => {
   const status = await result.status;
 
   if (status === 401) {
+    alert('세션이 만료되어 로그아웃 되었습니다.');
     removeUserInfo();
     return;
   }
@@ -24,6 +25,8 @@ const getFreshAccessToken = async () => {
 
   const { accessToken } = await result.json();
   localStorage.setItem('accessToken', accessToken);
+
+  window.location.reload();
 };
 
 const customFetch = async (url, request) => {
