@@ -30,7 +30,7 @@ export default function LableMain() {
   };
   const createLabel = async () => {
     const result = await labelAPI.create(labelData);
-    dispatch({ type: 'ADD', payload: result });
+    // dispatch({ type: 'ADD', payload: result });
     showCreateLabelInput();
   };
 

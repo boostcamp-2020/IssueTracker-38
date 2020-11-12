@@ -62,7 +62,7 @@ export default function MarkAsDropdown({ selections, setSelections }) {
   const handleMarkAsAction = (isClosed) => async () => {
     const result = await issueAPI.markAll(isClosed, selections);
     if (!result) return;
-    selections.forEach((issueId) => dispatch({ type: 'UPDATE', payload: { id: issueId, isClosed } }));
+    // selections.forEach((issueId) => dispatch({ type: 'UPDATE', payload: { id: issueId, isClosed } }));
     setSelections([]);
   };
 
