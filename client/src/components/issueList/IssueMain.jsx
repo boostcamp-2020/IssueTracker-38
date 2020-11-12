@@ -44,11 +44,11 @@ export default function IssueMain() {
   const [filteredIssues, setFilteredIssues] = useState([]);
 
   const checkFilter = (item) => {
-    if (filters.Assignee && item.assignees.indexOf(filters.Assignee) === -1) return false;
+    if (filters.Assignee && !item.assignees.includes(filters.Assignee)) return false;
     if (filters.Author && item.userId !== filters.Author) return false;
     if (filters.Milestone && item.milestoneId !== filters.Milestone) return false;
     if (filters.Label.length !== 0) {
-      const remain = item.labels.filter((label) => filters.Label.indexOf(label) === -1);
+      const remain = item.labels.filter((label) => !filters.Label.includes(label));
       if (remain.length !== item.labels.length - filters.Label.length) return false;
     }
     return true;
@@ -62,10 +62,7 @@ export default function IssueMain() {
       setFilteredIssues([...issues]);
       return;
     }
-    const result = issues.reduce((prev, cur) => {
-      if (checkFilter(cur)) prev.push(cur);
-      return prev;
-    }, []);
+    const result = issues.filter(checkFilter);
 
     setFilteredIssues(result);
   };
