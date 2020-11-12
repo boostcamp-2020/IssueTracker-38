@@ -52,7 +52,7 @@ const styles = {
   },
 };
 
-export default function MarkAsDropdown({ selections }) {
+export default function MarkAsDropdown({ selections, setSelections }) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
   const { dispatch } = useContext(IssuesContext);
@@ -63,6 +63,7 @@ export default function MarkAsDropdown({ selections }) {
     const result = await issueAPI.markAll(isClosed, selections);
     if (!result) return;
     selections.forEach((issueId) => dispatch({ type: 'UPDATE', payload: { id: issueId, isClosed } }));
+    setSelections([]);
   };
 
   const pageClickEvent = useCallback(({ target }) => {
@@ -104,4 +105,5 @@ export default function MarkAsDropdown({ selections }) {
 
 MarkAsDropdown.propTypes = {
   selections: PropTypes.arrayOf(PropTypes.number).isRequired,
+  setSelections: PropTypes.func.isRequired,
 };

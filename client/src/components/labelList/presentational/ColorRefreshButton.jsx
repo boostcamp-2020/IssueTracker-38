@@ -24,4 +24,5 @@ export default function ColorRefreshButton({ backgroundColor, onClick }) {
 
 ColorRefreshButton.propTypes = {
   backgroundColor: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };

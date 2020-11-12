@@ -5,7 +5,7 @@ import LabelOrMilestoneButton from '../presentational/LableOrMilestoneButton';
 import { useInput } from '../../../hooks/hooks';
 import { getRandomColorCode } from '../../../utils/utils';
 import { labelAPI } from '../../../apis/api';
-import { LabelStore, LabelsContext } from '../../../stores/LabelStore';
+import { LabelsContext } from '../../../stores/LabelStore';
 import LabelList from './LabelList';
 import DisplayFlex from '../layouts/DisplayFlex';
 
@@ -21,9 +21,7 @@ export default function LableMain() {
     color: labelColor,
     description: labelDescription,
   };
-  const showCreateLabelInput = () => {
-    newLabel ? setNewLabel(0) : setNewLabel(1);
-  };
+  const showCreateLabelInput = () => (newLabel ? setNewLabel(0) : setNewLabel(1));
   const makeRandomColor = () => {
     setLabelColor(getRandomColorCode());
   };
@@ -33,6 +31,7 @@ export default function LableMain() {
   const createLabel = async () => {
     const result = await labelAPI.create(labelData);
     dispatch({ type: 'ADD', payload: result });
+    showCreateLabelInput();
   };
 
   return (
@@ -56,6 +55,7 @@ export default function LableMain() {
             onChangeDescription={setLabelDescription}
             onChangeColor={onChangeColor}
             onSave={createLabel}
+            onCancel={showCreateLabelInput}
           />
         )
         : <div />}

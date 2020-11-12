@@ -34,6 +34,20 @@ export default function LabelList() {
     setLabelColor(getRandomColorCode());
   };
 
+  const editEvent = (label) => {
+    setEditState(label.id);
+    setLabelName(label.name);
+    setLabelDescription(label.description);
+    setLabelColor(label.color);
+  };
+
+  const resetEditState = () => {
+    setEditState(inactiveEditState);
+    setLabelName('');
+    setLabelDescription('');
+    setLabelColor('');
+  };
+
   const updateLabel = async () => {
     const labelData = {
       id: editState,
@@ -46,14 +60,7 @@ export default function LabelList() {
     if (!result) return;
 
     dispatch({ type: 'UPDATE', payload: labelData });
-  };
-
-  const editEvent = (label) => {
-    console.log('label', label);
-    setEditState(label.id);
-    setLabelName(label.name);
-    setLabelDescription(label.description);
-    setLabelColor(label.color);
+    resetEditState();
   };
 
   const deleteEvent = async (label) => {
@@ -92,6 +99,7 @@ export default function LabelList() {
               onChangeDescription={initLabelDescription}
               onChangeColor={initLabelColor}
               onSave={updateLabel}
+              onCancel={resetEditState}
             />
           );
         })
