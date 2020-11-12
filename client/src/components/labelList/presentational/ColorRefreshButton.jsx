@@ -9,11 +9,12 @@ const style = {
   borderRadius: '8px',
   border: 'none',
   cursor: 'pointer',
+  marginTop: '11px',
 };
 
-export default function ColorRefreshButton({ backgroundColor,onClick }) {
+export default function ColorRefreshButton({ backgroundColor, onClick }) {
   return (
-    <button onClick={onClick} type="button" css={{ ...style, backgroundColor }} aria-label="colorChange"> 
+    <button onClick={onClick} type="button" css={{ ...style, backgroundColor }} aria-label="colorChange">
       <svg viewBox="0 0 16 16" width="16" height="16">
         <path fillRule="evenodd" d={colorRefreshIcon} />
       </svg>
