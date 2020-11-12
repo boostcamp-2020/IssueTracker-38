@@ -39,7 +39,9 @@ export default function LableMain() {
     const result = await labelAPI.create(labelData);
     dispatch({ type: 'ADD', payload: result });
   };
-
+  const onCancel = () =>{
+    newLabel ? setNewLabel(0) : setNewLabel(1);
+  }
   return (
     <>
       <LabelOrMilestoneButton />
@@ -56,6 +58,7 @@ export default function LableMain() {
             onChangeDescription={setLabelDescription}
             onChangeColor={onChangeColor}
             onSave={createLabel}
+            onCancel={onCancel}
           />
         )
         : <div />}
