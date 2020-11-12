@@ -35,13 +35,15 @@ export default function LableMain() {
   const onChangeColor = (e) => {
     setLabelColor(e.target.value);
   };
-  const createLabel = async () => {
-    const result = await labelAPI.create(labelData);
-    dispatch({ type: 'ADD', payload: result });
-  };
   const onCancel = () =>{
     newLabel ? setNewLabel(0) : setNewLabel(1);
   }
+  const createLabel = async () => {
+    const result = await labelAPI.create(labelData);
+    dispatch({ type: 'ADD', payload: result });
+    onCancel();
+  };
+
   return (
     <>
       <LabelOrMilestoneButton />
