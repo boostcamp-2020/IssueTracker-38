@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import { IssuesContext } from '../../stores/IssueStore';
 import { LabelsContext } from '../../stores/LabelStore';
@@ -38,6 +38,42 @@ export default function IssueMain() {
 
   const [selections, setSelections] = useState([]);
   const [selectionSwitch, toggleSelectionSwitch] = useState(false);
+  const [filters, setFilters] = useState({
+    Author: null, Label: [], Milestone: null, Assignee: null,
+  });
+  const [filteredIssues, setFilteredIssues] = useState([]);
+
+  const checkFilter = (item) => {
+    if (filters.Assignee && !item.assignees.includes(filters.Assignee)) return false;
+    if (filters.Author && item.userId !== filters.Author) return false;
+    if (filters.Milestone && item.milestoneId !== filters.Milestone) return false;
+    if (filters.Label.length !== 0) {
+      const remain = item.labels.filter((label) => !filters.Label.includes(label));
+      if (remain.length !== item.labels.length - filters.Label.length) return false;
+    }
+    return true;
+  };
+
+  const checkIsFilterActive = () => filters.Author || filters.Label.length
+  || filters.Milestone || filters.Assignee;
+
+  const filterIssues = (isFilterActive) => {
+    if (!isFilterActive) {
+      setFilteredIssues([...issues]);
+      return;
+    }
+    const result = issues.filter(checkFilter);
+
+    setFilteredIssues(result);
+  };
+
+  useEffect(() => {
+    filterIssues(checkIsFilterActive());
+  }, [issues]);
+
+  useEffect(() => {
+    filterIssues(checkIsFilterActive());
+  }, [filters]);
 
   const handleCheckboxClick = (issueId) => {
     if (selections.includes(issueId)) {
@@ -56,7 +92,7 @@ export default function IssueMain() {
       return;
     }
 
-    const allIssueIds = issues.map((issue) => issue.id);
+    const allIssueIds = filteredIssues.map((issue) => issue.id);
     setSelections(allIssueIds);
   };
 
@@ -73,20 +109,20 @@ export default function IssueMain() {
           {selections.length > 0
             ? (
               <div css={styles.dropdowns}>
-                <MarkAsDropdown selections={selections} />
+                <MarkAsDropdown selections={selections} setSelections={setSelections} />
               </div>
             )
             : (
               <div css={styles.dropdowns}>
-                <Dropdown title="Author" items={users.map((user) => ({ ...user, value: user.nickname }))} />
-                <Dropdown title="Label" items={labels.map((label) => ({ ...label, value: label.name }))} />
-                <Dropdown title="Milestone" items={milestones.map((milestone) => ({ ...milestone, value: milestone.title }))} />
-                <Dropdown title="Asignee" items={users.map((user) => ({ ...user, value: user.nickname }))} />
+                <Dropdown title="Author" items={users.map((user) => ({ ...user, value: user.nickname }))} filters={filters} setFilters={setFilters} />
+                <Dropdown title="Label" items={labels.map((label) => ({ ...label, value: label.name }))} filters={filters} setFilters={setFilters} />
+                <Dropdown title="Milestone" items={milestones.map((milestone) => ({ ...milestone, value: milestone.title }))} filters={filters} setFilters={setFilters} />
+                <Dropdown title="Assignee" items={users.map((user) => ({ ...user, value: user.nickname }))} filters={filters} setFilters={setFilters} />
               </div>
             )}
         </div>
         <Issues
-          issues={issues}
+          issues={filteredIssues}
           handleCheckboxClick={handleCheckboxClick}
           selections={selections}
         />

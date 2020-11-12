@@ -7,9 +7,9 @@ import DropdownItem from './DropdownItem';
 const styles = {
   dropDown: {
     position: 'absolute',
-    border: '1px solid lightgray',
-    padding: '5px',
+    border: '1px solid #eff1f3',
     background: 'white',
+    boxShadow: '0px 0px 20px 5px #d2d2d2',
   },
   button: {
     border: 'none',
@@ -34,20 +34,44 @@ const styles = {
     borderLeft: '4px solid transparent',
   },
   title: {
-    borderBottom: '1px solid lightgray',
-    margin: '0px',
+    padding: '10px',
+    backgroundColor: '#f7f8fa',
+    borderBottom: '1px solid #eff1f3',
   },
   content: {
     listStyle: 'none',
-    margin: '5px 0 0 0',
-    padding: '5px',
   },
 };
 
-export default function Dropdown({ title, items }) {
+export default function Dropdown({
+  title, items, filters, setFilters,
+}) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
-  const itemList = items.map(({ id, value }) => <DropdownItem id={id} value={value} />);
+
+  const updateFilter = (id) => {
+    const newFilter = { ...filters };
+    if (title === 'Label') {
+      const wasSelected = newFilter[title].indexOf(id);
+      if (wasSelected !== -1) newFilter[title].splice(wasSelected, 1);
+      else newFilter[title].push(id);
+    } else {
+      const wasSelected = newFilter[title] === id;
+      newFilter[title] = wasSelected ? null : id;
+    }
+    setFilters(newFilter);
+  };
+
+  const checkIsSelected = (id) => {
+    if (title === 'Label' && filters[title].length !== 0) return filters[title].indexOf(id) !== -1;
+    if (filters[title] && filters[title] === id) return true;
+    return false;
+  };
+
+  const itemList = items.map(({ id, value }) => {
+    const isSelected = checkIsSelected(id);
+    return <DropdownItem id={id} value={value} isSelected={isSelected} onClick={updateFilter} />;
+  });
 
   const onClick = () => setIsActive(!isActive);
 
@@ -92,4 +116,6 @@ export default function Dropdown({ title, items }) {
 Dropdown.propTypes = {
   title: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filters: PropTypes.shape.isRequired,
+  setFilters: PropTypes.func.isRequired,
 };
