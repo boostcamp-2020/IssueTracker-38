@@ -1,61 +1,65 @@
-import React,{ useState,useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import LabelInputForm from '../presentational/LabelInputForm';
-import DefaultButton from '../../issueDetail/presentational/DefaultButton';
+import NewLabelButton from '../presentational/NewLabelButton';
 import LabelOrMilestoneButton from '../presentational/LableOrMilestoneButton';
 import { useInput } from '../../../hooks/hooks';
 import { getRandomColorCode } from '../../../utils/utils';
 import { labelAPI } from '../../../apis/api';
-import { LabelStore,LabelsContext } from '../../../stores/LabelStore'
-
-const styles = {
-  newLabelButton:{
-    backgroundColor:'green'
-  }
-}
+import { LabelsContext } from '../../../stores/LabelStore';
+import LabelList from './LabelList';
+import DisplayFlex from '../layouts/DisplayFlex';
 
 export default function LableMain() {
-  const [newLabel,setNewLabel]= useState(0);
-  const [labelName,setLabelName] = useInput('');
-  const [labelColor,setLabelColor] = useState(getRandomColorCode());
+  const [newLabel, setNewLabel] = useState(0);
+  const [labelName, setLabelName] = useInput('');
+  const [labelColor, setLabelColor] = useState(getRandomColorCode());
   const [labelDescription, setLabelDescription] = useInput('');
-  const {dispatch} = useContext(LabelsContext);
+  const { dispatch } = useContext(LabelsContext);
 
   const labelData = {
-    name:labelName,
-    color:labelColor,
-    description:labelDescription
-  }
-  const showCreateLabelInput = () =>{
-    newLabel?setNewLabel(0):setNewLabel(1)
-    return;
-  }
-  const makeRandomColor = () =>{
+    name: labelName,
+    color: labelColor,
+    description: labelDescription,
+  };
+  const showCreateLabelInput = () => (newLabel ? setNewLabel(0) : setNewLabel(1));
+  const makeRandomColor = () => {
     setLabelColor(getRandomColorCode());
-  }
-  const onChangeColor = (e) =>{
-    setLabelColor(e.target.value)
-  }
-  const createLabel = async ()=>{
+  };
+  const onChangeColor = (e) => {
+    setLabelColor(e.target.value);
+  };
+  const createLabel = async () => {
     const result = await labelAPI.create(labelData);
-    dispatch({type:'ADD',payload:result});
-  }
+    dispatch({ type: 'ADD', payload: result });
+    showCreateLabelInput();
+  };
 
-  return (<>
-      <LabelOrMilestoneButton />
-      <DefaultButton text='New Label' onClick={showCreateLabelInput} extraStyle={styles.newLabelButton}></DefaultButton>
-      {newLabel
-        ?<LabelInputForm 
-          labelName={labelName} 
-          description={labelDescription} 
-          color={labelColor} 
-          saveText='Create Label' 
-          onClick={makeRandomColor}
-          onChangeName={setLabelName}
-          onChangeDescription={setLabelDescription}
-          onChangeColor={onChangeColor}
-          onSave={createLabel}
+  return (
+    <>
+      <DisplayFlex>
+        <LabelOrMilestoneButton />
+        <NewLabelButton
+          title="New Label"
+          onClick={showCreateLabelInput}
         />
-        :<div></div>}
+      </DisplayFlex>
+      {newLabel
+        ? (
+          <LabelInputForm
+            labelName={labelName}
+            description={labelDescription}
+            color={labelColor}
+            saveText="Create Label"
+            onClick={makeRandomColor}
+            onChangeName={setLabelName}
+            onChangeDescription={setLabelDescription}
+            onChangeColor={onChangeColor}
+            onSave={createLabel}
+            onCancel={showCreateLabelInput}
+          />
+        )
+        : <div />}
+      <LabelList />
     </>
   );
 }

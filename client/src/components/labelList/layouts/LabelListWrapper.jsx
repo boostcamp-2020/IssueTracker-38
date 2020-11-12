@@ -5,7 +5,6 @@ const LabelListWrapper = styled.div({
   margin: '0 auto',
   borderRadius: '6px',
   border: '1px solid lightgrey',
-  justifyContent: 'space-between',
 });
 
 export default LabelListWrapper;

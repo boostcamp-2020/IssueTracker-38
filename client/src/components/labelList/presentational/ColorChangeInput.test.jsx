@@ -7,7 +7,7 @@ import '@testing-library/jest-dom';
 import ColorChangeInput from './ColorChangeInput';
 
 describe('<ColorChangeInput />', () => {
-  it('renders color refresh button', () => {
+  it('renders color change input', () => {
     const colorValue = '#ffffff';
     const { getByDisplayValue } = render(
       <ColorChangeInput

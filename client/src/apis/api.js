@@ -16,6 +16,7 @@ const getFreshAccessToken = async () => {
   const status = await result.status;
 
   if (status === 401) {
+    alert('세션이 만료되어 로그아웃 되었습니다.');
     removeUserInfo();
     return;
   }
@@ -24,13 +25,20 @@ const getFreshAccessToken = async () => {
 
   const { accessToken } = await result.json();
   localStorage.setItem('accessToken', accessToken);
+
+  window.location.reload();
 };
 
 const customFetch = async (url, request) => {
   try {
-    const res = await fetch(url, request);
-    const status = await res.status;
-    if (status === 401) await getFreshAccessToken();
+    let res = await fetch(url, request);
+    let { status } = res;
+    if (status === 401) {
+      await getFreshAccessToken();
+      request.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
+      res = await fetch(url, request);
+      status = res.status;
+    }
     if (status >= 500) throw new Error('Server error');
     if (status >= 400) throw new Error('Client error');
     return res.json();
