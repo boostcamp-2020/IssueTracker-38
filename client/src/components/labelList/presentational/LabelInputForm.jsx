@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 import DefaultButton from '../../issueDetail/presentational/DefaultButton';
 import LabelPreview from './LabelPreview';
@@ -51,7 +51,7 @@ export default function LabelInputForm({
   onChangeDescription,
   onChangeColor,
   onSave,
-  
+  onCancel,
 }) {
   return (
     <div css={styles.inputForm}>
@@ -76,9 +76,22 @@ export default function LabelInputForm({
         </div>
       </div>
       <div css={styles.buttons}>
-        <DefaultButton text="cancel" onClick={} extraStyle={styles.cancelButton} />
+        <DefaultButton text="cancel" onClick={onCancel} extraStyle={styles.cancelButton} />
         <DefaultButton text={saveText} extraStyle={styles.createLabelButton} onClick={onSave} />
       </div>
     </div>
   );
 }
+
+LabelInputForm.propTypes = {
+  labelName: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  saveText: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onChangeName: PropTypes.func.isRequired,
+  onChangeDescription: PropTypes.func.isRequired,
+  onChangeColor: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
