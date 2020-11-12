@@ -35,13 +35,10 @@ export default function LableMain() {
   const onChangeColor = (e) => {
     setLabelColor(e.target.value);
   };
-  const onCancel = () =>{
-    newLabel ? setNewLabel(0) : setNewLabel(1);
-  }
   const createLabel = async () => {
     const result = await labelAPI.create(labelData);
     dispatch({ type: 'ADD', payload: result });
-    onCancel();
+    showCreateLabelInput();
   };
 
   return (
@@ -60,7 +57,7 @@ export default function LableMain() {
             onChangeDescription={setLabelDescription}
             onChangeColor={onChangeColor}
             onSave={createLabel}
-            onCancel={onCancel}
+            onCancel={showCreateLabelInput}
           />
         )
         : <div />}
