@@ -5,7 +5,7 @@ import LabelOrMilestoneButton from '../presentational/LableOrMilestoneButton';
 import { useInput } from '../../../hooks/hooks';
 import { getRandomColorCode } from '../../../utils/utils';
 import { labelAPI } from '../../../apis/api';
-import { LabelStore, LabelsContext } from '../../../stores/LabelStore';
+import { LabelsContext } from '../../../stores/LabelStore';
 import LabelList from './LabelList';
 
 const styles = {
@@ -26,9 +26,7 @@ export default function LableMain() {
     color: labelColor,
     description: labelDescription,
   };
-  const showCreateLabelInput = () => {
-    newLabel ? setNewLabel(0) : setNewLabel(1);
-  };
+  const showCreateLabelInput = () => (newLabel ? setNewLabel(0) : setNewLabel(1));
   const makeRandomColor = () => {
     setLabelColor(getRandomColorCode());
   };
