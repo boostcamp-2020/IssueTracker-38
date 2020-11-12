@@ -1,6 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+import { decideTextColor } from '../../../utils/utils';
+
 const styles = {
   name: {
     padding: '2px 10px',
@@ -13,7 +15,7 @@ const styles = {
 
 export default function LabelItemName({ name, color }) {
   return (
-    <div css={{ ...styles.name, backgroundColor: color }}>
+    <div css={{ ...styles.name, backgroundColor: color, color: decideTextColor(color) }}>
       {name}
     </div>
   );

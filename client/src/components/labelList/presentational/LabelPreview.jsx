@@ -12,7 +12,7 @@ const style = {
   border: 'none',
   borderRadius: '6px',
   fontSize: '14px',
-  height: '30px',
+  marginBottom: '24px',
 };
 
 export default function LabelPreview({ name, color }) {

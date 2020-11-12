@@ -9,6 +9,7 @@ const style = {
   borderRadius: '8px',
   border: 'none',
   cursor: 'pointer',
+  marginTop: '11px',
 };
 
 export default function ColorRefreshButton({ backgroundColor, onClick }) {

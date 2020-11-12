@@ -7,7 +7,7 @@ import '@testing-library/jest-dom';
 import LabelPreview from './LabelPreview';
 
 describe('<LabelPreview />', () => {
-  it('renders color refresh button', () => {
+  it('renders label preview', () => {
     const name = 'Test Label';
     const color = '#ffffff';
 

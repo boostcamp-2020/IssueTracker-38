@@ -14,10 +14,10 @@ const styles = {
   buttonIcon: {
     margin: 'auto 5px',
   },
-  title:{
-    textDecoration:'none',
-    color:'black',
-  }
+  title: {
+    textDecoration: 'none',
+    color: 'black',
+  },
 };
 
 export default function GroupButton({
@@ -26,19 +26,20 @@ export default function GroupButton({
   title,
   emotion,
   linkTo,
+  titleColor = {},
 }) {
-  return (    
+  return (
     <div css={emotion}>
-      <svg viewBox="0 0 16 16" width="16" height="16" css={styles.buttonIcon}>
+      <svg viewBox="0 0 16 16" width="16" height="16" css={{ ...styles.buttonIcon, fill: titleColor }}>
         <path fillRule="evenodd" d={svgPathD} />
       </svg>
       <span>
         {' '}
-        <Link to={linkTo} style={styles.title}>{title}</Link>
+        <Link to={linkTo} style={{ ...styles.title, color: titleColor }}>{title}</Link>
         {' '}
       </span>
-      {countOfGroup?  <span css={styles.count}>{countOfGroup}</span>
-      :<></>}
+      {countOfGroup ? <span css={styles.count}>{countOfGroup}</span>
+        : <></>}
     </div>
   );
 }

@@ -10,17 +10,23 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    width: '100%',
-    height: '150px',
-    backgroundColor: 'lightgrey',
+    width: '1100px',
+    backgroundColor: '#f9f9f9',
     padding: '15px',
+    margin: '0 auto 20px auto',
+    boxSizing: 'border-box',
+    border: '2px solid #a6a6c2',
+    borderRadius: '5px',
   },
   createLabelButton: {
     height: '40px',
     backgroundColor: 'green',
+    color: 'white',
+    cursor: 'pointer',
   },
   cancelButton: {
     height: '40px',
+    cursor: 'pointer',
   },
   labelNameInput: {
     display: 'flex',
@@ -33,11 +39,21 @@ const styles = {
     margin: '5px',
   },
   buttons: {
-    margin: '10px',
+    margin: '8px 0 8px 25px;',
   },
   inputs: {
     display: 'flex',
     flexDirection: 'row',
+  },
+  input: {
+    height: '25px',
+    fontSize: '16px',
+    margin: '10px 0',
+    width: '200px',
+    marginRight: '15px',
+  },
+  title: {
+    fontWeight: 'bold',
   },
 };
 
@@ -62,22 +78,33 @@ export default function LabelInputForm({
       </div>
       <div css={styles.inputs}>
         <div css={styles.labelNameInput}>
-          LabeName
-          <textarea value={labelName} onChange={onChangeName} />
+          <span css={styles.title}>LabelName</span>
+          <input
+            type="text"
+            value={labelName}
+            onChange={onChangeName}
+            css={styles.input}
+          />
         </div>
         <div css={styles.labelDescriptionInput}>
-          Description
-          <textarea value={description} onChange={onChangeDescription} />
+          <span css={styles.title}>Description</span>
+          <input
+            type="text"
+            value={description}
+            onChange={onChangeDescription}
+            css={{ ...styles.input, width: '400px' }}
+          />
         </div>
         <div>
-          Color
+          <div css={styles.title}>Color</div>
           <ColorRefreshButton backgroundColor={color} onClick={onClick} />
           <ColorChangeInput value={color} onChange={onChangeColor} />
         </div>
-      </div>
-      <div css={styles.buttons}>
-        <DefaultButton text="cancel" onClick={onCancel} extraStyle={styles.cancelButton} />
-        <DefaultButton text={saveText} extraStyle={styles.createLabelButton} onClick={onSave} />
+        <div css={styles.buttons}>
+          <br />
+          <DefaultButton text="cancel" onClick={onCancel} extraStyle={styles.cancelButton} />
+          <DefaultButton text={saveText} extraStyle={styles.createLabelButton} onClick={onSave} />
+        </div>
       </div>
     </div>
   );

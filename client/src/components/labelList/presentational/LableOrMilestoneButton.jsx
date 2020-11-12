@@ -9,18 +9,22 @@ export default function LableMain() {
       borderRadius: '6px 0 0 6px',
       padding: '5px 10px',
       display: 'flex',
-      backgroundColor: 'blue',
+      backgroundColor: '#6464de',
+      width: '100px',
     },
     milestoneButton: {
       border: '1px solid grey',
       borderRadius: '0 6px 6px 0',
       padding: '5px 10px',
       display: 'flex',
+      width: '130px',
     },
     groupButtonWrapper: {
+      fontSize: '16px',
+      fontWeight: 'bold',
       display: 'flex',
       width: '250px',
-      height: '30px',
+      color: 'black',
     },
   };
   return (
@@ -30,12 +34,14 @@ export default function LableMain() {
         emotion={styles.labelButton}
         svgPathD={labelIcon}
         linkTo="/labelList"
+        titleColor="white"
       />
       <GroupButton
-        title="Milestone"
+        title="Milestones"
         emotion={styles.milestoneButton}
         svgPathD={milestoneIcon}
         linkTo="/milestoneList"
+        titleColor="black"
       />
     </div>
   );

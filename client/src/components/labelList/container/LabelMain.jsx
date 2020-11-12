@@ -1,18 +1,13 @@
 import React, { useState, useContext } from 'react';
 import LabelInputForm from '../presentational/LabelInputForm';
-import DefaultButton from '../../issueDetail/presentational/DefaultButton';
+import NewLabelButton from '../presentational/NewLabelButton';
 import LabelOrMilestoneButton from '../presentational/LableOrMilestoneButton';
 import { useInput } from '../../../hooks/hooks';
 import { getRandomColorCode } from '../../../utils/utils';
 import { labelAPI } from '../../../apis/api';
 import { LabelsContext } from '../../../stores/LabelStore';
 import LabelList from './LabelList';
-
-const styles = {
-  newLabelButton: {
-    backgroundColor: 'green',
-  },
-};
+import DisplayFlex from '../layouts/DisplayFlex';
 
 export default function LableMain() {
   const [newLabel, setNewLabel] = useState(0);
@@ -41,8 +36,13 @@ export default function LableMain() {
 
   return (
     <>
-      <LabelOrMilestoneButton />
-      <DefaultButton text="New Label" onClick={showCreateLabelInput} extraStyle={styles.newLabelButton} />
+      <DisplayFlex>
+        <LabelOrMilestoneButton />
+        <NewLabelButton
+          title="New Label"
+          onClick={showCreateLabelInput}
+        />
+      </DisplayFlex>
       {newLabel
         ? (
           <LabelInputForm
