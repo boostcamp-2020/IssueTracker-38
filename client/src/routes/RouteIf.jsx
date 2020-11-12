@@ -8,30 +8,27 @@ import Header from '../components/Header';
 import DetailMain from '../components/issueDetail/IssueDetailPage';
 import IssueMain from '../components/issueList/IssueMain';
 import NewIssueMain from '../components/newIssue/NewIssueMain';
-import LabelPage from '../components/labelList/LabelPage';
+import LabelMain from '../components/labelList/container/LabelMain';
 
 export default function RouteIf({ path, exact = false }) {
   return (
-    <Route
-      exact={exact}
-      path={path}
-      render={() => {
-        if (localStorage.getItem('accessToken')) {
-          return (
-            <Router>
-              <Switch>
-                <StoreWrapper>
-                  <Header />
-                  <Route exact path="/" component={IssueMain} />
-                  <Route path="/new-issue" component={NewIssueMain} />
-                  <Route path="/detail/:issueId" component={DetailMain} />
-                  <Route path="/label" component={LabelPage} />
-                  {/* <Redirect path="*" to="/" /> */}
-                </StoreWrapper>
-              </Switch>
-            </Router>
-          );
-        }
+    <Route exact={exact} path={path} render={() => {
+      if (localStorage.getItem('accessToken')) {
+        return (
+          <Router>
+            <Switch>
+              <StoreWrapper>
+                <Header />
+                <Route exact path="/" component={IssueMain} />
+                <Route path="/new-issue" component={NewIssueMain} />
+                <Route path="/labelList" component={LabelMain} />
+                <Route path="/detail/:issueId" component={DetailMain} />
+                <Redirect path="*" to="/" />
+              </StoreWrapper>
+            </Switch>
+          </Router>
+        );
+      }
 
         return <Redirect to="/login" />;
       }}

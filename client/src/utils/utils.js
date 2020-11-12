@@ -53,7 +53,7 @@ const getRandomCharacter = (characters) => {
   return characters[randomIndex];
 };
 
-const getRandomColorCode = () => {
+export const getRandomColorCode = () => {
   const CODE_LENGTH = 6;
   const characters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
 
