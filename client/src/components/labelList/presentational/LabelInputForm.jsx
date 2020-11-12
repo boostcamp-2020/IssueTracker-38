@@ -51,6 +51,7 @@ export default function LabelInputForm({
   onChangeDescription,
   onChangeColor,
   onSave,
+  onCancel
   
 }) {
   return (
@@ -76,7 +77,7 @@ export default function LabelInputForm({
         </div>
       </div>
       <div css={styles.buttons}>
-        <DefaultButton text="cancel" onClick={} extraStyle={styles.cancelButton} />
+        <DefaultButton text="cancel" onClick={onCancel} extraStyle={styles.cancelButton} />
         <DefaultButton text={saveText} extraStyle={styles.createLabelButton} onClick={onSave} />
       </div>
     </div>
