@@ -8,10 +8,12 @@ const styles = {
   },
 };
 
-export default function LabelItemButtons({ editState, editEvent, deleteEvent }) {
+export default function LabelItemButtons({
+  editState, editEvent, deleteEvent,
+}) {
   return (
     <div css={styles.buttons}>
-      {!editState && <TextButton text="Edit" onClick={editEvent} />}
+      {editState && <TextButton text="Edit" onClick={editEvent} />}
       <TextButton text="Delete" onClick={deleteEvent} />
     </div>
   );
