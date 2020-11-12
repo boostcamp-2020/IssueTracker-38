@@ -26,7 +26,7 @@ export default function RouteIf({ path, exact = false }) {
                   <Route path="/new-issue" component={NewIssueMain} />
                   <Route path="/labelList" component={LabelMain} />
                   <Route path="/detail/:issueId" component={DetailMain} />
-                  {/* <Redirect path="*" to="/" /> */}
+                  <Redirect path="*" to="/" />
                 </StoreWrapper>
               </Switch>
             </Router>
