@@ -68,7 +68,6 @@ module.exports = {
     if (Object.keys(willBeUpdated).length) {
       await Issue.update(willBeUpdated, { where: { id: IssueId } });
     }
-    console.log('req.body', req.body);
     process.emit('issue', { type: 'UPDATE', payload: req.body });
     res.json({ message: '수정 되었습니다.' });
   },

@@ -1,6 +1,5 @@
 import { useEffect, useContext } from 'react';
 import io from 'socket.io-client';
-// import { getItemById } from './utils/utils';
 import { IssuesContext } from './stores/IssueStore';
 import { LabelsContext } from './stores/LabelStore';
 import { UsersContext } from './stores/UserStore';
@@ -14,18 +13,14 @@ export default function Socket() {
 
   useEffect(() => {
     socket.on('label', ({ type, payload }) => {
-      payload.id = +payload.id;
-      labelDispatch({ type, payload });
+      labelDispatch({ type, payload: { ...payload, id: +payload.id } });
     });
 
     socket.on('user', ({ type, payload }) => {
-      payload.id = +payload.id;
-      userDispatch({ type, payload });
+      userDispatch({ type, payload: { ...payload, id: +payload.id } });
     });
 
     socket.on('issue', ({ type, payload }) => {
-      console.log('Socket Payload', JSON.stringify(payload));
-      console.log('Socket Payload', payload);
       if (type === 'ADD' || type === 'UPDATE') {
         issueDispatch({ type, payload });
         return;

@@ -1,11 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import LabelInputForm from '../presentational/LabelInputForm';
 import NewLabelButton from '../presentational/NewLabelButton';
 import LabelOrMilestoneButton from '../presentational/LableOrMilestoneButton';
 import { useInput } from '../../../hooks/hooks';
 import { getRandomColorCode } from '../../../utils/utils';
 import { labelAPI } from '../../../apis/api';
-import { LabelsContext } from '../../../stores/LabelStore';
 import LabelList from './LabelList';
 import DisplayFlex from '../layouts/DisplayFlex';
 
@@ -14,7 +13,6 @@ export default function LableMain() {
   const [labelName, setLabelName] = useInput('');
   const [labelColor, setLabelColor] = useState(getRandomColorCode());
   const [labelDescription, setLabelDescription] = useInput('');
-  const { dispatch } = useContext(LabelsContext);
 
   const labelData = {
     name: labelName,
@@ -29,8 +27,7 @@ export default function LableMain() {
     setLabelColor(e.target.value);
   };
   const createLabel = async () => {
-    const result = await labelAPI.create(labelData);
-    // dispatch({ type: 'ADD', payload: result });
+    await labelAPI.create(labelData);
     showCreateLabelInput();
   };
 

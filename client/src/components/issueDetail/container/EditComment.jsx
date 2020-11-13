@@ -30,7 +30,6 @@ export default function EditComment({ children, newContent, setNewContent }) {
       </CommentTitleWrapper>
       <CommentContentWrapper>
         <EditCommentTextInputWrapper value={newContent} placeholder="Leave a Comment" onChange={handleContent} />
-        {/* <div>Attach files by checking here.</div> */}
         <CountOfCharacter displayState={displayState} count={countOfCharacter} />
         {children}
       </CommentContentWrapper>

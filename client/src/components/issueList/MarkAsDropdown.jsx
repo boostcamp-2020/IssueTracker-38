@@ -1,8 +1,7 @@
 import React, {
-  useState, useEffect, useRef, useCallback, useContext,
+  useState, useEffect, useRef, useCallback,
 } from 'react';
 import { PropTypes } from 'prop-types';
-import { IssuesContext } from '../../stores/IssueStore';
 
 import { issueAPI } from '../../apis/api';
 
@@ -55,14 +54,12 @@ const styles = {
 export default function MarkAsDropdown({ selections, setSelections }) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
-  const { dispatch } = useContext(IssuesContext);
 
   const onClick = () => setIsActive(!isActive);
 
   const handleMarkAsAction = (isClosed) => async () => {
     const result = await issueAPI.markAll(isClosed, selections);
     if (!result) return;
-    // selections.forEach((issueId) => dispatch({ type: 'UPDATE', payload: { id: issueId, isClosed } }));
     setSelections([]);
   };
 

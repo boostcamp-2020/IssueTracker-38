@@ -27,7 +27,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).send(err);
@@ -38,7 +37,6 @@ app.listen(port, () => {
 });
 
 process.on('issue', (message) => {
-  console.log('message', message);
   io.emit('issue', message);
 });
 process.on('label', (message) => {

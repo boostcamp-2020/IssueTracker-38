@@ -16,7 +16,7 @@ export default function AuthCallback() {
     window.localStorage.setItem('accessToken', accessToken);
     window.localStorage.setItem('refreshToken', refreshToken);
     window.localStorage.setItem('userInfo', JSON.stringify(userInfo));
-    history.push('/')
+    history.push('/');
   };
 
   const query = new URLSearchParams(useLocation().search);

@@ -11,7 +11,7 @@ import { getRandomColorCode } from '../../../utils/utils';
 import { labelAPI } from '../../../apis/api';
 
 export default function LabelList() {
-  const { labels, dispatch } = useContext(LabelsContext);
+  const { labels } = useContext(LabelsContext);
   const inactiveEditState = false;
   const [editState, setEditState] = useState(inactiveEditState);
 
@@ -58,15 +58,11 @@ export default function LabelList() {
 
     const result = await labelAPI.update(labelData);
     if (!result) return;
-
-    // dispatch({ type: 'UPDATE', payload: labelData });
     resetEditState();
   };
 
   const deleteEvent = async (label) => {
-    const result = await labelAPI.remove(label.id);
-    if (!result) return;
-    // dispatch({ type: 'DELETE', payload: { id: label.id } });
+    await labelAPI.remove(label.id);
   };
 
   return (

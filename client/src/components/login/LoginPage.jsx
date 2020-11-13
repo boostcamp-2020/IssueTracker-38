@@ -1,12 +1,12 @@
 import React from 'react';
-import LoginMain from './container/LoginMain';
-
 import { Redirect } from 'react-router-dom';
+
+import LoginMain from './container/LoginMain';
 
 export default function LoginPage() {
   const token = localStorage.getItem('accessToken');
   if (token) {
-    return <Redirect to='/' />
+    return <Redirect to="/" />;
   }
 
   return (
