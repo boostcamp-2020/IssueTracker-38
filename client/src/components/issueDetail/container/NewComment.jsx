@@ -1,13 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { issueAPI, commentAPI } from '../../../apis/api';
-import { IssuesContext } from '../../../stores/IssueStore';
 import EditComment from './EditComment';
 import DefaultButton from '../presentational/DefaultButton';
 import SubmitButton from '../presentational/SubmitButton';
 
 export default function NewComment({ user, issue, addComment }) {
-  const { dispatch } = useContext(IssuesContext);
   const [newContent, setNewContent] = useState('');
 
   const createComment = async (e) => {
@@ -27,11 +25,7 @@ export default function NewComment({ user, issue, addComment }) {
     e.preventDefault();
 
     await createComment();
-    const result = await issueAPI.update({ id: issue.id, isClosed: !issue.isClosed });
-
-    if (!result) return;
-    const updated = { ...issue, isClosed: !issue.isClosed };
-    // dispatch({ type: 'UPDATE', payload: updated });
+    await issueAPI.update({ id: issue.id, isClosed: !issue.isClosed });
   };
 
   return (

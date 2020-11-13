@@ -9,10 +9,13 @@ const styles = {
     width: '300px',
     height: '200px',
     fontSize: '30px',
+    color: 'white',
+    fontWeigth: 'bold',
+    backgroundColor: 'black',
     '&:hover': {
-      backgroundColor: 'green',
+      backgroundColor: '#173B0B',
     },
-  }
+  },
 };
 
 export default function LoginMain() {

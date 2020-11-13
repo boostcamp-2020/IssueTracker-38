@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { PropTypes } from 'prop-types';
+import { decideTextColor } from '../../utils/utils';
 
 const styles = {
   item: {
@@ -16,7 +17,10 @@ export default function NewIssueSideBarAssignedDropdown({ assigned }) {
   return (
     <div>
       {assigned.map(({ name, color }) => (
-        <div css={{ ...styles.item, background: color, display: name ? 'inline-block' : 'block' }}>
+        <div css={{
+          ...styles.item, background: color, color: decideTextColor(color), display: name ? 'inline-block' : 'block',
+        }}
+        >
           {name}
         </div>
       ))}

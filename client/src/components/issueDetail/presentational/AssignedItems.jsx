@@ -1,5 +1,6 @@
 import { React } from 'react';
 import { PropTypes } from 'prop-types';
+import { decideTextColor } from '../../../utils/utils';
 
 const styles = {
   item: {
@@ -15,7 +16,10 @@ export default function AssignedItems({ assigned }) {
   return (
     <div>
       {assigned.map((element) => (
-        <div css={{ ...styles.item, background: element.color, display: element.name ? 'inline-block' : 'block' }}>
+        <div css={{
+          ...styles.item, background: element.color, color: element.name ? decideTextColor(element.color) : 'black', display: element.name ? 'inline-block' : 'block',
+        }}
+        >
           {element.name || element.title || element.nickname}
         </div>
       ))}

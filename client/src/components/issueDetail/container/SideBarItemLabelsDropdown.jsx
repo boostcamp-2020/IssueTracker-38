@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 
 import { useParams } from 'react-router-dom';
-import { IssuesContext } from '../../../stores/IssueStore';
 
 import { getItemById } from '../../../utils/utils';
 
@@ -17,25 +16,13 @@ export default function SideBarItemLabelsDropdown({
   items, assigned, type, dropdownRef,
 }) {
   const { issueId } = useParams();
-  const { issues, dispatch } = useContext(IssuesContext);
 
   const isAlreadyAssigned = (id) => getItemById(assigned, id);
 
-  const targetIssue = { ...getItemById(issues, +issueId) };
-
   const handleLabelsAssigning = (id) => async () => {
     const actionType = isAlreadyAssigned(id) ? 'delete' : 'add';
-    const { labels } = targetIssue;
-    const actions = {
-      add: () => labels.push(id),
-      delete: () => labels.splice(labels.indexOf(id), 1),
-    };
 
-    actions[actionType]();
-    const result = await issueAPI.update({ id: issueId, label: { type: actionType, id } });
-    if (!result) return;
-
-    // dispatch({ type: 'UPDATE', payload: targetIssue });
+    await issueAPI.update({ id: issueId, label: { type: actionType, id } });
   };
 
   return (

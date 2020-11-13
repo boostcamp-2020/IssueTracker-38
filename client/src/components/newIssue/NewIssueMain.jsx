@@ -1,12 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
 
 import { useInput } from '../../hooks/hooks';
 
 import { issueAPI } from '../../apis/api';
-
-import { IssuesContext } from '../../stores/IssueStore';
 
 import NewIssueTitle from './NewIssueTitle';
 import NewIssueComment from './NewIssueComment';
@@ -35,8 +33,6 @@ const styles = {
 export default function NewIssueMain() {
   const history = useHistory();
   const currentUser = JSON.parse(localStorage.getItem('userInfo'));
-  const { issues, dispatch } = useContext(IssuesContext);
-
   const [inputTitle, handleInputTitle] = useInput('');
   const [inputContent, handleInputContent] = useInput('');
 
@@ -72,15 +68,6 @@ export default function NewIssueMain() {
 
     alert('새로운 이슈를 추가하였습니다');
     resetForm();
-    // dispatch({
-    //   type: 'ADD',
-    //   payload: {
-    //     ...result,
-    //     assignees: newIssue.assignees,
-    //     labels: newIssue.labels,
-    //     milestoneId: newIssue.milestoneId,
-    //   },
-    // });
     history.push('/');
   };
 

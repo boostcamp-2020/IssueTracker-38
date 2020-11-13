@@ -18,7 +18,7 @@ const getFreshAccessToken = async () => {
   if (status === 401) {
     alert('세션이 만료되어 로그아웃 되었습니다.');
     removeUserInfo();
-    return;
+    return status;
   }
   if (status >= 500) throw new Error('Server error');
   if (status >= 400) throw new Error('Client error');
@@ -26,7 +26,7 @@ const getFreshAccessToken = async () => {
   const { accessToken } = await result.json();
   localStorage.setItem('accessToken', accessToken);
 
-  window.location.reload();
+  return status;
 };
 
 const customFetch = async (url, request) => {
@@ -34,10 +34,12 @@ const customFetch = async (url, request) => {
     let res = await fetch(url, request);
     let { status } = res;
     if (status === 401) {
-      await getFreshAccessToken();
-      request.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
-      res = await fetch(url, request);
-      status = res.status;
+      const freshStatus = await getFreshAccessToken();
+      if (freshStatus < 400) {
+        request.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
+        res = await fetch(url, request);
+        status = res.status;
+      }
     }
     if (status >= 500) throw new Error('Server error');
     if (status >= 400) throw new Error('Client error');

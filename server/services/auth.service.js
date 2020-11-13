@@ -65,14 +65,14 @@ module.exports = {
   },
   async getFreshAcessToken(req, res) {
     const refreshToken = req.headers.authorization.split('Bearer ')[1];
-    const { dataValues: user } = await User.findOne({ where: { refreshToken } });
+    const result = await User.findOne({ where: { refreshToken } });
 
-    if (!user) {
+    if (!result) {
       res.status(401).send({ message: 'Invalid refresh token' });
       return;
     }
 
-    const accessToken = getUserAccessToken(user);
+    const accessToken = getUserAccessToken(result.dataValues);
     res.status(200).send({ accessToken });
   },
 };

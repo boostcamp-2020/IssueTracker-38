@@ -1,6 +1,6 @@
 import React from 'react';
 import { removeUserInfo } from '../../../utils/utils';
-import TextButton from '../../../components/issueDetail/presentational/TextButton';
+import TextButton from '../../issueDetail/presentational/TextButton';
 
 const style = {
   position: 'absolute',

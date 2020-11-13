@@ -49,5 +49,6 @@ GroupButton.propTypes = {
   svgPathD: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   emotion: PropTypes.objectOf(PropTypes.node).isRequired,
-  onClick: PropTypes.shape.isRequired,
+  linkTo: PropTypes.string.isRequired,
+  titleColor: PropTypes.shape.isRequired,
 };

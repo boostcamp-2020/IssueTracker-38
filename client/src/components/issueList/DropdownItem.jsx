@@ -8,6 +8,9 @@ const styles = {
     display: 'flex',
     padding: '5px',
     borderBottom: '1px solid #eff1f3',
+    '&:hover': {
+      backgroundColor: '#efefef',
+    },
   },
   filterName: {
     margin: 'auto 0',
