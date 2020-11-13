@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 import { UsersContext } from '../../stores/UserStore';
 import { MilestoneContext } from '../../stores/MilestoneStore';
 import { LabelsContext } from '../../stores/LabelStore';
-import { calElapsedTime, getItemById } from '../../utils/utils';
+import { calElapsedTime, getItemById, decideTextColor } from '../../utils/utils';
 import { openedIcon, closedIcon, milestoneIcon } from '../../icons/icons';
 
 const styles = {
@@ -82,7 +82,7 @@ export default function Issue({
           const target = getItemById(allLabels, labelId);
           if (!target) return (<></>);
           return (
-            <div css={{ ...styles.label, backgroundColor: target.color }}>
+            <div css={{ ...styles.label, backgroundColor: target.color, color: decideTextColor(target.color) }}>
               {target.name}
             </div>
           );
