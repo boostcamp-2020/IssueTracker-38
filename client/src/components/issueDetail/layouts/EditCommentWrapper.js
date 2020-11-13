@@ -8,7 +8,8 @@ padding: 5px 0;
 text-align: center;
 border: 1px solid #e1e4e8;
 border-radius: 6px 6px 0 0;
-border-bottom: 0;`;
+border-bottom: 0;
+`;
 
 export const EditCommentTextInputWrapper = styled.textarea`
 border: 1px solid #e1e4e8;
