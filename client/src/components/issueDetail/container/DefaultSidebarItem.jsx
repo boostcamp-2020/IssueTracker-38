@@ -2,8 +2,8 @@ import { React, useContext } from 'react';
 import { PropTypes } from 'prop-types';
 import { useParams } from 'react-router-dom';
 
-import { IssuesContext } from '../../../stores/IssueStore';
-import { getItemById } from '../../../utils/utils';
+// import { IssuesContext } from '../../../stores/IssueStore';
+// import { getItemById } from '../../../utils/utils';
 import { issueAPI } from '../../../apis/api';
 import SelfAssignButton from '../presentational/SelfAssignButton';
 import DefaultMessageWrapper from '../layouts/DefaultSidebarItemWrapper';
@@ -11,16 +11,16 @@ import DefaultMessageWrapper from '../layouts/DefaultSidebarItemWrapper';
 export default function DefaultSidebarItem({
   title, author, defaultMessage,
 }) {
-  const { issues, dispatch } = useContext(IssuesContext);
+  // const { issues, dispatch } = useContext(IssuesContext);
   const { issueId } = useParams();
   const assignMyself = (id) => async () => {
     const type = 'add';
-    const targetIssue = { ...getItemById(issues, +issueId) };
+    // const targetIssue = { ...getItemById(issues, +issueId) };
 
-    const { assignees } = targetIssue;
-    assignees.push(id);
+    // const { assignees } = targetIssue;
+    // assignees.push(id);
 
-    const result = await issueAPI.update({ id: issueId, assignee: { type, id: author.id } });
+    const result = await issueAPI.update({ id: issueId, assignee: { type, id } });
     if (!result) return;
 
     // dispatch({ type: 'UPDATE', payload: targetIssue });

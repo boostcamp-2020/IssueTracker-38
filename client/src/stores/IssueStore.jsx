@@ -22,7 +22,8 @@ function issueReducer(issues, { type, payload }) {
       if (label) {
         if (label.type === 'add') {
           console.log('before', targetIssue.labels);
-          // targetIssue.labels.push(+label.id);
+          targetIssue.labels.push(+label.id);
+          // targetIssue.labels = [...new Set(targetIssue.labels)];
           console.log('after', targetIssue.labels);
         }
         if (label.type === 'delete') targetIssue.labels = targetIssue.labels.filter((labelId) => labelId !== +label.id);
@@ -30,7 +31,7 @@ function issueReducer(issues, { type, payload }) {
       }
 
       if (assignee) {
-        // if (assignee.type === 'add') targetIssue.assignees.push(+assignee.id);
+        if (assignee.type === 'add') targetIssue.assignees.push(+assignee.id);
         if (assignee.type === 'delete') targetIssue.assignees = targetIssue.assignees.filter((assigneeId) => assigneeId !== assignee.id);
         willBeUpdate.assignees = targetIssue.assignees;
       }

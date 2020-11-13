@@ -17,21 +17,21 @@ export default function SideBarItemAssigneesDropdown({
   items, assigned, type, dropdownRef,
 }) {
   const { issueId } = useParams();
-  const { issues, dispatch } = useContext(IssuesContext);
+  // const { issues, dispatch } = useContext(IssuesContext);
 
   const isAlreadyAssigned = (id) => getItemById(assigned, id);
 
-  const targetIssue = { ...getItemById(issues, +issueId) };
+  // const targetIssue = { ...getItemById(issues, +issueId) };
 
   const handleAssigneesAssigning = (id) => async () => {
     const actionType = isAlreadyAssigned(id) ? 'delete' : 'add';
-    const { assignees } = targetIssue;
-    const actions = {
-      add: () => assignees.push(id),
-      delete: () => assignees.splice(assignees.indexOf(id), 1),
-    };
+    // const { assignees } = targetIssue;
+    // const actions = {
+    //   add: () => assignees.push(id),
+    //   delete: () => assignees.splice(assignees.indexOf(id), 1),
+    // };
 
-    actions[actionType]();
+    // actions[actionType]();
     const result = await issueAPI.update({ id: issueId, assignee: { type: actionType, id } });
     if (!result) return;
 
