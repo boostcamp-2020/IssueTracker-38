@@ -7,6 +7,7 @@ const styles = {
     padding: '5px 16px',
     borderRadius: '6px',
     border: '1px solid #e1e4e8',
+    fontSize: '15px',
     fontWeight: '600',
     '&:focus': {
       outline: 'none',
@@ -14,10 +15,10 @@ const styles = {
   },
 };
 
-export default function DefaultButton({ text, onClick, fontSize = '15px' }) {
+export default function DefaultButton({ text, onClick, extraStyle = {} }) {
   return (
     <>
-      <button css={{ ...styles.button, fontSize }} type="button" onClick={onClick}>
+      <button css={{ ...styles.button, ...extraStyle }} type="button" onClick={onClick}>
         {text}
       </button>
     </>
@@ -27,5 +28,5 @@ export default function DefaultButton({ text, onClick, fontSize = '15px' }) {
 DefaultButton.propTypes = {
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  fontSize: PropTypes.string.isRequired,
+  extraStyle: PropTypes.shape.isRequired,
 };

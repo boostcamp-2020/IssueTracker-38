@@ -7,6 +7,8 @@ function userReducer(users, { type, payload }) {
   switch (type) {
     case 'INIT':
       return payload;
+    case 'ADD':
+      return [...users, payload];
     default:
       return users;
   }

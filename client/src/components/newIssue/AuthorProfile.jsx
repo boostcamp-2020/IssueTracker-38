@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { PropTypes } from 'prop-types';
 import { UsersContext } from '../../stores/UserStore';
-import { getItemById, getNicknameByEmail } from '../../utils/utils';
+import { getItemById } from '../../utils/utils';
 
 const styles = {
   nickname: {
@@ -12,8 +12,7 @@ const styles = {
 
 export default function AuthorProfile({ authorId }) {
   const { users } = useContext(UsersContext);
-  const author = getItemById(users, authorId);
-  const authorNickname = getNicknameByEmail(author?.email || 'nickname');
+  const authorNickname = getItemById(users, authorId)?.nickname;
 
   return (
     <div>

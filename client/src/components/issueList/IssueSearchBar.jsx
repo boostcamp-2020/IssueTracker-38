@@ -47,12 +47,14 @@ export default function IssueSearchBar({ countOfLabels, countOfMilestones }) {
           countOfGroup={countOfLabels}
           emotion={styles.labelButton}
           svgPathD={labelIcon}
+          linkTo="labelList"
         />
         <GroupButton
           title="Milestones"
           countOfGroup={countOfMilestones}
           emotion={styles.milestoneButton}
           svgPathD={milestoneIcon}
+          linkTo="/"
         />
       </div>
       <NewIssue />

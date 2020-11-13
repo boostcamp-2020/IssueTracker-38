@@ -33,7 +33,7 @@ module.exports = {
     res.json(Object.values(issues));
   },
   async update(req, res) {
-    const willBeUpdated = req.body;
+    const willBeUpdated = { ...req.body };
     const IssueId = willBeUpdated.id;
     delete willBeUpdated.id;
 
@@ -68,7 +68,7 @@ module.exports = {
     if (Object.keys(willBeUpdated).length) {
       await Issue.update(willBeUpdated, { where: { id: IssueId } });
     }
-
+    process.emit('issue', { type: 'UPDATE', payload: req.body });
     res.json({ message: '수정 되었습니다.' });
   },
   async updateMarkedIssues(req, res) {
@@ -85,6 +85,7 @@ module.exports = {
       },
     );
 
+    process.emit('issue', { type: 'UPDATE:isClosed', payload: req.body });
     res.json({ message: '수정 되었습니다.' });
   },
   async create(req, res) {
@@ -115,7 +116,9 @@ module.exports = {
       }
 
       await transaction.commit();
+      const { dataValues } = createdIssue;
 
+      process.emit('issue', { type: 'ADD', payload: { ...dataValues, labels, assignees } });
       res.status(200).json(createdIssue);
     } catch (err) {
       await transaction.rollback();

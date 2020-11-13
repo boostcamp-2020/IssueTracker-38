@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Logout from './login/container/Logout';
 
 const styles = {
   header: {
@@ -6,6 +8,7 @@ const styles = {
     backgroundColor: 'black',
     textAlign: 'center',
     margin: '0',
+    position: 'relative',
   },
   title: {
     padding: '0',
@@ -20,7 +23,8 @@ const styles = {
 export default function header() {
   return (
     <header css={styles.header}>
-      <a css={styles.title} href="/">ISSUES</a>
+      <Link to="/" style={styles.title}>ISSUES</Link>
+      <Logout />
     </header>
   );
 }

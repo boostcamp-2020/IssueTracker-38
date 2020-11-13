@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { UsersContext } from '../../../stores/UserStore';
-import { AuthContext } from '../../../stores/AuthStore';
 import { commentAPI } from '../../../apis/api';
-import { calElapsedTime, getItemById, getNicknameByEmail } from '../../../utils/utils';
+import { calElapsedTime, getItemById } from '../../../utils/utils';
 import CommentLayout from '../presentational/CommentLayout';
-import CommentTitleWrapper from '../presentational/CommentTitleWrapper';
+import CommentTitleWrapper from '../layouts/CommentTitleWrapper';
 import CommentTitle from '../presentational/CommentTitle';
-import CommentContentWrapper from '../presentational/CommentContentWrapper';
+import CommentContentWrapper from '../layouts/CommentContentWrapper';
 import EditComment from './EditComment';
 import DefaultButtom from '../presentational/DefaultButton';
 import SubmitButton from '../presentational/SubmitButton';
@@ -22,12 +21,11 @@ export default function Comment({
   updateComment,
 }) {
   const { users } = useContext(UsersContext);
-  const { currentUser } = useContext(AuthContext);
+  const currentUser = JSON.parse(localStorage.getItem('userInfo'));
   const [editState, setEditState] = useState(false);
   const [newContent, setNewContent] = useState(content);
 
-  const writer = getItemById(users, +userId);
-  const writerEmail = getNicknameByEmail(writer?.email || '@');
+  const writerNickname = getItemById(users, +userId)?.nickname;
   const elapsedTime = updatedAt ? calElapsedTime(updatedAt) : calElapsedTime(createdAt);
   const owner = currentUser.id === userId;
 
@@ -63,7 +61,7 @@ export default function Comment({
           <CommentLayout>
             <CommentTitleWrapper>
               <CommentTitle
-                email={writerEmail}
+                nickname={writerNickname}
                 elapsedTime={elapsedTime}
                 mark={markOfOwner()}
                 isOwner={owner}

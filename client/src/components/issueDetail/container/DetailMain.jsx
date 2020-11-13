@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { AuthContext } from '../../../stores/AuthStore';
 import { IssuesContext } from '../../../stores/IssueStore';
 import DetailTitle from './DetailTitle';
 import NewComment from './NewComment';
@@ -9,23 +8,10 @@ import CommentList from '../presentational/CommentList';
 import SideBar from './SideBar';
 import { getItemById, updateStoreItem } from '../../../utils/utils';
 import { commentAPI } from '../../../apis/api';
-
-const styles = {
-  body: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    width: '1200px',
-    boxSizing: 'border-box',
-    margin: '0 auto',
-  },
-  main: {
-    width: '1200px',
-    display: 'flex',
-  },
-};
+import { DetailMainWrapper, DetailContentWrapper } from '../layouts/DetailMainWrapper';
 
 export default function DetailMain() {
-  const { currentUser } = useContext(AuthContext);
+  const currentUser = JSON.parse(localStorage.getItem('userInfo'));
   const { issues } = useContext(IssuesContext);
   const { issueId } = useParams();
   const [issue, setIssue] = useState();
@@ -51,12 +37,12 @@ export default function DetailMain() {
   };
 
   return (
-    <div css={styles.body}>
+    <DetailMainWrapper>
       <DetailTitle
         issue={issue}
         countOfComments={comments.length - 1}
       />
-      <div css={styles.main}>
+      <DetailContentWrapper>
         <div>
           <CommentList
             issueAuthorId={issue?.userId}
@@ -70,7 +56,7 @@ export default function DetailMain() {
           />
         </div>
         <SideBar />
-      </div>
-    </div>
+      </DetailContentWrapper>
+    </DetailMainWrapper>
   );
 }
