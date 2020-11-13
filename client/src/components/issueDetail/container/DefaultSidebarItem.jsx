@@ -23,7 +23,7 @@ export default function DefaultSidebarItem({
     const result = await issueAPI.update({ id: issueId, assignee: { type, id: author.id } });
     if (!result) return;
 
-    dispatch({ type: 'UPDATE', payload: targetIssue });
+    // dispatch({ type: 'UPDATE', payload: targetIssue });
   };
 
   return (

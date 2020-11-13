@@ -31,7 +31,7 @@ export default function NewComment({ user, issue, addComment }) {
 
     if (!result) return;
     const updated = { ...issue, isClosed: !issue.isClosed };
-    dispatch({ type: 'UPDATE', payload: updated });
+    // dispatch({ type: 'UPDATE', payload: updated });
   };
 
   return (

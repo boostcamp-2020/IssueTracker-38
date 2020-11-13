@@ -35,7 +35,7 @@ export default function SideBarItemAssigneesDropdown({
     const result = await issueAPI.update({ id: issueId, assignee: { type: actionType, id } });
     if (!result) return;
 
-    dispatch({ type: 'UPDATE', payload: targetIssue });
+    // dispatch({ type: 'UPDATE', payload: targetIssue });
   };
 
   return (

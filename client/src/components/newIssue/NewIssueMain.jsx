@@ -72,15 +72,15 @@ export default function NewIssueMain() {
 
     alert('새로운 이슈를 추가하였습니다');
     resetForm();
-    dispatch({
-      type: 'ADD',
-      payload: {
-        ...result,
-        assignees: newIssue.assignees,
-        labels: newIssue.labels,
-        milestoneId: newIssue.milestoneId,
-      },
-    });
+    // dispatch({
+    //   type: 'ADD',
+    //   payload: {
+    //     ...result,
+    //     assignees: newIssue.assignees,
+    //     labels: newIssue.labels,
+    //     milestoneId: newIssue.milestoneId,
+    //   },
+    // });
     history.push('/');
   };
 

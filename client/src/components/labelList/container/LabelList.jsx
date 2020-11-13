@@ -59,14 +59,14 @@ export default function LabelList() {
     const result = await labelAPI.update(labelData);
     if (!result) return;
 
-    dispatch({ type: 'UPDATE', payload: labelData });
+    // dispatch({ type: 'UPDATE', payload: labelData });
     resetEditState();
   };
 
   const deleteEvent = async (label) => {
     const result = await labelAPI.remove(label.id);
     if (!result) return;
-    dispatch({ type: 'DELETE', payload: { id: label.id } });
+    // dispatch({ type: 'DELETE', payload: { id: label.id } });
   };
 
   return (

@@ -3,6 +3,7 @@ export const updateStoreItem = (prevState, payload) => {
   const targetIndex = nextState.findIndex((v) => v.id === payload.id);
   if (targetIndex < 0) return prevState;
   nextState[targetIndex] = { ...nextState[targetIndex], ...payload };
+
   return nextState;
 };
 

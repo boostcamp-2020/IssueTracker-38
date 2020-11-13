@@ -48,7 +48,7 @@ module.exports = {
     });
 
     const { login: nickname } = userData;
-    const [result] = await User.findOrCreate({ where: { nickname }, defaults: {} });
+    const [result, isCreated] = await User.findOrCreate({ where: { nickname }, defaults: {} });
     const { dataValues: user } = result;
 
     const accessToken = getUserAccessToken(user);
@@ -60,6 +60,8 @@ module.exports = {
       refreshToken,
       userInfo: { id: user.id, nickname: user.nickname },
     });
+
+    if (isCreated) process.emit('user', { type: 'ADD', payload: user });
   },
   async getFreshAcessToken(req, res) {
     const refreshToken = req.headers.authorization.split('Bearer ')[1];
