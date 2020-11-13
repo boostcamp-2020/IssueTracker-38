@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { issueAPI } from '../../../apis/api';
 import { UsersContext } from '../../../stores/UserStore';
-import { IssuesContext } from '../../../stores/IssueStore';
+// import { IssuesContext } from '../../../stores/IssueStore';
 import { calElapsedTime, getItemById } from '../../../utils/utils';
 import IssueTitle from '../presentational/IssueTitle';
 import IssueState from '../presentational/IssueState';
@@ -20,7 +20,7 @@ export default function DetailTitle({ issue, countOfComments }) {
   const createdAt = issue?.createdAt;
   const { issueId } = useParams();
 
-  const { dispatch } = useContext(IssuesContext);
+  // const { dispatch } = useContext(IssuesContext);
   const { users } = useContext(UsersContext);
   const author = getItemById(users, +userId)?.nickname;
 
@@ -34,7 +34,7 @@ export default function DetailTitle({ issue, countOfComments }) {
   const titleSaveClick = async () => {
     const result = await issueAPI.update({ id: issueId, title: titleState });
     if (!result) return;
-    dispatch({ type: 'UPDATE', payload: { ...issue, title: titleState } });
+    // dispatch({ type: 'UPDATE', payload: { ...issue, title: titleState } });
     toggleEditActive(0);
   };
 

@@ -36,7 +36,7 @@ export default function SideBarItemMilestoneDropdown({
     const result = await issueAPI.update({ id: issueId, milestoneId });
     if (!result) return;
 
-    dispatch({ type: 'UPDATE', payload: targetIssue });
+    // dispatch({ type: 'UPDATE', payload: targetIssue });
   };
 
   return (

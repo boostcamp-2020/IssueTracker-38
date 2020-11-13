@@ -9,6 +9,7 @@ import DetailMain from '../components/issueDetail/IssueDetailPage';
 import IssueMain from '../components/issueList/IssueMain';
 import NewIssueMain from '../components/newIssue/NewIssueMain';
 import LabelMain from '../components/labelList/container/LabelMain';
+import Socket from '../Socket';
 
 export default function RouteIf({ path, exact = false }) {
   return (
@@ -21,6 +22,7 @@ export default function RouteIf({ path, exact = false }) {
             <Router>
               <Switch>
                 <StoreWrapper>
+                  <Socket />
                   <Header />
                   <Route exact path="/" component={IssueMain} />
                   <Route path="/new-issue" component={NewIssueMain} />

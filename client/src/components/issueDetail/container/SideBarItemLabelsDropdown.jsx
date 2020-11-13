@@ -35,7 +35,7 @@ export default function SideBarItemLabelsDropdown({
     const result = await issueAPI.update({ id: issueId, label: { type: actionType, id } });
     if (!result) return;
 
-    dispatch({ type: 'UPDATE', payload: targetIssue });
+    // dispatch({ type: 'UPDATE', payload: targetIssue });
   };
 
   return (
