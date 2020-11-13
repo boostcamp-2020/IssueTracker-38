@@ -42,6 +42,7 @@ export const removeUserInfo = () => {
 };
 
 export const decideTextColor = (backgroundRGB) => {
+  if (!backgroundRGB) return 'black';
   const RGBcode = backgroundRGB.replace(/#/g, '');
   const value = parseInt(RGBcode, 16);
 
