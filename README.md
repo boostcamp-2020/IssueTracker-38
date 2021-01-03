@@ -3,7 +3,7 @@
 ### 프로젝트 소개  
   GitHub 이슈 관리 서비스 클론입니다.
 ### [팀 그라운드 룰](https://github.com/boostcamp-2020/IssueTracker-38/wiki/Ground-Rule)
-### [배포 링크](http://27.96.130.13:3000/)
+### [배포 링크](http://27.96.130.13:3000/) (now closed)
 ### 브랜치 상세
 - master : 배포 가능한 상태  
   - dev  : 개발 완료 된 기능  
